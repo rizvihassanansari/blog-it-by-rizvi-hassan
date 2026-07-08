@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
@@ -25,9 +27,9 @@ gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
+gem "solid_cable"
 gem "solid_cache"
 gem "solid_queue"
-gem "solid_cable"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -55,6 +57,9 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # For linting ERB files
+  gem "erb_lint", require: false, git: "https://github.com/Shopify/erb-lint.git", branch: "main"
 end
 
 group :test do
@@ -63,5 +68,13 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'react-rails', "~> 2.7.1"
+group :development, :test do
+  # previous gems under this group as it was
+
+  # For code formatting and linting
+  gem "rubocop", require: false
+  gem "rubocop-rails", require: false
+end
+
 gem "connection_pool", "~> 2.4"
+gem "react-rails", "~> 2.7.1"

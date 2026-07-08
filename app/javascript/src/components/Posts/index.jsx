@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import { Typography } from "@bigbinary/neetoui";
 
-import { Container, PageLoader } from "./commons";
+import List from "./List";
 
-import postsApi from "../apis/posts";
+import postsApi from "../../apis/posts";
+import { Container, PageLoader } from "../commons";
 
-const Home = () => {
+const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -36,14 +37,12 @@ const Home = () => {
 
   return (
     <Container>
-      <Typography style="h1" weight="bold">
+      <Typography className="mt-4" style="h1" weight="bold">
         Blog posts
       </Typography>
-      {posts.map(post => (
-        <p key={post.id}>{post.title}</p>
-      ))}
+      <List {...{ posts }} />
     </Container>
   );
 };
 
-export default Home;
+export default Posts;

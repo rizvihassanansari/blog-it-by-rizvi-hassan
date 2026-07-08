@@ -8,7 +8,9 @@ import NavBar from "./NavBar";
 const Container = ({ children, className = "" }) => (
   <>
     <NavBar />
-    <div className={classnames("mx-auto max-w-6xl px-6", [className])}>
+    <div
+      className={classnames("mx-auto max-w-6xl bg-blue-100 px-6", [className])}
+    >
       {children}
     </div>
   </>

@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_07_07_055033) do
+ActiveRecord::Schema[8.0].define(version: 2026_07_08_153345) do
+  create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
@@ -19,5 +22,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_07_055033) do
     t.boolean "is_bloggable", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug", null: false
   end
 end

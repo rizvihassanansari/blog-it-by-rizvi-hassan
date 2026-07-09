@@ -4,7 +4,7 @@ import { Typography } from "@bigbinary/neetoui";
 
 import { formatDate } from "../utils";
 
-const Post = ({ title, description, created_at }) => (
+const Item = ({ title, description, created_at }) => (
   <li className="border-b border-gray-300 pb-2 pt-6">
     <Typography className="mb-2" style="h3" weight="bold">
       {title}
@@ -16,4 +16,4 @@ const Post = ({ title, description, created_at }) => (
   </li>
 );
 
-export default Post;
+export default Item;

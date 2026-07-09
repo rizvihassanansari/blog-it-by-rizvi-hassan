@@ -1,11 +1,11 @@
 import React from "react";
 
-import Post from "./Post";
+import PostItem from "./Item";
 
 const List = ({ posts }) => (
   <ul className="mt-4">
     {posts.map(post => (
-      <Post key={post.id} {...post} />
+      <PostItem key={post.id} {...post} />
     ))}
   </ul>
 );

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import { Typography } from "@bigbinary/neetoui";
-
 import List from "./List";
 
 import postsApi from "../../apis/posts";
 import { Container, PageLoader } from "../commons";
+import Title from "../commons/Title";
 
-const Posts = () => {
+const Show = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -37,12 +36,10 @@ const Posts = () => {
 
   return (
     <Container>
-      <Typography className="mt-4" style="h1" weight="bold">
-        Blog posts
-      </Typography>
+      <Title titleText="Blog posts" />
       <List {...{ posts }} />
     </Container>
   );
 };
 
-export default Posts;
+export default Show;

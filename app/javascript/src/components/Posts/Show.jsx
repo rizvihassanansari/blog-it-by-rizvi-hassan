@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 import List from "./List";
 
 import postsApi from "../../apis/posts";
@@ -9,6 +11,8 @@ import Title from "../commons/Title";
 const Show = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const history = useHistory();
 
   const fetchTasks = async () => {
     try {
@@ -20,6 +24,10 @@ const Show = () => {
     } catch {
       setLoading(false);
     }
+  };
+
+  const handleClick = () => {
+    history.push("/posts/create");
   };
 
   useEffect(() => {
@@ -36,7 +44,10 @@ const Show = () => {
 
   return (
     <Container>
-      <Title titleText="Blog posts" />
+      <Title
+        buttonProps={{ label: "Add a new blog post", onClick: handleClick }}
+        titleText="Blog posts"
+      />
       <List {...{ posts }} />
     </Container>
   );

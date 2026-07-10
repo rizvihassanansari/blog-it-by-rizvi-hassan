@@ -12,7 +12,10 @@
 .black-button--primary {
   color: rgb(var(--neeto-ui-white));
   background-color: rgb(var(--neeto-ui-gray-800));
-  border: 1px solid black;
+
+  &:not(.naked) {
+    border: 1px solid black;
+  }
 
   &:hover,
   :focus {
@@ -32,7 +35,10 @@
 .black-button--secondary {
   background-color: rgb(var(--neeto-ui-white));
   color: rgb(var(--neeto-ui-gray-800));
-  border: 1px solid black;
+
+  &:not(.naked) {
+    border: 1px solid black;
+  }
 
   &:hover,
   :focus {

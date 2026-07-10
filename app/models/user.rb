@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  belongs_to :organization
+
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
-  validates :password_digest, presence: true
 end

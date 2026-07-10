@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_07_10_094010) do
+ActiveRecord::Schema[8.0].define(version: 2026_07_10_103430) do
   create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
   end
 
@@ -33,11 +33,9 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_10_094010) do
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
-    t.string "email", null: false
-    t.string "password_digest", null: false
+    t.integer "organization_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "organization_id"
   end
 
   add_foreign_key "users", "organizations"

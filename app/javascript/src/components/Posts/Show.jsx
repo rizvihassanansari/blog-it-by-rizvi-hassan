@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import routes from "routes";
 
@@ -14,6 +15,7 @@ const Show = () => {
   const [loading, setLoading] = useState(true);
 
   const history = useHistory();
+  const { t } = useTranslation();
 
   const fetchTasks = async () => {
     try {
@@ -46,8 +48,8 @@ const Show = () => {
   return (
     <Container>
       <Title
-        buttonProps={{ label: "Add a new blog post", onClick: handleClick }}
-        titleText="Blog posts"
+        buttonProps={{ label: t("labels.newBlogPost"), onClick: handleClick }}
+        titleText={t("titles.blogPosts")}
       />
       <List {...{ posts }} />
     </Container>

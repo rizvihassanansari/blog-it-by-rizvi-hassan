@@ -10,7 +10,6 @@ const App = () => (
     <Switch>
       <Route exact component={ShowPosts} path={routes.root} />
       <Route exact component={CreatePost} path={routes.posts.create} />
-      <Route exact path="/about" render={() => <div>About</div>} />
     </Switch>
   </Router>
 );

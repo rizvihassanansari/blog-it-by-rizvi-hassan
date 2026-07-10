@@ -15,6 +15,7 @@ const alias = {
   common: absolutePath("src/common"),
   components: absolutePath("src/components"),
   routes: absolutePath("src/routes"),
+  translations: absolutePath("src/translations"),
   assets: absolutePath("../assets"),
 };
 

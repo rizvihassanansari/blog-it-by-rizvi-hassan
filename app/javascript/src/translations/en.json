@@ -1,0 +1,27 @@
+{
+  "helloWorld": "Hello World",
+  "titles": {
+    "blogPosts": "Blog posts",
+    "newBlogPost": "New blog post"
+  },
+  "messages": {
+    "loading": "Loading..."
+  },
+  "validations": {
+    "titleRequired": "Title is required",
+    "titleCannotExceed": "Title cannot exceed {{length}} characters",
+    "descriptionRequired": "Description is required",
+    "descriptionCannotExceed": "Description cannot exceed {{length}} characters"
+  },
+  "labels": {
+    "title": "Title",
+    "description": "Description",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "newBlogPost": "Add a new blog post"
+  },
+  "placeholders": {
+    "title": "Enter title",
+    "description": "Enter description"
+  }
+}

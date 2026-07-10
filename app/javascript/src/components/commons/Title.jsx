@@ -10,6 +10,7 @@ const Title = ({ titleText, buttonProps = {} }) => (
       <Button
         className="black-button--primary ml-auto"
         label={buttonProps.label}
+        size="small"
         type="button"
         onClick={buttonProps.onClick}
       />

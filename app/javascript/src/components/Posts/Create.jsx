@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button } from "@bigbinary/neetoui";
 import { Form, Input, Textarea } from "@bigbinary/neetoui/formik";
 import postsApi from "apis/posts";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import {
@@ -15,7 +16,9 @@ import Title from "../commons/Title";
 
 const Create = () => {
   const [isLoading, setIsLoading] = useState(false);
+
   const history = useHistory();
+  const { t } = useTranslation();
 
   const handleSubmit = async values => {
     setIsLoading(true);
@@ -31,7 +34,7 @@ const Create = () => {
 
   return (
     <Container>
-      <Title titleText="New blog post" />
+      <Title titleText={t("titles.newBlogPost")} />
       <Form
         className="h-[600px]"
         formikProps={{
@@ -45,30 +48,30 @@ const Create = () => {
             <Input
               required
               className="w-full"
-              label="Title"
+              label={t("labels.title")}
               name="title"
-              placeholder="Enter title"
+              placeholder={t("placeholders.title")}
             />
             <Textarea
               required
               className="w-full"
-              label="Description"
+              label={t("labels.description")}
               name="description"
-              placeholder="Enter description"
+              placeholder={t("placeholders.description")}
+              rows={10}
             />
           </div>
           <div className=" mt-auto flex justify-end gap-6">
             <Button
               className="black-button--secondary"
               disabled={false}
-              label="Cancel"
-              style="tertiary"
+              label={t("labels.cancel")}
               type="button"
               onClick={() => history.push("/")}
             />
             <Button
               className="black-button--primary"
-              label="Submit"
+              label={t("labels.submit")}
               loading={isLoading}
               type="submit"
             />

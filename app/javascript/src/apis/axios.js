@@ -1,8 +1,10 @@
+import { Toastr } from "@bigbinary/neetoui";
 import axios from "axios";
+import { t } from "i18next";
 
 axios.defaults.baseURL = "/";
 
-export const setAuthHeaders = () => {
+const setAuthHeaders = () => {
   axios.defaults.headers = {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -17,3 +19,33 @@ export const setAuthHeaders = () => {
     axios.defaults.headers["X-Auth-Token"] = token;
   }
 };
+
+const handleSuccessResponse = response => {
+  if (response) {
+    response.success = response.status === 200;
+    if (response.data.notice) {
+      Toastr.success(response.data.notice);
+    }
+  }
+
+  return response;
+};
+
+const handleErrorResponse = axiosErrorObject => {
+  Toastr.error(
+    axiosErrorObject.response?.data?.error || t("messages.errors.default")
+  );
+  if (axiosErrorObject.response?.status === 423) {
+    window.location.href = "/";
+  }
+
+  return Promise.reject(axiosErrorObject);
+};
+
+const registerIntercepts = () => {
+  axios.interceptors.response.use(handleSuccessResponse, error =>
+    handleErrorResponse(error)
+  );
+};
+
+export { setAuthHeaders, registerIntercepts };

@@ -1,14 +1,16 @@
 import "../stylesheets/application.scss";
 import ReactRailsUJS from "react_ujs";
+import i18n from "common/i18n";
 import App from "../src/App";
 
-import { setAuthHeaders } from "apis/axios";
+import { setAuthHeaders, registerIntercepts } from "apis/axios";
 import { initializeLogger } from "common/logger";
 
 initializeLogger();
 setAuthHeaders();
+registerIntercepts();
 
 const componentsContext = { App };
-ReactRailsUJS.getConstructor = (name) => {
+ReactRailsUJS.getConstructor = name => {
   return componentsContext[name];
 };

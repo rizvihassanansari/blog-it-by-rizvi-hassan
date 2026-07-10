@@ -1,14 +1,18 @@
 import React from "react";
 
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-import Posts from "./components/Posts";
+import { PostList, CreatePost, ShowPost } from "./components/Posts";
+import routes from "./routes";
 
 const App = () => (
   <Router>
+    <ToastContainer />
     <Switch>
-      <Route exact component={Posts} path="/" />
-      <Route exact path="/about" render={() => <div>About</div>} />
+      <Route exact component={PostList} path={routes.root} />
+      <Route exact component={ShowPost} path={routes.posts.show} />
+      <Route exact component={CreatePost} path={routes.posts.create} />
     </Switch>
   </Router>
 );

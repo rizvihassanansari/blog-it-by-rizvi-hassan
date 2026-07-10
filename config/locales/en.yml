@@ -29,6 +29,8 @@
 
 en:
   hello: "Hello world"
-  task:
+  generic_error: "Something went wrong. Please try again later."
+  successfully_created: "Post was successfully created!"
+  post:
     slug:
       immutable: "is immutable!"

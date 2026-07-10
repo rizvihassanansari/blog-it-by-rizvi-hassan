@@ -984,10 +984,10 @@
     "@babel/helper-string-parser" "^7.29.7"
     "@babel/helper-validator-identifier" "^7.29.7"
 
-"@bigbinary/neeto-cist@^1.0.17":
-  version "1.0.17"
-  resolved "https://registry.yarnpkg.com/@bigbinary/neeto-cist/-/neeto-cist-1.0.17.tgz#bcdedc78825a1bbbe462ea14ffd74642c956362f"
-  integrity sha512-A0SgQFZYZKLyj6ygnc/yU1UST7PSAC6Qg44guOzyFnwmc3ZqvBBETXNkYxctg7A54nfpE67MQaF3iNovX2vnZw==
+"@bigbinary/neeto-cist@1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@bigbinary/neeto-cist/-/neeto-cist-1.0.3.tgz#605c48c737be78af77335735b5f2faf4236a9cfa"
+  integrity sha512-LER8D0dNDdpzOzon1Qki0a36YdId5sNyoX8O/k9gKLlGu4dlIM7v/Qvx3BqS0BGzwismVJW/c2M5ae+yDRKT4A==
 
 "@bigbinary/neeto-commons-frontend@^3.0.10":
   version "3.6.0"
@@ -1023,10 +1023,10 @@
   resolved "https://registry.yarnpkg.com/@bigbinary/neeto-hotkeys/-/neeto-hotkeys-1.0.4.tgz#03358c7eb27c430b69d8bf786a4a278fdf7a280f"
   integrity sha512-/DEbXYPeg/Pbljd/k2GhRvCaDEpQG2JTnSWz0soSlw5m6VkPY7NdC0PR+PIwvHFZUjGtRU7liSBZoWPTleTtHA==
 
-"@bigbinary/neeto-icons@^1.20.89":
-  version "1.20.89"
-  resolved "https://registry.yarnpkg.com/@bigbinary/neeto-icons/-/neeto-icons-1.20.89.tgz#9feebf1cf08b27fdd8a673d50d4b89dcd5fb579d"
-  integrity sha512-xqWm7uq2RS/sjU1eGcWBb3nsiZCXmEgTFCU4phbEYR+AiqYWYTfT/lP+XJVtdIEp8eswImrx/vEecVyrTuGtRQ==
+"@bigbinary/neeto-icons@1.20.64":
+  version "1.20.64"
+  resolved "https://registry.yarnpkg.com/@bigbinary/neeto-icons/-/neeto-icons-1.20.64.tgz#bbdf11043fe6d6ddf0f1455a6f7d0f150473456d"
+  integrity sha512-naGxIyhd28eD89caMJrgUlR+xhmM0T6weIu97Y76p6UNVdxSM4oNK0NGe19th7BNT7uqkx1JD4HED3RG5Jv5sg==
 
 "@bigbinary/neetoui@^4.0.3":
   version "4.4.27"
@@ -2666,6 +2666,11 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     inherits "^2.0.4"
     safe-buffer "^5.2.1"
     to-buffer "^1.2.2"
+
+classnames@2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.1.tgz#4d1a3d02d037d45e00b096c0be6f5496dcbf288a"
+  integrity sha512-gScPmXWHPMKg+62TGMUcdfHWYgw0FuiKNCnxhL0zNuWxFTeXsEC4CU/LUU600GNcEVo3nYkKfWUKp2Nv0awx0g==
 
 classnames@2.x, classnames@^2.2.1, classnames@^2.2.3, classnames@^2.2.5, classnames@^2.2.6, classnames@^2.3.1, classnames@^2.3.2, classnames@^2.5.1:
   version "2.5.1"
@@ -6269,23 +6274,23 @@ react-resizable@^3.0.4:
     prop-types "15.x"
     react-draggable "^4.5.0"
 
-react-router-dom@5.3.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-5.3.0.tgz#da1bfb535a0e89a712a93b97dd76f47ad1f32363"
-  integrity sha512-ObVBLjUZsphUUMVycibxgMdh5jJ1e3o+KpAZBVeHcNQZ4W+uUGGWsokurzlF4YOldQYRQL4y6yFRWM4m3svmuQ==
+react-router-dom@5.3.3:
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-5.3.3.tgz#8779fc28e6691d07afcaf98406d3812fe6f11199"
+  integrity sha512-Ov0tGPMBgqmbu5CDmN++tv2HQ9HlWDuWIIqn4b88gjlAN5IHI+4ZUZRcpz9Hl0azFIwihbLDYw1OiHGRo7ZIng==
   dependencies:
     "@babel/runtime" "^7.12.13"
     history "^4.9.0"
     loose-envify "^1.3.1"
     prop-types "^15.6.2"
-    react-router "5.2.1"
+    react-router "5.3.3"
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react-router@5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/react-router/-/react-router-5.2.1.tgz#4d2e4e9d5ae9425091845b8dbc6d9d276239774d"
-  integrity sha512-lIboRiOtDLFdg1VTemMwud9vRVuOCZmUIT/7lUoZiSpPODiiH1UQlfXy+vPLC/7IWdFYnhRwAyNqA/+I7wnvKQ==
+react-router@5.3.3:
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-5.3.3.tgz#8e3841f4089e728cf82a429d92cdcaa5e4a3a288"
+  integrity sha512-mzQGUvS3bM84TnbtMYR8ZjKnuPJ71IjSzR+DE6UkUqvN4czWIqEs17yLL8xkAycv4ev0AiN+IGrWu88vJs/p2w==
   dependencies:
     "@babel/runtime" "^7.12.13"
     history "^4.9.0"
@@ -7485,7 +7490,7 @@ yaml@^1.10.0, yaml@^1.10.2:
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.3.tgz#76e407ed95c42684fb8e14641e5de62fe65bbcb3"
   integrity sha512-vIYeF1u3CjlhAFekPPAk2h/Kv4T3mAkMox5OymRiJQB0spDP10LHvt+K7G9Ny6NuuMAb25/6n1qyUjAcGNf/AA==
 
-yup@0.32.11:
+yup@^0.32.11:
   version "0.32.11"
   resolved "https://registry.yarnpkg.com/yup/-/yup-0.32.11.tgz#d67fb83eefa4698607982e63f7ca4c5ed3cf18c5"
   integrity sha512-Z2Fe1bn+eLstG8DRR6FTavGD+MeAwyfmouhHsIUgaADz8jvFKbO/fXc2trJKZg+5EBjh4gGm3iU/t3onKlXHIg==

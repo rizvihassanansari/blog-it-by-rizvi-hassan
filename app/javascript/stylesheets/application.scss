@@ -3,3 +3,66 @@
 @tailwind utilities;
 
 @import "@bigbinary/neetoui";
+@import "react-toastify/dist/ReactToastify.min.css";
+
+*{
+  box-sizing: border-box;
+}
+
+.black-button--primary {
+  color: rgb(var(--neeto-ui-white));
+  background-color: rgb(var(--neeto-ui-gray-800));
+
+  &:not(.naked) {
+    border: 1px solid black;
+  }
+
+  &:hover,
+  :focus {
+    color: rgb(var(--neeto-ui-white)) !important;
+    background-color: rgb(var(--neeto-ui-black)) !important;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(var(--neeto-ui-gray-500), 15%) !important;
+  }
+
+  &:focus-visible {
+    color: rgb(var(--neeto-ui-white)) !important;
+  }
+}
+
+.black-button--secondary {
+  background-color: rgb(var(--neeto-ui-white));
+  color: rgb(var(--neeto-ui-gray-800));
+
+  &:not(.naked) {
+    border: 1px solid black;
+  }
+
+  &:hover,
+  :focus {
+    color: rgb(var(--neeto-ui-white)) !important;
+    background-color: rgb(var(--neeto-ui-black)) !important;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(var(--neeto-ui-gray-500), 15%) !important;
+  }
+
+  &:focus-visible {
+    color: rgb(var(--neeto-ui-white)) !important;
+  }
+}
+
+div:has(> input), div:has(> textarea) {
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(var(--neeto-ui-gray-500), 15%) !important;
+    border-color: black !important;
+  }
+
+  &:focus-within {
+    border-color: black !important;
+    box-shadow: 0 0 0 3px rgba(var(--neeto-ui-gray-500), 15%) !important;
+  }
+}

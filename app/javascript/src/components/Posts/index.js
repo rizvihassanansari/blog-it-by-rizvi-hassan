@@ -1,4 +1,5 @@
 import CreatePost from "./Create";
-import ShowPosts from "./Show";
+import PostList from "./List";
+import ShowPost from "./Show";
 
-export { ShowPosts, CreatePost };
+export { PostList, CreatePost, ShowPost };

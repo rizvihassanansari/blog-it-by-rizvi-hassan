@@ -10,7 +10,9 @@ const Container = ({ children, className = "" }) => (
     <NavBar />
     <div className="h-screen w-full overflow-scroll">
       <div
-        className={classnames("mx-auto h-fit max-w-6xl px-6 pt-6", [className])}
+        className={classnames("mx-auto h-fit max-w-6xl px-6 pt-12", [
+          className,
+        ])}
       >
         {children}
       </div>

@@ -1,57 +1,45 @@
 import React, { useEffect, useState } from "react";
 
-import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+import { Typography } from "@bigbinary/neetoui";
+import { useParams, useHistory } from "react-router-dom";
 import routes from "routes";
-
-import List from "./List";
 
 import postsApi from "../../apis/posts";
 import { Container, PageLoader } from "../commons";
 import Title from "../commons/Title";
 
 const Show = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [post, setPost] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
+  const { slug } = useParams();
   const history = useHistory();
-  const { t } = useTranslation();
 
-  const fetchTasks = async () => {
+  const fetchPost = async () => {
     try {
       const {
-        data: { posts },
-      } = await postsApi.fetch();
-      setPosts(posts);
-      setLoading(false);
+        data: { post },
+      } = await postsApi.show(slug);
+      setPost(post);
     } catch {
-      setLoading(false);
+      history.replace(routes.root);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleClick = () => {
-    history.push(routes.posts.create);
-  };
-
   useEffect(() => {
-    fetchTasks();
+    fetchPost();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="h-screen w-full">
-        <PageLoader />
-      </div>
-    );
+  if (isLoading) {
+    return <PageLoader />;
   }
 
   return (
     <Container>
-      <Title
-        buttonProps={{ label: t("labels.newBlogPost"), onClick: handleClick }}
-        titleText={t("titles.blogPosts")}
-      />
-      <List {...{ posts }} />
+      <Title titleText={post.title} />
+      <Typography className="mt-8">{post.description}</Typography>
     </Container>
   );
 };

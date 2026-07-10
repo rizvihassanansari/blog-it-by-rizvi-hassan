@@ -5,6 +5,7 @@ import { Form, Input, Textarea } from "@bigbinary/neetoui/formik";
 import postsApi from "apis/posts";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import routes from "routes";
 
 import {
   POST_FORM_INITIAL_VALUES,
@@ -24,9 +25,9 @@ const Create = () => {
     setIsLoading(true);
     try {
       await postsApi.create(values);
-      history.push("/");
+      history.push(routes.root);
     } catch {
-      // logger.error(error);
+      history.push(routes.root);
     } finally {
       setIsLoading(false);
     }

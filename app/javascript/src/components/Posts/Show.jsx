@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
+import routes from "routes";
 
 import List from "./List";
 
@@ -27,7 +28,7 @@ const Show = () => {
   };
 
   const handleClick = () => {
-    history.push("/posts/create");
+    history.push(routes.posts.create);
   };
 
   useEffect(() => {

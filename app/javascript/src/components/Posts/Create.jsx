@@ -19,7 +19,6 @@ const Create = () => {
 
   const handleSubmit = async values => {
     setIsLoading(true);
-    // console.log("submitting values: ", values);
     try {
       await postsApi.create(values);
       history.push("/");

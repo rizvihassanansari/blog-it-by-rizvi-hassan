@@ -1,6 +1,7 @@
 import { Book, Edit } from "@bigbinary/neeto-icons";
+import routes from "routes";
 
 export const LINKS = [
-  { to: "/", icon: Book },
-  { to: "/posts/create", icon: Edit },
+  { to: routes.root, icon: Book },
+  { to: routes.posts.create, icon: Edit },
 ];

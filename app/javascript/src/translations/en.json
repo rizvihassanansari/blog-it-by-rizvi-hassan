@@ -5,7 +5,10 @@
     "newBlogPost": "New blog post"
   },
   "messages": {
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "errors": {
+      "default": "Something went wrong!"
+    }
   },
   "validations": {
     "titleRequired": "Title is required",

@@ -36,7 +36,7 @@ const Index = ({ isVisible }) => {
       <CategoryHead />
       <div className="mt-8 flex h-fit w-full flex-col items-center gap-2">
         {isNotEmpty(categories) ? (
-          categories.map(({ id, name }) => <Bar key={id} {...{ name }} />)
+          categories.map(({ id, name }) => <Bar key={id} {...{ name, id }} />)
         ) : (
           <Typography style="body2">No category</Typography>
         )}

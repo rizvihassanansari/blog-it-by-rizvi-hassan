@@ -1,13 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Typography } from "@bigbinary/neetoui";
+import classNames from "classnames";
+import { symmetricDifference } from "ramda";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import routes from "routes";
 
-const Bar = ({ name }) => (
-  <div className="w-full rounded bg-white px-2 py-1 shadow">
-    <Typography className="text-nowrap" style="body3">
-      {name}
-    </Typography>
-  </div>
-);
+import useQueryParams from "../../../hooks/useQueryParams";
+import { buildUrl } from "../../../utils/urls";
+import { DEFAULT_PAGE_INDEX } from "../../Posts/List/constants";
+
+const Bar = ({ id, name }) => {
+  const { categories = [] } = useQueryParams();
+  const history = useHistory();
+
+  const [isSelected, setIsSelected] = useState(
+    categories.includes(id.toString())
+  );
+
+  const toggleItem = (item, list) => symmetricDifference([item], list);
+
+  const handleClick = () => {
+    setIsSelected(previous => !previous);
+    const newCategories = toggleItem(id.toString(), categories);
+    history.replace(
+      buildUrl(routes.root, {
+        page: DEFAULT_PAGE_INDEX,
+        categories: newCategories,
+      })
+    );
+  };
+
+  return (
+    <div
+      className={classNames("w-full rounded px-2 py-1 shadow", {
+        "bg-white": isSelected,
+        "bg-transparent": !isSelected,
+      })}
+      onClick={handleClick}
+    >
+      <Typography className="text-nowrap" style="body3">
+        {name}
+      </Typography>
+    </div>
+  );
+};
 
 export default Bar;

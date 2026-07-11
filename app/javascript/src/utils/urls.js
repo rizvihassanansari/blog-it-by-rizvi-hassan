@@ -1,8 +1,17 @@
-import { filterNonNull } from "neetocist";
+import { isNotEmpty } from "@bigbinary/neeto-cist";
 
 export const buildUrl = (route, params) => {
-  const filteredParams = filterNonNull(params);
-  const queryString = new URLSearchParams(filteredParams).toString();
+  let queryString = "";
+
+  if (params.page) {
+    queryString += `page=${params.page}`;
+  }
+
+  if (params.categories && isNotEmpty(params.categories)) {
+    params.categories.forEach(item => {
+      queryString += `&categories=${item}`;
+    });
+  }
 
   return !queryString ? route : `${route}?${queryString}`;
 };

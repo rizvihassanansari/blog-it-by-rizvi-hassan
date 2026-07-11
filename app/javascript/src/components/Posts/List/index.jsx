@@ -9,20 +9,30 @@ import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "./constants";
 import PostItem from "./Item";
 
 import { useFetchPosts } from "../../../hooks/reactQueries/usePostsApi";
+import useQueryParams from "../../../hooks/useQueryParams";
+import { buildUrl } from "../../../utils/urls";
 import { PageLoader } from "../../commons";
 import Title from "../../commons/Title";
 
 const Index = () => {
+  const { page = DEFAULT_PAGE_INDEX, categories = [] } = useQueryParams();
+
   const history = useHistory();
   const { t } = useTranslation();
 
   const { data: { posts = [], totalResults = 0 } = {}, isLoading } =
     useFetchPosts({
-      page: DEFAULT_PAGE_INDEX,
+      page,
+      categories,
     });
 
   const handleClick = () => {
     history.push(routes.posts.create);
+  };
+
+  const handlePageNavigation = nextPage => {
+    const url = buildUrl(routes.root, { page: nextPage, categories });
+    history.push(url);
   };
 
   if (isLoading) {
@@ -47,8 +57,8 @@ const Index = () => {
       <div className="sticky bottom-0 left-0 flex w-full justify-end bg-white py-2 pr-2 ">
         <Pagination
           count={Number(totalResults)}
-          navigate={() => {}}
-          pageNo={DEFAULT_PAGE_INDEX}
+          navigate={handlePageNavigation}
+          pageNo={Number(page)}
           pageSize={DEFAULT_PAGE_SIZE}
         />
       </div>

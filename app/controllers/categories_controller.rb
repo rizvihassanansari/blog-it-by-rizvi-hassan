@@ -2,7 +2,15 @@
 
 class CategoriesController < ApplicationController
   def index
-    categories = Category.all
+    keyword = params[:search]
+
+    categories = []
+    if keyword.present?
+      categories = Category.where("name LIKE ?", "%#{keyword.to_s}%")
+    else
+      categories = Category.all
+    end
+
     render_json({ categories: })
   end
 

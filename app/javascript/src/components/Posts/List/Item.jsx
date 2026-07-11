@@ -4,9 +4,8 @@ import { Typography } from "@bigbinary/neetoui";
 import { Link } from "react-router-dom";
 import routes from "routes";
 
-import CategoryTags from "./Tags";
-
-import { formatDate } from "../utils";
+import { formatDate } from "../../utils";
+import CategoryTags from "../commons/Tags";
 
 const Item = ({
   title,

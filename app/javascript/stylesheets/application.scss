@@ -55,7 +55,7 @@
   }
 }
 
-div:has(> input), div:has(> textarea) {
+div:has(> input:not(.neeto-ui-react-select__input)), div:has(> textarea), .neeto-ui-react-select__control {
   &:focus-visible {
     box-shadow: 0 0 0 3px rgba(var(--neeto-ui-gray-500), 15%) !important;
     border-color: black !important;

@@ -14,17 +14,20 @@
     "titleRequired": "Title is required",
     "titleCannotExceed": "Title cannot exceed {{length}} characters",
     "descriptionRequired": "Description is required",
-    "descriptionCannotExceed": "Description cannot exceed {{length}} characters"
+    "descriptionCannotExceed": "Description cannot exceed {{length}} characters",
+    "categoryRequired": "Please select at least one category"
   },
   "labels": {
     "title": "Title",
     "description": "Description",
     "cancel": "Cancel",
     "submit": "Submit",
-    "newBlogPost": "Add a new blog post"
+    "newBlogPost": "Add a new blog post",
+    "categories": "Categories"
   },
   "placeholders": {
     "title": "Enter title",
-    "description": "Enter description"
+    "description": "Enter description",
+    "categories": "Add categories"
   }
 }

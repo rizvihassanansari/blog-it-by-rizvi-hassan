@@ -7,6 +7,7 @@ const MAX_DESCRIPTION_LENGTH = 10000;
 export const POST_FORM_INITIAL_VALUES = {
   title: "",
   description: "",
+  categories: [],
 };
 
 export const POST_FORM_VALIDATION_SCHEMA = yup.object().shape({
@@ -26,4 +27,5 @@ export const POST_FORM_VALIDATION_SCHEMA = yup.object().shape({
         length: MAX_DESCRIPTION_LENGTH,
       })
     ),
+  categories: yup.array().min(1, t("validations.categoryRequired")),
 });

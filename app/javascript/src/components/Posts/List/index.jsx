@@ -6,11 +6,11 @@ import routes from "routes";
 
 import PostItem from "./Item";
 
-import postsApi from "../../apis/posts";
-import { Container, PageLoader } from "../commons";
-import Title from "../commons/Title";
+import postsApi from "../../../apis/posts";
+import { Container, PageLoader } from "../../commons";
+import Title from "../../commons/Title";
 
-const List = () => {
+const Index = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -60,4 +60,4 @@ const List = () => {
   );
 };
 
-export default List;
+export default Index;

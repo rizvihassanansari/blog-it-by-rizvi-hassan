@@ -2,7 +2,11 @@
 
 class PostsController < ApplicationController
   def index
-    posts = Post.all.order(created_at: :desc)
+    posts = Post.all.order(created_at: :desc).as_json(
+      include: {
+        user: { only: %i[name id organization_id] },
+        categories: { only: %i[id name] }
+      })
     render_json({ posts: })
   end
 

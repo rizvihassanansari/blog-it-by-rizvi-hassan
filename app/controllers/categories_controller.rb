@@ -5,4 +5,16 @@ class CategoriesController < ApplicationController
     categories = Category.all
     render_json({ categories: })
   end
+
+  def create
+    category = Category.new(category_params)
+    category.save!
+    render_notice(t("successfully_created.category"))
+  end
+
+  private
+
+    def category_params
+      params.require(:category).permit(:name)
+    end
 end

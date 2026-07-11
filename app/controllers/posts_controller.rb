@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     params_with_user_id = post_params.merge(user_id: 1)
     post = Post.new(params_with_user_id)
     post.save!
-    render_notice(t("successfully_created"))
+    render_notice(t("successfully_created.post"))
   end
 
   def show

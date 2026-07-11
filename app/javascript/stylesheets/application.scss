@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "@bigbinary/neetoui";
-@import "react-toastify/dist/ReactToastify.min.css";
+@import "node_modules/@bigbinary/neetoui/dist/index.css";
+@import "node_modules/react-toastify/dist/ReactToastify.min.css";
 
 *{
   box-sizing: border-box;

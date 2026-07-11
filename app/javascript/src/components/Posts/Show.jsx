@@ -4,8 +4,11 @@ import { Typography } from "@bigbinary/neetoui";
 import { useParams, useHistory } from "react-router-dom";
 import routes from "routes";
 
+import Tags from "./commons/Tags";
+
 import postsApi from "../../apis/posts";
 import { Container, PageLoader } from "../commons";
+import UserAvatar from "../commons/Avatar";
 import Title from "../commons/Title";
 
 const Show = () => {
@@ -38,7 +41,14 @@ const Show = () => {
 
   return (
     <Container>
+      <Tags categories={post.categories} />
       <Title titleText={post.title} />
+      <UserAvatar
+        showName
+        date={post.created_at}
+        size="large"
+        user={post.user}
+      />
       <Typography className="mt-8">{post.description}</Typography>
     </Container>
   );

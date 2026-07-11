@@ -1,7 +1,4 @@
-import dayjs from "dayjs";
 import { dissoc, mergeLeft } from "ramda";
-
-export const formatDate = dateInISO => dayjs(dateInISO).format("DD MMMM YYYY");
 
 export const getValues = obj => obj.map(item => item.value);
 

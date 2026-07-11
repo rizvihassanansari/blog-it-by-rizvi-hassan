@@ -2,7 +2,8 @@
   "helloWorld": "Hello World",
   "titles": {
     "blogPosts": "Blog posts",
-    "newBlogPost": "New blog post"
+    "newBlogPost": "New blog post",
+    "categories": "CATEGORIES"
   },
   "messages": {
     "loading": "Loading...",

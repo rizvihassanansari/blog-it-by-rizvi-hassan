@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import routes from "routes";
 
 import CreateUserForm from "./Form";
+import { modifySubmitPayload } from "./utils";
 
 import categoriesApi from "../../apis/categories";
 import { Container } from "../commons";
@@ -18,12 +19,12 @@ const Create = () => {
   const history = useHistory();
   const { t } = useTranslation();
 
-  const handleSubmit = async values => {
+  const handleSubmit = async formValues => {
     setIsLoading(true);
-    // const valuesWithDefaultUser = { ...values, user_id: 1 }; //setting default user_id value to 1 for now
-    // console.log("Values to submit:", valuesWithDefaultUser);
+    const modifiedPayload = modifySubmitPayload(formValues);
+    // console.log(modifiedPayload);
     try {
-      await postsApi.create(values);
+      await postsApi.create(modifiedPayload);
       history.push(routes.root);
     } catch {
       history.push(routes.root);

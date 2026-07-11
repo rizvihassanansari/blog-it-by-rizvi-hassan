@@ -4,7 +4,7 @@ import { Typography } from "@bigbinary/neetoui";
 import { Link } from "react-router-dom";
 import routes from "routes";
 
-import { formatDate } from "../utils";
+import { formatDate } from "./utils";
 
 const Item = ({ title, description, created_at, slug }) => (
   <li className="border-b border-gray-300 pb-2 pt-6">

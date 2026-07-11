@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_07_10_113058) do
+ActiveRecord::Schema[8.0].define(version: 2026_07_11_101514) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "categories_posts", id: false, force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "category_id", null: false
+    t.index ["category_id", "post_id"], name: "index_categories_posts_on_category_id_and_post_id"
+    t.index ["post_id", "category_id"], name: "index_categories_posts_on_post_id_and_category_id"
   end
 
   create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
@@ -26,13 +33,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_10_113058) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "post_categories", id: false, force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "category_id", null: false
-    t.index ["category_id"], name: "index_post_categories_on_category_id"
-    t.index ["post_id"], name: "index_post_categories_on_post_id"
-  end
-
   create_table "posts", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
@@ -42,6 +42,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_10_113058) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug", null: false
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,7 +52,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_10_113058) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "post_categories", "categories"
-  add_foreign_key "post_categories", "posts"
+  add_foreign_key "posts", "users"
   add_foreign_key "users", "organizations"
 end

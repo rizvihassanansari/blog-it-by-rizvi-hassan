@@ -7,7 +7,7 @@ import routes from "routes";
 import Tags from "./commons/Tags";
 
 import postsApi from "../../apis/posts";
-import { Container, PageLoader } from "../commons";
+import { PageLoader } from "../commons";
 import UserAvatar from "../commons/Avatar";
 import Title from "../commons/Title";
 
@@ -40,7 +40,7 @@ const Show = () => {
   }
 
   return (
-    <Container>
+    <>
       <Tags categories={post.categories} />
       <Title titleText={post.title} />
       <UserAvatar
@@ -50,7 +50,7 @@ const Show = () => {
         user={post.user}
       />
       <Typography className="mt-8">{post.description}</Typography>
-    </Container>
+    </>
   );
 };
 

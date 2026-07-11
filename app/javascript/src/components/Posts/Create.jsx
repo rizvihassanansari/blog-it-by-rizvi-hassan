@@ -9,7 +9,6 @@ import CreateUserForm from "./Form";
 import { modifySubmitPayload } from "./utils";
 
 import categoriesApi from "../../apis/categories";
-import { Container } from "../commons";
 import Title from "../commons/Title";
 
 const Create = () => {
@@ -47,10 +46,10 @@ const Create = () => {
   }, []);
 
   return (
-    <Container>
+    <>
       <Title titleText={t("titles.newBlogPost")} />
       <CreateUserForm {...{ isLoading, handleSubmit, categories }} />
-    </Container>
+    </>
   );
 };
 

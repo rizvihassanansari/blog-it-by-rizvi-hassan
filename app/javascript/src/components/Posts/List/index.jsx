@@ -7,7 +7,7 @@ import routes from "routes";
 import PostItem from "./Item";
 
 import postsApi from "../../../apis/posts";
-import { Container, PageLoader } from "../../commons";
+import { PageLoader } from "../../commons";
 import Title from "../../commons/Title";
 
 const Index = () => {
@@ -46,7 +46,7 @@ const Index = () => {
   }
 
   return (
-    <Container>
+    <>
       <Title
         buttonProps={{ label: t("labels.newBlogPost"), onClick: handleClick }}
         titleText={t("titles.blogPosts")}
@@ -56,7 +56,7 @@ const Index = () => {
           <PostItem key={post.id} {...post} />
         ))}
       </ul>
-    </Container>
+    </>
   );
 };
 

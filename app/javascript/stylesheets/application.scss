@@ -5,57 +5,84 @@
 @import "node_modules/@bigbinary/neetoui/dist/index.css";
 @import "node_modules/react-toastify/dist/ReactToastify.min.css";
 
-*{
+* {
   box-sizing: border-box;
 }
 
 .black-button--primary {
-  color: rgb(var(--neeto-ui-white));
-  background-color: rgb(var(--neeto-ui-gray-800));
+  color: rgb(var(--neeto-ui-white)) !important;
+  background-color: rgb(var(--neeto-ui-gray-800)) !important;
 
   &:not(.naked) {
-    border: 1px solid black;
+    border: 1px solid black !important;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(var(--neeto-ui-gray-500), 15%) !important;
+    }
+
+    &:focus-visible {
+      color: rgb(var(--neeto-ui-white)) !important;
+    }
+
+    &:hover,
+    :focus {
+      color: rgb(var(--neeto-ui-white)) !important;
+      background-color: rgb(var(--neeto-ui-black)) !important;
+    }
   }
 
-  &:hover,
-  :focus {
-    color: rgb(var(--neeto-ui-white)) !important;
-    background-color: rgb(var(--neeto-ui-black)) !important;
-  }
 
   &:focus {
-    box-shadow: 0 0 0 3px rgba(var(--neeto-ui-gray-500), 15%) !important;
+    box-shadow: none !important;
   }
 
   &:focus-visible {
-    color: rgb(var(--neeto-ui-white)) !important;
+    color: none !important;
   }
 }
 
 .black-button--secondary {
-  background-color: rgb(var(--neeto-ui-white));
-  color: rgb(var(--neeto-ui-gray-800));
+  background-color: rgb(var(--neeto-ui-white)) !important;
+  color: rgb(var(--neeto-ui-gray-800)) !important;
 
   &:not(.naked) {
-    border: 1px solid black;
+    border: 1px solid black !important;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(var(--neeto-ui-gray-500), 15%) !important;
+    }
+
+    &:focus-visible {
+      color: rgb(var(--neeto-ui-white)) !important;
+    }
+
+      &:hover,
+      :focus {
+        color: rgb(var(--neeto-ui-white)) !important;
+        background-color: rgb(var(--neeto-ui-black)) !important;
+      }
   }
 
-  &:hover,
-  :focus {
-    color: rgb(var(--neeto-ui-white)) !important;
-    background-color: rgb(var(--neeto-ui-black)) !important;
-  }
 
   &:focus {
-    box-shadow: 0 0 0 3px rgba(var(--neeto-ui-gray-500), 15%) !important;
+    box-shadow: none !important;
   }
 
   &:focus-visible {
-    color: rgb(var(--neeto-ui-white)) !important;
+    color: none !important;
+  }
+
+  & .naked {
+    &:focus,
+    &:focus-visible {
+      box-shadow: none;
+    }
   }
 }
 
-div:has(> input:not(.neeto-ui-react-select__input)), div:has(> textarea), .neeto-ui-react-select__control {
+div:has(> input:not(.neeto-ui-react-select__input)),
+div:has(> textarea),
+.neeto-ui-react-select__control {
   &:focus-visible {
     box-shadow: 0 0 0 3px rgba(var(--neeto-ui-gray-500), 15%) !important;
     border-color: black !important;

@@ -1,3 +1,4 @@
+import { keysToCamelCase } from "@bigbinary/neeto-cist";
 import { Toastr } from "@bigbinary/neetoui";
 import axios from "axios";
 import { t } from "i18next";
@@ -25,6 +26,10 @@ const handleSuccessResponse = response => {
     response.success = response.status === 200;
     if (response.data.notice) {
       Toastr.success(response.data.notice);
+    }
+
+    if (response.data) {
+      response = keysToCamelCase(response.data);
     }
   }
 

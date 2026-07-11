@@ -1,31 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { isNotEmpty } from "@bigbinary/neeto-cist";
 import { Spinner, Typography } from "@bigbinary/neetoui";
-import categoriesApi from "apis/categories";
 import classNames from "classnames";
 
 import Bar from "./Bar";
 import CategoryHead from "./Head";
 
+import { useFetchCategories } from "../../../hooks/reactQueries/useCategoriesApi";
+
 const Index = ({ isVisible }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [categories, setCategories] = useState([]);
-
-  const fetchCategories = async () => {
-    try {
-      const { data } = await categoriesApi.fetch();
-      setCategories(data.categories);
-    } catch {
-      setCategories([]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
+  const { data: { categories = [] } = {}, isLoading } = useFetchCategories();
 
   if (isVisible && isLoading) {
     return (

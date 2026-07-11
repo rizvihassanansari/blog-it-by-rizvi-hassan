@@ -5,14 +5,16 @@ class PostsController < ApplicationController
 
   def index
     page = [params[:page].to_i, 1].max
-    category_ids = Array(params[:tags]).map(&:to_i)
+    category_ids = Array(params[:categories]).map(&:to_i)
 
     posts = []
     total_results = 0
     if category_ids.present?
       filtered_posts = Post
         .joins(:categories)
-        .where(categories: { id: category_ids }).distinct
+        .where(categories: { id: category_ids })
+        .distinct
+        .order(created_at: :desc)
 
       total_results = filtered_posts.count
 
@@ -22,7 +24,7 @@ class PostsController < ApplicationController
         .as_json(include: { user: { only: %i[name id organization_id] }, categories: { only: %i[id name] } })
 
     else
-      total_posts = Post.all
+      total_posts = Post.all.order(created_at: :desc)
       total_results = total_posts.count
 
       posts = total_posts

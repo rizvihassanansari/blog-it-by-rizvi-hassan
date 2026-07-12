@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { isNotEmpty } from "@bigbinary/neeto-cist";
 import { Spinner, Typography } from "@bigbinary/neetoui";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 import Bar from "./Bar";
 import CategoryHead from "./Head";
@@ -15,8 +16,13 @@ const Index = ({ isVisible }) => {
 
   const debouncedKeyword = useDebounce(keyword);
 
-  const { data: { categories = [] } = {}, isLoading } =
-    useFetchCategories(debouncedKeyword);
+  const { t } = useTranslation();
+
+  const {
+    data: { categories = [] } = {},
+    isLoading,
+    refetch: refetchCategories,
+  } = useFetchCategories(debouncedKeyword);
 
   if (isVisible && isLoading) {
     return (
@@ -39,12 +45,12 @@ const Index = ({ isVisible }) => {
         }
       )}
     >
-      <CategoryHead {...{ keyword, setKeyword }} />
+      <CategoryHead {...{ keyword, setKeyword, refetchCategories }} />
       <div className="mt-8 flex h-fit w-full flex-col items-center gap-2">
         {isNotEmpty(categories) ? (
           categories.map(({ id, name }) => <Bar key={id} {...{ name, id }} />)
         ) : (
-          <Typography style="body2">No category</Typography>
+          <Typography style="body2">{t("messages.noCategories")}</Typography>
         )}
       </div>
     </div>

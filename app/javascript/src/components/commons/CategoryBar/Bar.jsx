@@ -33,7 +33,7 @@ const Bar = ({ id, name }) => {
 
   return (
     <div
-      className={classNames("w-full rounded px-2 py-1 shadow", {
+      className={classNames("w-full cursor-pointer rounded px-2 py-1 shadow", {
         "bg-white": isSelected,
         "bg-transparent": !isSelected,
       })}

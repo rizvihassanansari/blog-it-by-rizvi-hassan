@@ -5,8 +5,12 @@ import { Button, Typography, Input } from "@bigbinary/neetoui";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 
-const Head = ({ keyword, setKeyword }) => {
+import New from "./New";
+
+const Head = ({ keyword, setKeyword, ...restParams }) => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const { t } = useTranslation();
 
   return (
@@ -18,9 +22,16 @@ const Head = ({ keyword, setKeyword }) => {
             icon={Search}
             size="small"
             style="text"
+            tooltipProps={{ content: t("messages.tooltip.searchCategory") }}
             onClick={() => setIsSearchVisible(previous => !previous)}
           />
-          <Button icon={Plus} size="small" style="text" />
+          <Button
+            icon={Plus}
+            size="small"
+            style="text"
+            tooltipProps={{ content: t("messages.tooltip.addCategory") }}
+            onClick={() => setIsModalOpen(true)}
+          />
         </div>
       </header>
       <div
@@ -30,13 +41,16 @@ const Head = ({ keyword, setKeyword }) => {
         })}
       >
         <Input
-          placeholder="Search category"
+          placeholder={t("placeholders.searchCategory")}
           size="small"
           type="text"
           value={keyword}
           onChange={event => setKeyword(event.target.value)}
         />
       </div>
+      <New
+        {...{ isOpen: isModalOpen, setIsOpen: setIsModalOpen, ...restParams }}
+      />
     </>
   );
 };

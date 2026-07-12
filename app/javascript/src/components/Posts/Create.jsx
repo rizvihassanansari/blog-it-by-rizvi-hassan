@@ -21,7 +21,7 @@ const Create = () => {
 
   const { mutate, isPending: isLoading } = useCreatePost(handleSuccess);
 
-  const handleSubmit = async formValues => {
+  const handleSubmit = formValues => {
     const payload = modifySubmitPayload(formValues);
     mutate(payload);
   };

@@ -2,12 +2,19 @@
   "helloWorld": "Hello World",
   "titles": {
     "blogPosts": "Blog posts",
-    "newBlogPost": "New blog post"
+    "newBlogPost": "New blog post",
+    "categories": "CATEGORIES",
+    "newCategory": "New category"
   },
   "messages": {
     "loading": "Loading...",
+    "noCategories": "No category",
     "errors": {
       "default": "Something went wrong!"
+    },
+    "tooltip": {
+      "searchCategory": "Search category",
+      "addCategory": "Add new category"
     }
   },
   "validations": {
@@ -15,7 +22,11 @@
     "titleCannotExceed": "Title cannot exceed {{length}} characters",
     "descriptionRequired": "Description is required",
     "descriptionCannotExceed": "Description cannot exceed {{length}} characters",
-    "categoryRequired": "Please select at least one category"
+    "categoryRequired": "Please select at least one category",
+    "category": {
+      "required": "Enter a category name",
+      "checkLength": "Category must be of at least 3 characters"
+    }
   },
   "labels": {
     "title": "Title",
@@ -23,11 +34,15 @@
     "cancel": "Cancel",
     "submit": "Submit",
     "newBlogPost": "Add a new blog post",
-    "categories": "Categories"
+    "categories": "Categories",
+    "categoryName": "Category name",
+    "add": "Add"
   },
   "placeholders": {
     "title": "Enter title",
     "description": "Enter description",
-    "categories": "Add categories"
+    "categories": "Add categories",
+    "searchCategory": "Search category",
+    "categoryName": "Enter name of category"
   }
 }

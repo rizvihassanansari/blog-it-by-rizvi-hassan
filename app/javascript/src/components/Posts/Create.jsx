@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import postsApi from "apis/posts";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import routes from "routes";
@@ -8,49 +7,32 @@ import routes from "routes";
 import CreateUserForm from "./Form";
 import { modifySubmitPayload } from "./utils";
 
-import categoriesApi from "../../apis/categories";
-import { Container } from "../commons";
+import { useFetchCategories } from "../../hooks/reactQueries/useCategoriesApi";
+import { useCreatePost } from "../../hooks/reactQueries/usePostsApi";
 import Title from "../commons/Title";
 
 const Create = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [categories, setCategories] = useState([]);
-
   const history = useHistory();
   const { t } = useTranslation();
 
-  const handleSubmit = async formValues => {
-    setIsLoading(true);
-    const modifiedPayload = modifySubmitPayload(formValues);
-    // console.log(modifiedPayload);
-    try {
-      await postsApi.create(modifiedPayload);
-      history.push(routes.root);
-    } catch {
-      history.push(routes.root);
-    } finally {
-      setIsLoading(false);
-    }
+  const handleSuccess = () => {
+    history.push(routes.root);
   };
 
-  const fetchCategories = async () => {
-    try {
-      const { data } = await categoriesApi.fetch();
-      setCategories(data.categories);
-    } catch {
-      setCategories([]);
-    }
+  const { mutate, isPending: isLoading } = useCreatePost(handleSuccess);
+
+  const handleSubmit = formValues => {
+    const payload = modifySubmitPayload(formValues);
+    mutate(payload);
   };
 
-  useEffect(() => {
-    fetchCategories();
-  }, []);
+  const { data: { categories = [] } = {} } = useFetchCategories();
 
   return (
-    <Container>
+    <>
       <Title titleText={t("titles.newBlogPost")} />
       <CreateUserForm {...{ isLoading, handleSubmit, categories }} />
-    </Container>
+    </>
   );
 };
 

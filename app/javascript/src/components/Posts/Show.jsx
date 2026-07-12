@@ -1,56 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { Typography } from "@bigbinary/neetoui";
-import { useParams, useHistory } from "react-router-dom";
-import routes from "routes";
+import { useParams } from "react-router-dom";
 
 import Tags from "./commons/Tags";
 
-import postsApi from "../../apis/posts";
-import { Container, PageLoader } from "../commons";
+import { useShowPost } from "../../hooks/reactQueries/usePostsApi";
+import { PageLoader } from "../commons";
 import UserAvatar from "../commons/Avatar";
 import Title from "../commons/Title";
 
 const Show = () => {
-  const [post, setPost] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
-
   const { slug } = useParams();
-  const history = useHistory();
 
-  const fetchPost = async () => {
-    try {
-      const {
-        data: { post },
-      } = await postsApi.show(slug);
-      setPost(post);
-    } catch {
-      history.replace(routes.root);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchPost();
-  }, []);
+  const { data: { post = {} } = {}, isLoading } = useShowPost(slug);
 
   if (isLoading) {
     return <PageLoader />;
   }
 
   return (
-    <Container>
-      <Tags categories={post.categories} />
-      <Title titleText={post.title} />
+    <>
+      <Tags categories={post?.categories} />
+      <Title titleText={post?.title} />
       <UserAvatar
         showName
-        date={post.created_at}
+        date={post?.createdAt}
         size="large"
-        user={post.user}
+        user={post?.user}
       />
-      <Typography className="mt-8">{post.description}</Typography>
-    </Container>
+      <Typography className="mt-8">{post?.description}</Typography>
+    </>
   );
 };
 

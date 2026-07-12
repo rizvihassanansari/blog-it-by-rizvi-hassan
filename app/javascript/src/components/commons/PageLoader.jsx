@@ -6,7 +6,7 @@ import { withTranslation } from "react-i18next";
 const PageLoader = ({ t }) => (
   <div
     className={classnames(
-      "flex h-screen w-screen flex-row items-center justify-center"
+      "flex h-screen w-full flex-row items-center justify-center"
     )}
   >
     <h1 className="text-lg leading-5">{t("messages.loading")}</h1>

@@ -9,7 +9,7 @@ import CategoryTags from "../commons/Tags";
 
 const Item = ({
   title,
-  created_at,
+  createdAt,
   slug,
   user: { name = "" } = {},
   categories,
@@ -24,7 +24,7 @@ const Item = ({
     <Typography style="body3" weight="bold">
       {name}
     </Typography>
-    <Typography style="nano">{formatDate(created_at)}</Typography>
+    <Typography style="nano">{formatDate(createdAt)}</Typography>
   </li>
 );
 

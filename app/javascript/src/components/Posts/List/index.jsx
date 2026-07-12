@@ -1,43 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
+import { Pagination } from "@bigbinary/neetoui";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import routes from "routes";
 
+import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "./constants";
 import PostItem from "./Item";
 
-import postsApi from "../../../apis/posts";
-import { Container, PageLoader } from "../../commons";
+import { useFetchPosts } from "../../../hooks/reactQueries/usePostsApi";
+import useQueryParams from "../../../hooks/useQueryParams";
+import { buildUrl } from "../../../utils/urls";
+import { PageLoader } from "../../commons";
 import Title from "../../commons/Title";
 
 const Index = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { page = DEFAULT_PAGE_INDEX, categories = [] } = useQueryParams();
 
   const history = useHistory();
   const { t } = useTranslation();
 
-  const fetchTasks = async () => {
-    try {
-      const {
-        data: { posts },
-      } = await postsApi.fetch();
-      setPosts(posts);
-      setLoading(false);
-    } catch {
-      setLoading(false);
-    }
-  };
+  const { data: { posts = [], totalResults = 0 } = {}, isLoading } =
+    useFetchPosts({
+      page,
+      categories,
+    });
 
   const handleClick = () => {
     history.push(routes.posts.create);
   };
 
-  useEffect(() => {
-    fetchTasks();
-  }, []);
+  const handlePageNavigation = nextPage => {
+    const url = buildUrl(routes.root, { page: nextPage, categories });
+    history.push(url);
+  };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="h-screen w-full">
         <PageLoader />
@@ -46,17 +44,25 @@ const Index = () => {
   }
 
   return (
-    <Container>
+    <>
       <Title
         buttonProps={{ label: t("labels.newBlogPost"), onClick: handleClick }}
         titleText={t("titles.blogPosts")}
       />
       <ul className="mt-4">
-        {posts.map(post => (
+        {posts?.map(post => (
           <PostItem key={post.id} {...post} />
         ))}
       </ul>
-    </Container>
+      <div className="sticky bottom-0 left-0 flex w-full justify-end bg-white py-2 pr-2 ">
+        <Pagination
+          count={Number(totalResults)}
+          navigate={handlePageNavigation}
+          pageNo={Number(page)}
+          pageSize={DEFAULT_PAGE_SIZE}
+        />
+      </div>
+    </>
   );
 };
 

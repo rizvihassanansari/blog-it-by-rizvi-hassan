@@ -32,7 +32,7 @@ const New = ({ isOpen, setIsOpen, refetchCategories }) => {
           {t("titles.newCategory")}
         </Typography>
       </Modal.Header>
-      <Modal.Body className="space-y-2">
+      <Modal.Body className="mt-4 space-y-2">
         <FormikForm
           formikProps={{
             initialValues: INITIAL_FORM_PROPS,

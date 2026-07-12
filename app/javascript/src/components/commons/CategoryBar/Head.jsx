@@ -5,7 +5,7 @@ import { Button, Typography, Input } from "@bigbinary/neetoui";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import New from "./New";
+import NewCategory from "./New";
 
 const Head = ({ keyword, setKeyword, ...restParams }) => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
@@ -22,7 +22,6 @@ const Head = ({ keyword, setKeyword, ...restParams }) => {
             icon={Search}
             size="small"
             style="text"
-            tooltipProps={{ content: t("messages.tooltip.searchCategory") }}
             onClick={() => setIsSearchVisible(previous => !previous)}
           />
           <Button
@@ -48,7 +47,7 @@ const Head = ({ keyword, setKeyword, ...restParams }) => {
           onChange={event => setKeyword(event.target.value)}
         />
       </div>
-      <New
+      <NewCategory
         {...{ isOpen: isModalOpen, setIsOpen: setIsModalOpen, ...restParams }}
       />
     </>

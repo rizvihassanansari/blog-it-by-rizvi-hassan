@@ -26,6 +26,17 @@
     "category": {
       "required": "Enter a category name",
       "checkLength": "Category must be of at least 3 characters"
+    },
+    "auth": {
+      "name": "Name is required",
+      "nameLength": "Name must be {{length}} characters or less",
+      "email": "Email is required",
+      "validEmail": "Email must be valid",
+      "organization": "Organization is required",
+      "password": "Password is required",
+      "passwordLength": "Password must be {{length}} characters long",
+      "passwordConfirm": "Please confirm your password",
+      "passwordNotMatch": "Passwords do not match"
     }
   },
   "labels": {
@@ -36,13 +47,24 @@
     "newBlogPost": "Add a new blog post",
     "categories": "Categories",
     "categoryName": "Category name",
-    "add": "Add"
+    "add": "Add",
+    "name": "Name",
+    "email": "Email",
+    "organization": "Organization",
+    "password": "Password",
+    "passwordConfirm": "Password Confirmation",
+    "signup": "Signup",
+    "existingUser": "Existing user? Login"
   },
   "placeholders": {
     "title": "Enter title",
     "description": "Enter description",
     "categories": "Add categories",
     "searchCategory": "Search category",
-    "categoryName": "Enter name of category"
+    "categoryName": "Enter name of category",
+    "name": "Oliver",
+    "email": "oliver@example.com",
+    "organization": "Select organization",
+    "password": "·······"
   }
 }

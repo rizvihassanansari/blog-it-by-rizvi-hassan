@@ -1,4 +1,8 @@
+import { t } from "i18next";
 import * as yup from "yup";
+
+const MIN_PASSWORD_LENGTH = 6;
+const MAX_NAME_LENGTH = 35;
 
 export const SIGNUP_FORM_INITIAL_VALUES = {
   name: "",
@@ -9,21 +13,30 @@ export const SIGNUP_FORM_INITIAL_VALUES = {
 };
 
 export const SIGNUP_FORM_VALIDATION_SCHEMA = yup.object().shape({
-  name: yup.string().required("Name is required"),
+  name: yup
+    .string()
+    .required(t("validations.auth.name"))
+    .max(
+      MAX_NAME_LENGTH,
+      t("validations.auth.nameLength", { length: MAX_NAME_LENGTH })
+    ),
   email: yup
     .string()
-    .email("Email must be valid")
-    .required("Email is required"),
+    .email(t("validations.auth.validEmail"))
+    .required(t("validations.auth.email")),
   organization: yup
     .object()
     .shape({ label: yup.string(), value: yup.number() })
-    .required("Organization is required"),
+    .required(t("validations.auth.organization")),
   password: yup
     .string()
-    .required("Password is required")
-    .min(6, "Password must be at least 6 characters long"),
+    .required(t("validations.auth.password"))
+    .min(
+      6,
+      t("validations.auth.passwordLength", { length: MIN_PASSWORD_LENGTH })
+    ),
   passwordConfirmation: yup
     .string()
-    .required("Please confirm your password")
-    .oneOf([yup.ref("password")], "Passwords do not match"),
+    .required(t("validations.auth.passwordConfirm"))
+    .oneOf([yup.ref("password")], t("validations.auth.passwordNotMatch")),
 });

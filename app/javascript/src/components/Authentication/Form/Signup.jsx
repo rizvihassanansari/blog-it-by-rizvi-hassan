@@ -7,6 +7,7 @@ import {
   Button as FormikButton,
   Select,
 } from "@bigbinary/neetoui/formik";
+import { useTranslation } from "react-i18next";
 
 import {
   SIGNUP_FORM_INITIAL_VALUES,
@@ -14,6 +15,8 @@ import {
 } from "../constants";
 
 const Signup = ({ handleSubmit, handleLoginRedirect, organizations }) => {
+  const { t } = useTranslation();
+
   const organizationOptions = organizations.map(organization => ({
     label: organization.name,
     value: organization.id,
@@ -31,50 +34,51 @@ const Signup = ({ handleSubmit, handleLoginRedirect, organizations }) => {
       <Input
         required
         className="w-full"
-        label="Name"
+        label={t("labels.name")}
         name="name"
-        placeholder="Oliver"
+        placeholder={t("placeholders.name")}
         type="text"
       />
       <Input
         required
         className="w-full"
-        label="Email"
+        label={t("labels.email")}
         name="email"
-        placeholder="oliver@example.com"
+        placeholder={t("placeholders.email")}
         type="email"
       />
       <Select
         required
         className="w-full"
-        label="Organization"
+        defaultValue={organizationOptions[0]}
+        label={t("labels.organization")}
         name="organization"
         options={organizationOptions}
-        placeholder="Select an organization"
+        placeholder={t("placeholders.organization")}
       />
       <Input
         required
         className="w-full"
-        label="Password"
+        label={t("label.password")}
         name="password"
-        placeholder="·······"
+        placeholder={t("placeholders.password")}
         type="password"
       />
       <Input
         required
         className="w-full"
-        label="Password confirmation"
+        label={t("labels.passwordConfirm")}
         name="passwordConfirmation"
-        placeholder="·······"
+        placeholder={t("placeholders.password")}
         type="password"
       />
       <FormikButton
         className="black-button--primary w-full justify-center"
-        label="Register"
+        label={t("labels.signup")}
         type="submit"
       />
       <Button
-        label="New user? Login"
+        label="Existing user? Login"
         style="link"
         onClick={() => handleLoginRedirect()}
       />

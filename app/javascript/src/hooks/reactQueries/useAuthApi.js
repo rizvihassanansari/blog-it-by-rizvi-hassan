@@ -7,3 +7,9 @@ export const useSignup = handleSuccess =>
     mutationFn: payload => authApi.signup(payload),
     onSuccess: handleSuccess,
   });
+
+export const useLogin = handleSuccess =>
+  useMutation({
+    mutationFn: payload => authApi.login(payload),
+    onSuccess: handleSuccess,
+  });

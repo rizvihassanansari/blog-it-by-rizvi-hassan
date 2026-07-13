@@ -1,11 +1,7 @@
 import React from "react";
 
 import { Button } from "@bigbinary/neetoui";
-import {
-  Form as FormikForm,
-  Input,
-  Button as FormikButton,
-} from "@bigbinary/neetoui/formik";
+import { Form as FormikForm, Input } from "@bigbinary/neetoui/formik";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -13,7 +9,7 @@ import {
   LOGIN_FORM_VALIDATION_SCHEMA,
 } from "../constants";
 
-const Login = ({ handleSubmit, handleSignupRedirect }) => {
+const Login = ({ handleSubmit, handleSignupRedirect, isLoading }) => {
   const { t } = useTranslation();
 
   return (
@@ -22,7 +18,7 @@ const Login = ({ handleSubmit, handleSignupRedirect }) => {
       formikProps={{
         initialValues: LOGIN_FORM_INITIAL_VALUES,
         validationSchema: LOGIN_FORM_VALIDATION_SCHEMA,
-        onSubmit: { handleSubmit },
+        onSubmit: handleSubmit,
       }}
     >
       <Input
@@ -41,9 +37,10 @@ const Login = ({ handleSubmit, handleSignupRedirect }) => {
         placeholder={t("placeholders.password")}
         type="password"
       />
-      <FormikButton
+      <Button
         className="black-button--primary w-full justify-center"
         label={t("labels.login")}
+        loading={isLoading}
         type="submit"
       />
       <Button

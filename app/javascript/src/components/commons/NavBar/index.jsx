@@ -8,9 +8,11 @@ import classNames from "classnames";
 import { ListDetails } from "@bigbinary/neeto-icons";
 import { Button } from "@bigbinary/neetoui";
 import CategoryBar from "../CategoryBar";
+import { getFromLocalStorage } from "../../../utils/storage";
 
 const NavBar = () => {
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
+  const name = getFromLocalStorage("authUserName");
 
   const handleClick = () => {
     setIsCategoryVisible(previous => !previous);
@@ -35,7 +37,7 @@ const NavBar = () => {
           )}
           onClick={handleClick}
         />
-        <UserAvatar className="mt-auto" user={{ name: "Rizvi Hassan" }} />
+        <UserAvatar className="mt-auto" user={{ name }} />
       </div>
       <CategoryBar isVisible={isCategoryVisible} />
     </main>

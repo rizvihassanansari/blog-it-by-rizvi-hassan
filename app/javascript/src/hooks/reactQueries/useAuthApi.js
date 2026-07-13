@@ -1,6 +1,9 @@
 import { useMutation } from "react-query";
 
 import authApi from "../../apis/auth";
+import { resetAuthTokens, setAuthHeaders } from "../../apis/axios";
+import routes from "../../routes";
+import { setToLocalStorage } from "../../utils/storage";
 
 export const useSignup = handleSuccess =>
   useMutation({
@@ -8,8 +11,32 @@ export const useSignup = handleSuccess =>
     onSuccess: handleSuccess,
   });
 
-export const useLogin = handleSuccess =>
+export const useLogin = () =>
   useMutation({
     mutationFn: payload => authApi.login(payload),
-    onSuccess: handleSuccess,
+    onSuccess: user => {
+      setToLocalStorage({
+        authToken: user.authenticationToken,
+        email: user.email.toLowerCase(),
+        userId: user.id,
+        userName: user.name,
+      });
+      setAuthHeaders();
+      window.location.href = routes.root;
+    },
+  });
+
+export const useLogout = () =>
+  useMutation({
+    mutationFn: () => authApi.logout(),
+    onSuccess: () => {
+      setToLocalStorage({
+        authToken: null,
+        email: null,
+        userId: null,
+        userName: null,
+      });
+      resetAuthTokens();
+      window.location.href = routes.root;
+    },
   });

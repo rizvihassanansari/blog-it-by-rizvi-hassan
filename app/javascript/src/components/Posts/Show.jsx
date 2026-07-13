@@ -25,6 +25,7 @@ const Show = () => {
       <Title titleText={post?.title} />
       <UserAvatar
         showName
+        className="my-3"
         date={post?.createdAt}
         size="large"
         user={post?.user}

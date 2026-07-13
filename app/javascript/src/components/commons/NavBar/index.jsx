@@ -1,18 +1,23 @@
 /* eslint-disable import/order */
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { LINKS } from "./constants";
 import NavLink from "./Link";
 import UserAvatar from "../Avatar";
 import classNames from "classnames";
 import { ListDetails } from "@bigbinary/neeto-icons";
-import { Button } from "@bigbinary/neetoui";
+import { Button, Popover } from "@bigbinary/neetoui";
 import CategoryBar from "../CategoryBar";
 import { getFromLocalStorage } from "../../../utils/storage";
+import Logout from "./Logout";
 
 const NavBar = () => {
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);
+
+  const avatarRef = useRef(null);
+
   const name = getFromLocalStorage("authUserName");
+  const email = getFromLocalStorage("authEmail");
 
   const handleClick = () => {
     setIsCategoryVisible(previous => !previous);
@@ -37,7 +42,12 @@ const NavBar = () => {
           )}
           onClick={handleClick}
         />
-        <UserAvatar className="mt-auto" user={{ name }} />
+        <div className="mt-auto" ref={avatarRef}>
+          <UserAvatar user={{ name }} />
+        </div>
+        <Popover reference={avatarRef}>
+          <Logout {...{ name, email }} />
+        </Popover>
       </div>
       <CategoryBar isVisible={isCategoryVisible} />
     </main>

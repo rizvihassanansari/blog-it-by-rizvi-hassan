@@ -12,14 +12,17 @@ const Avatar = ({
   showName = false,
   ...restParams
 }) => (
-  <div className={classNames("my-3 flex items-center", [className])}>
+  <div className={classNames("flex items-center", [className])}>
     <UserIcon {...{ user, ...restParams }} />
     {showName && (
       <div className="ml-4">
         {showName && (
-          <Typography style="body2" weight="bold">
-            {user.name}
-          </Typography>
+          <>
+            <Typography style="body2" weight="bold">
+              {user.name}
+            </Typography>
+            <Typography style="body3">{user.email}</Typography>
+          </>
         )}
         {date && <Typography style="body3">{formatDate(date)}</Typography>}
       </div>

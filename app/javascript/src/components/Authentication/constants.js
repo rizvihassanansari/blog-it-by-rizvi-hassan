@@ -40,3 +40,13 @@ export const SIGNUP_FORM_VALIDATION_SCHEMA = yup.object().shape({
     .required(t("validations.auth.passwordConfirm"))
     .oneOf([yup.ref("password")], t("validations.auth.passwordNotMatch")),
 });
+
+export const LOGIN_FORM_INITIAL_VALUES = {
+  email: "",
+  password: "",
+};
+
+export const LOGIN_FORM_VALIDATION_SCHEMA = yup.object().shape({
+  email: yup.string().required(t("validations.auth.email")),
+  password: yup.string().required(t("validations.auth.password")),
+});

@@ -78,7 +78,7 @@ const Signup = ({ handleSubmit, handleLoginRedirect, organizations }) => {
         type="submit"
       />
       <Button
-        label="Existing user? Login"
+        label={t("labels.existingUser")}
         style="link"
         onClick={() => handleLoginRedirect()}
       />

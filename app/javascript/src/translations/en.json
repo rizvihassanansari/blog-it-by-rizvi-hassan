@@ -4,7 +4,9 @@
     "blogPosts": "Blog posts",
     "newBlogPost": "New blog post",
     "categories": "CATEGORIES",
-    "newCategory": "New category"
+    "newCategory": "New category",
+    "signup": "Signup",
+    "login": "Login"
   },
   "messages": {
     "loading": "Loading...",
@@ -54,7 +56,9 @@
     "password": "Password",
     "passwordConfirm": "Password Confirmation",
     "signup": "Signup",
-    "existingUser": "Existing user? Login"
+    "login": "Login",
+    "existingUser": "Existing user? Login",
+    "newUser": "New user? Signup"
   },
   "placeholders": {
     "title": "Enter title",

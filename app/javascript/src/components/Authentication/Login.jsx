@@ -5,28 +5,15 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import LoginForm from "./Form/Login";
 
-import { setAuthHeaders } from "../../apis/axios";
 import { useLogin } from "../../hooks/reactQueries/useAuthApi";
 import routes from "../../routes";
-import { setToLocalStorage } from "../../utils/storage";
 import Title from "../commons/Title";
 
 const Login = () => {
   const history = useHistory();
   const { t } = useTranslation();
 
-  const handleSuccess = response => {
-    setToLocalStorage({
-      authToken: response.authenticationToken,
-      email: response.email.toLowerCase(),
-      userId: response.id,
-      userName: response.name,
-    });
-    setAuthHeaders();
-    window.location.href = routes.root;
-  };
-
-  const { mutate, isLoading } = useLogin(handleSuccess);
+  const { mutate, isLoading } = useLogin();
 
   const handleSubmit = (payload, { resetFrom }) => {
     mutate(payload);

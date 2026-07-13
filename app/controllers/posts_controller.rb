@@ -7,12 +7,14 @@ class PostsController < ApplicationController
     page = [params[:page].to_i, 1].max
     category_ids = Array(params[:categories]).map(&:to_i)
 
+    current_user_organization_id = current_user.organization_id
+
     posts = []
     total_results = 0
     if category_ids.present?
       filtered_posts = Post
         .joins(:categories)
-        .where(categories: { id: category_ids })
+        .where(categories: { id: category_ids }, organization_id: current_user_organization_id)
         .distinct
         .order(created_at: :desc)
 
@@ -28,6 +30,7 @@ class PostsController < ApplicationController
       total_results = total_posts.count
 
       posts = total_posts
+        .where(organization_id: current_user_organization_id)
         .limit(PAGE_SIZE)
         .offset((page - 1) * PAGE_SIZE)
         .as_json(include: { user: { only: %i[name id organization_id] }, categories: { only: %i[id name] } })
@@ -39,6 +42,8 @@ class PostsController < ApplicationController
   def create
     params_with_user_id = post_params.merge(user_id: 1)
     post = Post.new(params_with_user_id)
+    post[:user_id] = current_user.id
+    post[:organization_id] = current_user.organization_id
     post.save!
     render_notice(t("successfully_created.post"))
   end

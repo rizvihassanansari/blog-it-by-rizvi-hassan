@@ -3,6 +3,8 @@ import { Toastr } from "@bigbinary/neetoui";
 import axios from "axios";
 import { t } from "i18next";
 
+import { getFromLocalStorage } from "../utils/storage";
+
 axios.defaults.baseURL = "/";
 
 const setAuthHeaders = () => {
@@ -13,8 +15,8 @@ const setAuthHeaders = () => {
       .querySelector('[name="csrf-token"]')
       .getAttribute("content"),
   };
-  const token = localStorage.getItem("authToken");
-  const email = localStorage.getItem("authEmail");
+  const token = getFromLocalStorage("authToken");
+  const email = getFromLocalStorage("authEmail");
   if (token && email) {
     axios.defaults.headers["X-Auth-Email"] = email;
     axios.defaults.headers["X-Auth-Token"] = token;

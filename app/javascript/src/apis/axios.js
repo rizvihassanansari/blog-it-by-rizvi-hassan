@@ -1,4 +1,4 @@
-import { keysToCamelCase } from "@bigbinary/neeto-cist";
+import { keysToCamelCase, keysToSnakeCase } from "@bigbinary/neeto-cist";
 import { Toastr } from "@bigbinary/neetoui";
 import axios from "axios";
 import { t } from "i18next";
@@ -47,10 +47,20 @@ const handleErrorResponse = axiosErrorObject => {
   return Promise.reject(axiosErrorObject);
 };
 
+const handleRequestInterceptor = request => {
+  if (request.method?.toLowerCase() === "post" && request.data) {
+    request.data = keysToSnakeCase(request.data);
+  }
+
+  return request;
+};
+
 const registerIntercepts = () => {
   axios.interceptors.response.use(handleSuccessResponse, error =>
     handleErrorResponse(error)
   );
+
+  axios.interceptors.request.use(handleRequestInterceptor);
 };
 
 export { setAuthHeaders, registerIntercepts };

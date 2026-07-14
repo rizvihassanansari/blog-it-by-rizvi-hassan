@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Edit } from "@bigbinary/neeto-icons";
-import { Button, Typography } from "@bigbinary/neetoui";
+import { Button, Tag, Typography } from "@bigbinary/neetoui";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -32,7 +32,12 @@ const Show = () => {
     <>
       <Tags categories={post?.categories} />
       <div className="flex items-start justify-between pr-4">
-        <Title titleText={post?.title} />
+        <div className="flex items-center gap-3">
+          <Title titleText={post?.title} />
+          {!post.isBloggable && (
+            <Tag label={t("labels.draft")} size="small" style="danger" />
+          )}
+        </div>
         {post?.userId === currentUserId && (
           <Button
             className="aspect-square cursor-pointer"

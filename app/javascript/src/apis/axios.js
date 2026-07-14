@@ -2,6 +2,7 @@ import { keysToCamelCase, keysToSnakeCase } from "@bigbinary/neeto-cist";
 import { Toastr } from "@bigbinary/neetoui";
 import axios from "axios";
 import { t } from "i18next";
+import { includes } from "ramda";
 
 import { getFromLocalStorage } from "../utils/storage";
 
@@ -56,7 +57,10 @@ const handleErrorResponse = axiosErrorObject => {
 };
 
 const handleRequestInterceptor = request => {
-  if (request.method?.toLowerCase() === "post" && request.data) {
+  if (
+    includes(request.method?.toLowerCase(), ["post", "put", "delete"]) &&
+    request.data
+  ) {
     request.data = keysToSnakeCase(request.data);
   }
 

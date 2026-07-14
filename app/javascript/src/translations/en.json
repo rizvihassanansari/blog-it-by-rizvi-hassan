@@ -65,7 +65,9 @@
     "saveDraft": "Save as draft",
     "edit": "Edit",
     "preview": "Preview post",
-    "delete": "Delete"
+    "delete": "Delete",
+    "previewTag": "Preview",
+    "draft": "Draft"
   },
   "placeholders": {
     "title": "Enter title",

@@ -37,7 +37,11 @@ const Edit = () => {
   const { data: { post } = {} } = useShowPost(slug);
 
   const handleSuccess = data => {
-    setSavedTime(formatDateTime(data?.updatedAt));
+    if (formRef.current.values.isBloggable) {
+      history.push(routes.root);
+    } else {
+      setSavedTime(formatDateTime(data?.updatedAt));
+    }
   };
 
   const { mutate, isPending: isLoading } = useUpdatePost(handleSuccess);

@@ -1,7 +1,9 @@
 import React from "react";
 
 import { Table as NeetoTable } from "@bigbinary/neetoui";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
+import routes from "../../routes";
 import { formatDateTime } from "../utils";
 
 const Table = ({ posts }) => {
@@ -10,6 +12,9 @@ const Table = ({ posts }) => {
       title: "TITLE",
       dataIndex: "title",
       key: "id",
+      render: ({ title, slug }) => (
+        <Link to={routes.posts.show.replace(":slug", slug)}>{title}</Link>
+      ),
     },
     {
       title: "CATEGORY",
@@ -31,7 +36,8 @@ const Table = ({ posts }) => {
 
   const rowData = posts.map(post => ({
     id: post.id,
-    title: post.title,
+    slug: post.slug,
+    title: { title: post.title, slug: post.slug },
     category: post.categories.map(category => category.name).join(", "),
     updatedAt: formatDateTime(post.updatedAt),
     status: post.isBloggable ? "Published" : "Draft",

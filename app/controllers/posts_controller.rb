@@ -66,8 +66,12 @@ class PostsController < ApplicationController
   def update
     @post.update(update_params)
     @post.save!
-    render_notice(t("successfully_updated.post")) unless params.key?(:quiet)
-    render_json(@post.as_json(only: :updated_at))
+
+    if params.key?(:quiet)
+      render_json(@post.as_json(only: :updated_at))
+    else
+      render_notice(t("successfully_updated.post"))
+    end
   end
 
   def my_posts

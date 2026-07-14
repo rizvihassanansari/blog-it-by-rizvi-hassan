@@ -56,6 +56,7 @@ const Index = () => {
       </ul>
       <div className="sticky bottom-0 left-0 flex w-full justify-end bg-white py-2 pr-2 ">
         <Pagination
+          className="neetix-pagination"
           count={Number(totalResults)}
           navigate={handlePageNavigation}
           pageNo={Number(page)}

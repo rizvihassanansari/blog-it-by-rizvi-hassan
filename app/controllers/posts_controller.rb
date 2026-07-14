@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-  PAGE_SIZE = 10
+  PAGE_SIZE = 5
 
   before_action :load_post!, only: %i[show update destroy]
 

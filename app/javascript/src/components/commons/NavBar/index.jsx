@@ -5,7 +5,7 @@ import { LINKS } from "./constants";
 import NavLink from "./Link";
 import UserAvatar from "../Avatar";
 import classNames from "classnames";
-import { ListDetails } from "@bigbinary/neeto-icons";
+import { Book, ListDetails } from "@bigbinary/neeto-icons";
 import { Button, Popover } from "@bigbinary/neetoui";
 import CategoryBar from "../CategoryBar";
 import { getFromLocalStorage } from "../../../utils/storage";
@@ -24,11 +24,19 @@ const NavBar = () => {
   };
 
   return (
-    <main className="relative flex h-screen w-fit">
+    <main className="relative z-10 flex h-screen w-fit">
       <div className="relative left-0 top-0 flex h-full w-14 flex-col items-center gap-4 border-r py-6">
+        <Button
+          className="naked black-button--primary aspect-square rounded-md p-1"
+          icon={Book}
+          size="large"
+          type="button"
+        />
+        <hr className="w-full" />
         {LINKS.map(params => (
           <NavLink key={params.to} {...params} />
         ))}
+        <hr className="w-full" />
         <Button
           icon={ListDetails}
           size="large"

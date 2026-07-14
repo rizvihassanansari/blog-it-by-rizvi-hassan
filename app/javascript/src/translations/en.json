@@ -7,7 +7,8 @@
     "categories": "CATEGORIES",
     "newCategory": "New category",
     "signup": "Signup",
-    "login": "Login"
+    "login": "Login",
+    "notFound": "404! Not found"
   },
   "messages": {
     "loading": "Loading...",
@@ -19,7 +20,8 @@
       "searchCategory": "Search category",
       "addCategory": "Add new category"
     },
-    "draftSaved": "Draft saved at <bold>{{time}}</bold>"
+    "draftSaved": "Draft saved at <bold>{{time}}</bold>",
+    "pageNotFound": "The page you are looking for is not available"
   },
   "validations": {
     "titleRequired": "Title is required",
@@ -70,7 +72,8 @@
     "previewTag": "Preview",
     "draft": "Draft",
     "unpublish": "Unpublish",
-    "unpublished": "Unpublished"
+    "unpublished": "Unpublished",
+    "home": "Go back to home"
   },
   "placeholders": {
     "title": "Enter title",

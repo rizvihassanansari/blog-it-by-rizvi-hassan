@@ -61,7 +61,8 @@
     "existingUser": "Existing user? Login",
     "newUser": "New user? Signup",
     "publish": "Publish",
-    "saveDraft": "Save as draft"
+    "saveDraft": "Save as draft",
+    "edit": "Edit"
   },
   "placeholders": {
     "title": "Enter title",

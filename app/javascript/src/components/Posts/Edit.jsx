@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { ActionDropdown, Button } from "@bigbinary/neetoui";
+import { Button } from "@bigbinary/neetoui";
 import { useTranslation } from "react-i18next";
 import {
   useHistory,
   useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
 
+import SubmitButton from "./commons/SubmitButton";
 import EditPostForm from "./Form";
 import { modifySubmitPayload } from "./utils";
 
@@ -74,28 +75,7 @@ const Edit = () => {
             style="secondary"
             onClick={() => history.replace(routes.root)}
           />
-          <ActionDropdown
-            className=""
-            label={t("labels.publish")}
-            buttonProps={{
-              className: "neetix-button--primary",
-            }}
-            dropdownProps={{
-              buttonProps: {
-                className: "neetix-button--primary",
-              },
-            }}
-            onClick={() => handleUpdate(true)}
-          >
-            <ActionDropdown.Menu>
-              <ActionDropdown.MenuItem onClick={() => handleUpdate(true)}>
-                {t("labels.publish")}
-              </ActionDropdown.MenuItem>
-              <ActionDropdown.MenuItem onClick={() => handleUpdate(false)}>
-                {t("labels.saveDraft")}
-              </ActionDropdown.MenuItem>
-            </ActionDropdown.Menu>
-          </ActionDropdown>
+          <SubmitButton {...{ handleUpdate }} />
         </div>
       </div>
       <EditPostForm

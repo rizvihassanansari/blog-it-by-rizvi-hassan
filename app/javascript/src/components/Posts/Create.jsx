@@ -1,10 +1,11 @@
 import React, { useRef } from "react";
 
-import { ActionDropdown, Button } from "@bigbinary/neetoui";
+import { Button } from "@bigbinary/neetoui";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import routes from "routes";
 
+import SubmitButton from "./commons/SubmitButton";
 import CreatePostForm from "./Form";
 import { modifySubmitPayload } from "./utils";
 
@@ -31,17 +32,8 @@ const Create = () => {
 
   const { data: { categories = [] } = {} } = useFetchCategories();
 
-  const handlePublish = () => {
-    formRef.current.values.isBloggable = "true";
-    formRef.current.validateForm();
-
-    if (formRef.current.isValid) {
-      formRef.current.submitForm();
-    }
-  };
-
-  const handleSaveDraft = () => {
-    formRef.current.values.isBloggable = "false";
+  const handleUpdate = (publish = false) => {
+    formRef.current.values.isBloggable = publish ? "true" : "false";
     formRef.current.validateForm();
 
     if (formRef.current.isValid) {
@@ -59,28 +51,7 @@ const Create = () => {
             style="secondary"
             onClick={() => history.replace(routes.root)}
           />
-          <ActionDropdown
-            className=""
-            label={t("labels.publish")}
-            buttonProps={{
-              className: "neetix-button--primary",
-            }}
-            dropdownProps={{
-              buttonProps: {
-                className: "neetix-button--primary",
-              },
-            }}
-            onClick={handlePublish}
-          >
-            <ActionDropdown.Menu>
-              <ActionDropdown.MenuItem onClick={handlePublish}>
-                {t("labels.publish")}
-              </ActionDropdown.MenuItem>
-              <ActionDropdown.MenuItem onClick={handleSaveDraft}>
-                {t("labels.saveDraft")}
-              </ActionDropdown.MenuItem>
-            </ActionDropdown.Menu>
-          </ActionDropdown>
+          <SubmitButton {...{ handleUpdate }} />
         </div>
       </div>
       <CreatePostForm

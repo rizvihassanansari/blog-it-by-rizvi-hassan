@@ -3,6 +3,8 @@
 class PostsController < ApplicationController
   PAGE_SIZE = 10
 
+  before_action :load_post!, only: %i[show update]
+
   def index
     page = [params[:page].to_i, 1].max
     category_ids = Array(params[:categories]).map(&:to_i)
@@ -48,19 +50,31 @@ class PostsController < ApplicationController
   end
 
   def show
-    post = Post.find_by!(slug: params[:slug])
-
-    if post.user_id != current_user.id && post.is_bloggable == false
+    if @post.user_id != current_user.id && @post.is_bloggable == false
       render_error(t("does_not_exist"))
     else
-      post = post.as_json(include: { user: { only: %i[name id organization_id] }, categories: { only: %i[id name] } })
+      post = @post.as_json(include: { user: { only: %i[name id organization_id] }, categories: { only: %i[id name] } })
       render_json({ post: })
     end
+  end
+
+  def update
+    @post.update(update_params)
+    @post.save!
+    render_notice(t("successfully_updated.post"))
   end
 
   private
 
     def post_params
       params.require(:post).permit(:title, :description, :is_bloggable, category_ids: [])
+    end
+
+    def update_params
+      params.require(:post).permit(:description, :is_bloggable, category_ids: [])
+    end
+
+    def load_post!
+      @post = Post.find_by!(slug: params[:slug])
     end
 end

@@ -1,38 +1,45 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { ActionDropdown, Button } from "@bigbinary/neetoui";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import routes from "routes";
+import {
+  useHistory,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
 
-import CreatePostForm from "./Form";
+import EditPostForm from "./Form";
 import { modifySubmitPayload } from "./utils";
 
 import { useFetchCategories } from "../../hooks/reactQueries/useCategoriesApi";
-import { useCreatePost } from "../../hooks/reactQueries/usePostsApi";
+import {
+  useShowPost,
+  useUpdatePost,
+} from "../../hooks/reactQueries/usePostsApi";
+import routes from "../../routes";
 import Title from "../commons/Title";
 
-const Create = () => {
+const Edit = () => {
+  const [initialFormValues, setInitialFormValues] = useState(null);
+
   const formRef = useRef(null);
 
+  const { slug } = useParams();
   const history = useHistory();
   const { t } = useTranslation();
 
-  const handleSuccess = () => {
-    history.push(routes.root);
-  };
+  const { data: { post } = {} } = useShowPost(slug);
 
-  const { mutate, isPending: isLoading } = useCreatePost(handleSuccess);
+  const { mutate, isPending: isLoading } = useUpdatePost();
 
   const handleSubmit = formValues => {
     const payload = modifySubmitPayload(formValues);
-    mutate(payload);
+    mutate({ slug, payload });
   };
 
   const { data: { categories = [] } = {} } = useFetchCategories();
 
-  const handlePublish = () => {
-    formRef.current.values.isBloggable = "true";
+  const handleUpdate = (publish = false) => {
+    formRef.current.values.isBloggable = publish ? "true" : "false";
     formRef.current.validateForm();
 
     if (formRef.current.isValid) {
@@ -40,19 +47,27 @@ const Create = () => {
     }
   };
 
-  const handleSaveDraft = () => {
-    formRef.current.values.isBloggable = "false";
-    formRef.current.validateForm();
+  useEffect(() => {
+    if (post) {
+      const postValues = {
+        title: post.title,
+        description: post.description,
+        isBloggable: post.isBloggable,
+      };
 
-    if (formRef.current.isValid) {
-      formRef.current.submitForm();
+      const categoryOptions = post.categories.map(category => ({
+        label: category.name,
+        value: category.id,
+      }));
+
+      setInitialFormValues({ ...postValues, categories: categoryOptions });
     }
-  };
+  }, [post]);
 
   return (
     <>
       <div className="flex justify-between">
-        <Title titleText={t("titles.newBlogPost")} />
+        <Title titleText={t("titles.editBlogPost")} />
         <div className="flex items-center justify-center gap-2">
           <Button
             label={t("labels.cancel")}
@@ -70,29 +85,31 @@ const Create = () => {
                 className: "neetix-button--primary",
               },
             }}
-            onClick={handlePublish}
+            onClick={() => handleUpdate(true)}
           >
             <ActionDropdown.Menu>
-              <ActionDropdown.MenuItem onClick={handlePublish}>
+              <ActionDropdown.MenuItem onClick={() => handleUpdate(true)}>
                 {t("labels.publish")}
               </ActionDropdown.MenuItem>
-              <ActionDropdown.MenuItem onClick={handleSaveDraft}>
+              <ActionDropdown.MenuItem onClick={() => handleUpdate(false)}>
                 {t("labels.saveDraft")}
               </ActionDropdown.MenuItem>
             </ActionDropdown.Menu>
           </ActionDropdown>
         </div>
       </div>
-      <CreatePostForm
+      <EditPostForm
         ref={formRef}
         {...{
           isLoading,
           handleSubmit,
           categories,
+          initialFormValues,
         }}
+        disableTitle
       />
     </>
   );
 };
 
-export default Create;
+export default Edit;

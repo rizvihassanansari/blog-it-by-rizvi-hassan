@@ -7,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 
 import { Signup, Login } from "./components/Authentication";
 import { Container, PrivateRoute } from "./components/commons";
-import { PostList, CreatePost, ShowPost } from "./components/Posts";
+import { PostList, CreatePost, EditPost, ShowPost } from "./components/Posts";
 import routes from "./routes";
 import queryClient from "./utils/queryClient";
 import { getFromLocalStorage } from "./utils/storage";
@@ -23,7 +23,18 @@ const App = () => {
         <Container>
           <Switch>
             <Route exact component={ShowPost} path={routes.posts.show} />
-            <Route exact component={CreatePost} path={routes.posts.create} />
+            <PrivateRoute
+              component={CreatePost}
+              condition={isLoggedIn}
+              path={routes.posts.create}
+              redirectRoute={routes.auth.login}
+            />
+            <PrivateRoute
+              component={EditPost}
+              condition={isLoggedIn}
+              path={routes.posts.edit}
+              redirectRoute={routes.auth.login}
+            />
             <Route exact component={Signup} path={routes.auth.signup} />
             <Route exact component={Login} path={routes.auth.login} />
             <PrivateRoute

@@ -32,3 +32,9 @@ export const useCreatePost = handleSuccess =>
     mutationFn: payload => postsApi.create(payload),
     onSuccess: handleSuccess,
   });
+
+export const useUpdatePost = () =>
+  useMutation({
+    mutationKey: [QUERY_KEYS.POSTS],
+    mutationFn: values => postsApi.update(values),
+  });

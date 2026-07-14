@@ -5,6 +5,7 @@ const routes = {
     show: "/posts/:slug/show",
     edit: "/posts/:slug/edit",
     preview: "/posts/preview",
+    myPosts: "/posts/my",
   },
   auth: {
     signup: "/signup",

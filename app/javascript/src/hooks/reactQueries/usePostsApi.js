@@ -49,3 +49,9 @@ export const useDeletePost = slug => {
     onSuccess: () => history.replace(routes.root),
   });
 };
+
+export const useFetchMyPosts = () =>
+  useQuery({
+    queryKey: [QUERY_KEYS.POSTS],
+    queryFn: () => postsApi.myPosts(),
+  });

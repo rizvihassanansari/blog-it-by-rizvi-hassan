@@ -40,15 +40,12 @@ export const useUpdatePost = handleSuccess =>
     onSuccess: handleSuccess,
   });
 
-export const useDeletePost = slug => {
-  const history = useHistory();
-
-  return useMutation({
+export const useDeletePost = handleSuccess =>
+  useMutation({
     mutationKey: [QUERY_KEYS.POSTS],
-    mutationFn: () => postsApi.destroy(slug),
-    onSuccess: () => history.replace(routes.root),
+    mutationFn: parameters => postsApi.destroy(parameters),
+    onSuccess: handleSuccess,
   });
-};
 
 export const useFetchMyPosts = () =>
   useQuery({

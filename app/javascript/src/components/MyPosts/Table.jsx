@@ -7,7 +7,7 @@ import Title from "./Title";
 
 import { formatDateTime } from "../utils";
 
-const Table = ({ posts }) => {
+const Table = ({ posts, refetch }) => {
   const columnData = [
     {
       title: "TITLE",
@@ -30,7 +30,7 @@ const Table = ({ posts }) => {
       dataIndex: "status",
       key: "status",
       width: 150,
-      render: status => <Status {...{ status }} />,
+      render: values => <Status {...{ ...values, refetch }} />,
     },
   ];
 
@@ -40,7 +40,7 @@ const Table = ({ posts }) => {
     title: { title: post.title, slug: post.slug },
     category: post.categories.map(category => category.name).join(", "),
     updatedAt: formatDateTime(post.updatedAt),
-    status: post.isBloggable ? "Published" : "Draft",
+    status: { isBloggable: post.isBloggable, slug: post.slug },
   }));
 
   return <NeetoTable columnData={columnData} rowData={rowData} />;

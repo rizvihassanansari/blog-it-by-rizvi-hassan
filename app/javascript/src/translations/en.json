@@ -62,12 +62,15 @@
     "existingUser": "Existing user? Login",
     "newUser": "New user? Signup",
     "publish": "Publish",
+    "published": "Published",
     "saveDraft": "Save as draft",
     "edit": "Edit",
     "preview": "Preview post",
     "delete": "Delete",
     "previewTag": "Preview",
-    "draft": "Draft"
+    "draft": "Draft",
+    "unpublish": "Unpublish",
+    "unpublished": "Unpublished"
   },
   "placeholders": {
     "title": "Enter title",

@@ -45,7 +45,7 @@ const Edit = () => {
   };
 
   const { mutate, isPending: isLoading } = useUpdatePost(handleSuccess);
-  const { mutate: deletePost } = useDeletePost(slug);
+  const { mutate: deletePost } = useDeletePost(() => history.push(routes.root));
 
   const handleSubmit = formValues => {
     const payload = modifySubmitPayload(formValues);
@@ -64,7 +64,7 @@ const Edit = () => {
   };
 
   const handleDelete = () => {
-    deletePost();
+    deletePost({ slug });
   };
 
   const handlePreview = () => {

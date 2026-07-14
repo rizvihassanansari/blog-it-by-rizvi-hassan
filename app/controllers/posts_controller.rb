@@ -46,7 +46,12 @@ class PostsController < ApplicationController
     post[:user_id] = current_user.id
     post[:organization_id] = current_user.organization_id
     post.save!
-    render_notice(t("successfully_created.post"))
+
+    if params.key?(:quiet)
+      render_json(post.as_json(only: :updated_at))
+    else
+      render_notice(t("successfully_created.post"))
+    end
   end
 
   def show
@@ -60,7 +65,11 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy!
-    render_notice(t("successfully_deleted.post")) unless params.key?(:quiet)
+    if params.key?(:quiet)
+      render_json({ deleted: true })
+    else
+      render_notice(t("successfully_deleted.post")) unless params.key?(:quiet)
+    end
   end
 
   def update

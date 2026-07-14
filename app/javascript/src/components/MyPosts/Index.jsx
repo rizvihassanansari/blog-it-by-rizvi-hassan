@@ -8,7 +8,7 @@ import { useFetchMyPosts } from "../../hooks/reactQueries/usePostsApi";
 import Title from "../commons/Title";
 
 const Index = () => {
-  const { data: { posts = [] } = {} } = useFetchMyPosts();
+  const { data: { posts = [] } = {}, refetch } = useFetchMyPosts();
 
   return (
     <>
@@ -16,7 +16,7 @@ const Index = () => {
       <Typography className="my-4" style="body2" weight="semibold">
         14 Articles
       </Typography>
-      <Table {...{ posts }} />
+      <Table {...{ posts, refetch }} />
     </>
   );
 };

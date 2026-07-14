@@ -6,8 +6,8 @@ import routes from "../../routes";
 
 const Title = ({ title, slug }) => (
   <Link
-    className="text-green-700"
-    to={routes.posts.show.replace(":slug", slug)}
+    className="block w-[450px] truncate text-green-700"
+    to={routes.posts.edit.replace(":slug", slug)}
   >
     {title}
   </Link>

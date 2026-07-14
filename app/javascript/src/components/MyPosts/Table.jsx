@@ -13,6 +13,7 @@ const Table = ({ posts, refetch }) => {
       title: "TITLE",
       dataIndex: "title",
       key: "id",
+      width: 450,
       render: ({ title, slug }) => <Title {...{ title, slug }} />,
     },
     {

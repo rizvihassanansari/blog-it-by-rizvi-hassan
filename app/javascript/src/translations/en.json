@@ -62,7 +62,8 @@
     "newUser": "New user? Signup",
     "publish": "Publish",
     "saveDraft": "Save as draft",
-    "edit": "Edit"
+    "edit": "Edit",
+    "preview": "Preview post"
   },
   "placeholders": {
     "title": "Enter title",

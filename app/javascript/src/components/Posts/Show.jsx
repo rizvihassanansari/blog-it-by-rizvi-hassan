@@ -10,12 +10,14 @@ import Tags from "./commons/Tags";
 
 import { useShowPost } from "../../hooks/reactQueries/usePostsApi";
 import routes from "../../routes";
+import { getFromLocalStorage } from "../../utils/storage";
 import { PageLoader } from "../commons";
 import UserAvatar from "../commons/Avatar";
 import Title from "../commons/Title";
 
 const Show = () => {
   const { slug } = useParams();
+  const currentUserId = parseInt(getFromLocalStorage("authUserId"));
 
   const { t } = useTranslation();
   const history = useHistory();
@@ -31,22 +33,24 @@ const Show = () => {
       <Tags categories={post?.categories} />
       <div className="flex items-start justify-between pr-4">
         <Title titleText={post?.title} />
-        <Button
-          classname="aspect-square cursor-pointer"
-          icon={Edit}
-          style="text"
-          tooltipProps={{
-            content: t("labels.edit"),
-          }}
-          onClick={() =>
-            history.replace(routes.posts.edit.replace(":slug", slug))
-          }
-        />
+        {post?.userId === currentUserId && (
+          <Button
+            classname="aspect-square cursor-pointer"
+            icon={Edit}
+            style="text"
+            tooltipProps={{
+              content: t("labels.edit"),
+            }}
+            onClick={() =>
+              history.replace(routes.posts.edit.replace(":slug", slug))
+            }
+          />
+        )}
       </div>
       <UserAvatar
         showName
         className="my-3"
-        date={post?.createdAt}
+        date={post?.updatedAt}
         size="large"
         user={post?.user}
       />

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import { Redirect } from "@bigbinary/neeto-icons";
 import { Button } from "@bigbinary/neetoui";
 import { useTranslation } from "react-i18next";
 import {
@@ -17,6 +18,7 @@ import {
   useUpdatePost,
 } from "../../hooks/reactQueries/usePostsApi";
 import routes from "../../routes";
+import { setPreviewPost } from "../../utils/storage";
 import Title from "../commons/Title";
 
 const Edit = () => {
@@ -48,6 +50,17 @@ const Edit = () => {
     }
   };
 
+  const handlePreview = () => {
+    const previewData = formRef.current.values;
+    previewData["categories"] = formRef.current.values.categories.map(item => ({
+      id: item.value,
+      name: item.label,
+    }));
+    previewData["user"] = post.user;
+    setPreviewPost(previewData);
+    history.push(routes.posts.preview);
+  };
+
   useEffect(() => {
     if (post) {
       const postValues = {
@@ -70,6 +83,14 @@ const Edit = () => {
       <div className="flex justify-between">
         <Title titleText={t("titles.editBlogPost")} />
         <div className="flex items-center justify-center gap-2">
+          <Button
+            icon={Redirect}
+            style="text"
+            tooltipProps={{
+              content: t("labels.preview"),
+            }}
+            onClick={handlePreview}
+          />
           <Button
             label={t("labels.cancel")}
             style="secondary"

@@ -68,6 +68,7 @@ const Form = forwardRef(
               maxLength={MAX_DESCRIPTION_LENGTH}
               name="description"
               placeholder={t("placeholders.description")}
+              size="large"
             />
           </div>
         </div>

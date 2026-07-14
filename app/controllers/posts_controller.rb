@@ -3,7 +3,7 @@
 class PostsController < ApplicationController
   PAGE_SIZE = 10
 
-  before_action :load_post!, only: %i[show update]
+  before_action :load_post!, only: %i[show update destroy]
 
   def index
     page = [params[:page].to_i, 1].max
@@ -58,10 +58,16 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post.destroy!
+    render_notice(t("successfully_deleted.post")) unless params.key?(:quiet)
+  end
+
   def update
     @post.update(update_params)
     @post.save!
-    render_notice(t("successfully_updated.post"))
+    render_notice(t("successfully_updated.post")) unless params.key?(:quiet)
+    render_json(@post.as_json(only: :updated_at))
   end
 
   private

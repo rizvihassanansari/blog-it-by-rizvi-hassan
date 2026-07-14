@@ -33,8 +33,19 @@ export const useCreatePost = handleSuccess =>
     onSuccess: handleSuccess,
   });
 
-export const useUpdatePost = () =>
+export const useUpdatePost = handleSuccess =>
   useMutation({
     mutationKey: [QUERY_KEYS.POSTS],
     mutationFn: values => postsApi.update(values),
+    onSuccess: handleSuccess,
   });
+
+export const useDeletePost = slug => {
+  const history = useHistory();
+
+  return useMutation({
+    mutationKey: [QUERY_KEYS.POSTS],
+    mutationFn: () => postsApi.destroy(slug),
+    onSuccess: () => history.replace(routes.root),
+  });
+};

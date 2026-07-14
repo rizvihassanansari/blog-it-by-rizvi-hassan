@@ -35,7 +35,7 @@ const Show = () => {
         <Title titleText={post?.title} />
         {post?.userId === currentUserId && (
           <Button
-            classname="aspect-square cursor-pointer"
+            className="aspect-square cursor-pointer"
             icon={Edit}
             style="text"
             tooltipProps={{

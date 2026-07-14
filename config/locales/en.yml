@@ -36,6 +36,8 @@ en:
     user: "User was successfully created!"
   successfully_updated:
     post: "Post was successfully updated!"
+  successfully_deleted:
+    post: "Post was successfully deleted!"
   post:
     slug:
       immutable: "is immutable!"

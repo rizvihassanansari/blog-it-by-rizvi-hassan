@@ -5,7 +5,7 @@ import { ActionDropdown, Typography } from "@bigbinary/neetoui";
 import classNames from "classnames";
 import { withTranslation } from "react-i18next";
 
-const SubmitButton = ({ handleUpdate, t }) => {
+const SubmitButton = ({ handleUpdate, t, handleDelete = null }) => {
   const [isPublish, setIsPublish] = useState(true);
 
   return (
@@ -25,7 +25,7 @@ const SubmitButton = ({ handleUpdate, t }) => {
       <ActionDropdown.Menu>
         <ActionDropdown.MenuItem onClick={() => setIsPublish(true)}>
           <Typography
-            className="flex items-center justify-start px-2"
+            className="flex cursor-pointer items-center justify-start px-2"
             style="body2"
             weight={!isPublish ? "light" : "medium"}
           >
@@ -40,7 +40,7 @@ const SubmitButton = ({ handleUpdate, t }) => {
         </ActionDropdown.MenuItem>
         <ActionDropdown.MenuItem onClick={() => setIsPublish(false)}>
           <Typography
-            className="flex items-center justify-start px-2"
+            className="flex cursor-pointer items-center justify-start px-2"
             style="body2"
             weight={!isPublish ? "medium" : "light"}
           >
@@ -53,6 +53,20 @@ const SubmitButton = ({ handleUpdate, t }) => {
             {t("labels.saveDraft")}
           </Typography>
         </ActionDropdown.MenuItem>
+        {handleDelete && (
+          <>
+            <ActionDropdown.Divider />
+            <ActionDropdown.MenuItem onClick={handleDelete}>
+              <Typography
+                className="flex cursor-pointer items-center justify-start px-2 pl-8 text-red-500"
+                style="body2"
+                weight="bold"
+              >
+                {t("labels.delete")}
+              </Typography>
+            </ActionDropdown.MenuItem>
+          </>
+        )}
       </ActionDropdown.Menu>
     </ActionDropdown>
   );

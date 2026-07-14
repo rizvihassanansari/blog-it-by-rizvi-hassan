@@ -18,7 +18,8 @@
     "tooltip": {
       "searchCategory": "Search category",
       "addCategory": "Add new category"
-    }
+    },
+    "draftSaved": "Draft saved at <bold>{{time}}</bold>"
   },
   "validations": {
     "titleRequired": "Title is required",
@@ -63,7 +64,8 @@
     "publish": "Publish",
     "saveDraft": "Save as draft",
     "edit": "Edit",
-    "preview": "Preview post"
+    "preview": "Preview post",
+    "delete": "Delete"
   },
   "placeholders": {
     "title": "Enter title",

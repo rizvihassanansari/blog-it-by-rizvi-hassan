@@ -6,8 +6,8 @@ import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import routes from "routes";
 
+import CreatePostForm from "./commons/Form";
 import SubmitButton from "./commons/SubmitButton";
-import CreatePostForm from "./Form";
 import { modifySubmitPayload } from "./utils";
 
 import { useFetchCategories } from "../../hooks/reactQueries/useCategoriesApi";

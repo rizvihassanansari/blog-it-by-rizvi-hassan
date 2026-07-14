@@ -6,9 +6,14 @@ const create = payload => axios.post("/posts", { post: payload });
 
 const show = slug => axios.get(`/posts/${slug}`);
 
-const update = ({ slug, payload }) =>
-  axios.put(`/posts/${slug}`, { post: payload });
+const update = ({ slug, payload, quiet = false }) => {
+  const url = quiet ? `/posts/${slug}?quiet` : `/posts/${slug}`;
 
-const postsApi = { fetch, create, show, update };
+  return axios.put(url, { post: payload });
+};
+
+const destroy = slug => axios.delete(`/posts/${slug}`);
+
+const postsApi = { fetch, create, show, update, destroy };
 
 export default postsApi;

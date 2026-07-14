@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-  PAGE_SIZE = 10
+  PAGE_SIZE = 5
 
   before_action :load_post!, only: %i[show update destroy]
 
@@ -46,7 +46,12 @@ class PostsController < ApplicationController
     post[:user_id] = current_user.id
     post[:organization_id] = current_user.organization_id
     post.save!
-    render_notice(t("successfully_created.post"))
+
+    if params.key?(:quiet)
+      render_json(post.as_json(only: :updated_at))
+    else
+      render_notice(t("successfully_created.post"))
+    end
   end
 
   def show
@@ -60,14 +65,29 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy!
-    render_notice(t("successfully_deleted.post")) unless params.key?(:quiet)
+    if params.key?(:quiet)
+      render_json({ deleted: true })
+    else
+      render_notice(t("successfully_deleted.post")) unless params.key?(:quiet)
+    end
   end
 
   def update
     @post.update(update_params)
     @post.save!
-    render_notice(t("successfully_updated.post")) unless params.key?(:quiet)
-    render_json(@post.as_json(only: :updated_at))
+
+    if params.key?(:quiet)
+      render_json(@post.as_json(only: :updated_at))
+    else
+      render_notice(t("successfully_updated.post"))
+    end
+  end
+
+  def my_posts
+    posts = current_user.posts.joins(:categories).distinct.as_json(
+      only: %i[id title slug is_bloggable updated_at],
+      include: { categories: { only: %i[id name] } })
+    render_json({ posts: })
   end
 
   private

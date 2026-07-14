@@ -7,6 +7,8 @@ import { ToastContainer } from "react-toastify";
 
 import { Signup, Login } from "./components/Authentication";
 import { Container, PrivateRoute } from "./components/commons";
+import PageNotFound from "./components/commons/PageNotFound";
+import MyPosts from "./components/MyPosts";
 import {
   PostList,
   CreatePost,
@@ -45,11 +47,18 @@ const App = () => {
             <Route exact component={Signup} path={routes.auth.signup} />
             <Route exact component={Login} path={routes.auth.login} />
             <PrivateRoute
+              component={MyPosts}
+              condition={isLoggedIn}
+              path={routes.posts.myPosts}
+              redirectRoute={routes.auth.login}
+            />
+            <PrivateRoute
               component={PostList}
               condition={isLoggedIn}
               path={routes.root}
               redirectRoute={routes.auth.login}
             />
+            <Route exact component={PageNotFound} path="*" />
           </Switch>
         </Container>
       </Router>

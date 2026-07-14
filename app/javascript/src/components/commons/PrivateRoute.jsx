@@ -12,6 +12,7 @@ const PrivateRoute = ({
   if (!condition) {
     return (
       <Redirect
+        exact
         to={{
           pathname: redirectRoute,
           from: props.location,
@@ -20,7 +21,7 @@ const PrivateRoute = ({
     );
   }
 
-  return <Route component={Component} path={path} {...props} />;
+  return <Route exact component={Component} path={path} {...props} />;
 };
 
 export default PrivateRoute;

@@ -1,6 +1,5 @@
 import React from "react";
 
-// import { Button } from "@bigbinary/neetoui";
 import {
   Form as FormikForm,
   Input,
@@ -9,6 +8,7 @@ import {
   Button,
 } from "@bigbinary/neetoui/formik";
 import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 
 import {
   POST_FORM_INITIAL_VALUES,
@@ -17,6 +17,8 @@ import {
 
 const Form = ({ handleSubmit, isLoading, categories }) => {
   const { t } = useTranslation();
+  const history = useHistory();
+
   const categoryOptions = categories.map(({ name, id }) => ({
     label: name,
     value: id,

@@ -30,7 +30,9 @@ const Show = () => {
         size="large"
         user={post?.user}
       />
-      <Typography className="mt-8">{post?.description}</Typography>
+      <Typography className="my-8 whitespace-pre-wrap break-words">
+        {post?.description}
+      </Typography>
     </>
   );
 };

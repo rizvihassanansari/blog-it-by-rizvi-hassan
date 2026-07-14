@@ -1,80 +1,81 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-// import { Button } from "@bigbinary/neetoui";
 import {
   Form as FormikForm,
   Input,
   Textarea,
   Select,
-  Button,
 } from "@bigbinary/neetoui/formik";
 import { useTranslation } from "react-i18next";
 
 import {
   POST_FORM_INITIAL_VALUES,
   POST_FORM_VALIDATION_SCHEMA,
+  MAX_DESCRIPTION_LENGTH,
 } from "./constants";
 
-const Form = ({ handleSubmit, isLoading, categories }) => {
-  const { t } = useTranslation();
-  const categoryOptions = categories.map(({ name, id }) => ({
-    label: name,
-    value: id,
-  }));
+// eslint-disable-next-line no-unused-vars
+const Form = forwardRef(
+  (
+    {
+      handleSubmit,
+      categories,
+      initialFormValues = null,
+      disableTitle = false,
+    },
+    ref
+  ) => {
+    const { t } = useTranslation();
 
-  return (
-    <FormikForm
-      className="h-[600px]"
-      formikProps={{
-        initialValues: POST_FORM_INITIAL_VALUES,
-        validationSchema: POST_FORM_VALIDATION_SCHEMA,
-        onSubmit: handleSubmit,
-      }}
-    >
-      <div className="mt-8 flex h-full w-full flex-col rounded-xl border p-12 shadow-md">
-        <div className="flex flex-col gap-6">
-          <Input
-            required
-            className="w-full"
-            label={t("labels.title")}
-            name="title"
-            placeholder={t("placeholders.title")}
-          />
-          <Select
-            isMulti
-            required
-            label={t("labels.categories")}
-            name="categories"
-            options={categoryOptions}
-            placeholder={t("placeholders.categories")}
-          />
-          <Textarea
-            required
-            className="w-full"
-            label={t("labels.description")}
-            name="description"
-            placeholder={t("placeholders.description")}
-            rows={10}
-          />
-        </div>
-        <div className=" mt-auto flex justify-end gap-6">
-          <Button
-            className="black-button--secondary"
-            disabled={false}
-            label={t("labels.cancel")}
-            type="button"
-            onClick={() => history.push("/")}
-          />
-          <Button
-            className="black-button--primary"
-            label={t("labels.submit")}
-            loading={isLoading}
-            type="submit"
-          />
-        </div>
-      </div>
-    </FormikForm>
-  );
-};
+    const categoryOptions = categories.map(({ name, id }) => ({
+      label: name,
+      value: id,
+    }));
 
+    return (
+      <FormikForm
+        className="h-[600px] min-h-[600px]"
+        formikProps={{
+          initialValues: initialFormValues ?? POST_FORM_INITIAL_VALUES,
+          enableReinitialize: true,
+          validationSchema: POST_FORM_VALIDATION_SCHEMA,
+          onSubmit: handleSubmit,
+          innerRef: ref,
+        }}
+      >
+        <div className="mt-8 flex h-full w-full flex-col rounded-xl border p-12 shadow-md">
+          <div className="flex flex-col gap-6">
+            <Input
+              required
+              className="w-full"
+              disabled={disableTitle}
+              label={t("labels.title")}
+              name="title"
+              placeholder={t("placeholders.title")}
+            />
+            <Select
+              isMulti
+              required
+              label={t("labels.categories")}
+              name="categories"
+              options={categoryOptions}
+              placeholder={t("placeholders.categories")}
+            />
+            <Textarea
+              required
+              className="w-full"
+              label={t("labels.description")}
+              maxLength={MAX_DESCRIPTION_LENGTH}
+              name="description"
+              placeholder={t("placeholders.description")}
+              size="large"
+            />
+          </div>
+        </div>
+      </FormikForm>
+    );
+  }
+);
+
+Form.displayName = "From";
 export default Form;

@@ -13,4 +13,21 @@ const getFromLocalStorage = key => {
   }
 };
 
-export { setToLocalStorage, getFromLocalStorage };
+const setPreviewPost = post => {
+  localStorage.setItem("previewPost", JSON.stringify(post));
+};
+
+const getPreviewPost = () => {
+  try {
+    return JSON.parse(localStorage.getItem("previewPost"));
+  } catch {
+    return null;
+  }
+};
+
+export {
+  setToLocalStorage,
+  getFromLocalStorage,
+  setPreviewPost,
+  getPreviewPost,
+};

@@ -2,12 +2,13 @@ import { t } from "i18next";
 import * as yup from "yup";
 
 const MAX_TITLE_LENGTH = 125;
-const MAX_DESCRIPTION_LENGTH = 10000;
+export const MAX_DESCRIPTION_LENGTH = 10000;
 
 export const POST_FORM_INITIAL_VALUES = {
   title: "",
   description: "",
   categories: [],
+  isBloggable: "false",
 };
 
 export const POST_FORM_VALIDATION_SCHEMA = yup.object().shape({

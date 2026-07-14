@@ -3,6 +3,8 @@
 class PostsController < ApplicationController
   PAGE_SIZE = 10
 
+  before_action :load_post!, only: %i[show update]
+
   def index
     page = [params[:page].to_i, 1].max
     category_ids = Array(params[:categories]).map(&:to_i)
@@ -14,7 +16,7 @@ class PostsController < ApplicationController
     if category_ids.present?
       filtered_posts = Post
         .joins(:categories)
-        .where(categories: { id: category_ids }, organization_id: current_user_organization_id)
+        .where(is_bloggable: true, categories: { id: category_ids }, organization_id: current_user_organization_id)
         .distinct
         .order(created_at: :desc)
 
@@ -30,7 +32,7 @@ class PostsController < ApplicationController
       total_results = total_posts.count
 
       posts = total_posts
-        .where(organization_id: current_user_organization_id)
+        .where(is_bloggable: true, organization_id: current_user_organization_id)
         .limit(PAGE_SIZE)
         .offset((page - 1) * PAGE_SIZE)
         .as_json(include: { user: { only: %i[name id organization_id] }, categories: { only: %i[id name] } })
@@ -40,8 +42,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    params_with_user_id = post_params.merge(user_id: 1)
-    post = Post.new(params_with_user_id)
+    post = Post.new(post_params)
     post[:user_id] = current_user.id
     post[:organization_id] = current_user.organization_id
     post.save!
@@ -49,14 +50,31 @@ class PostsController < ApplicationController
   end
 
   def show
-    post = Post.find_by!(slug: params[:slug])
-    post = post.as_json(include: { user: { only: %i[name id organization_id] }, categories: { only: %i[id name] } })
-    render_json({ post: })
+    if @post.user_id != current_user.id && @post.is_bloggable == false
+      render_error(t("does_not_exist"))
+    else
+      post = @post.as_json(include: { user: { only: %i[name id organization_id] }, categories: { only: %i[id name] } })
+      render_json({ post: })
+    end
+  end
+
+  def update
+    @post.update(update_params)
+    @post.save!
+    render_notice(t("successfully_updated.post"))
   end
 
   private
 
     def post_params
-      params.require(:post).permit(:title, :description, category_ids: [])
+      params.require(:post).permit(:title, :description, :is_bloggable, category_ids: [])
+    end
+
+    def update_params
+      params.require(:post).permit(:description, :is_bloggable, category_ids: [])
+    end
+
+    def load_post!
+      @post = Post.find_by!(slug: params[:slug])
     end
 end

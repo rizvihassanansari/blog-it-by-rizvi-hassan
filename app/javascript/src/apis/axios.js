@@ -32,7 +32,7 @@ const handleSuccessResponse = response => {
   if (response) {
     response.success = response.status === 200;
     if (response.data.notice) {
-      Toastr.success(response.data.notice);
+      Toastr.success(response.data.notice, { autoClose: 3000 });
     }
 
     if (response.data) {
@@ -45,7 +45,8 @@ const handleSuccessResponse = response => {
 
 const handleErrorResponse = axiosErrorObject => {
   Toastr.error(
-    axiosErrorObject.response?.data?.error || t("messages.errors.default")
+    axiosErrorObject.response?.data?.error ||
+      t("messages.errors.default", { autoClose: 3000 })
   );
   if (axiosErrorObject.response?.status === 423) {
     window.location.href = "/";

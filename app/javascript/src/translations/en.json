@@ -3,6 +3,7 @@
   "titles": {
     "blogPosts": "Blog posts",
     "newBlogPost": "New blog post",
+    "editBlogPost": "Edit blog post",
     "categories": "CATEGORIES",
     "newCategory": "New category",
     "signup": "Signup",
@@ -58,7 +59,11 @@
     "signup": "Signup",
     "login": "Login",
     "existingUser": "Existing user? Login",
-    "newUser": "New user? Signup"
+    "newUser": "New user? Signup",
+    "publish": "Publish",
+    "saveDraft": "Save as draft",
+    "edit": "Edit",
+    "preview": "Preview post"
   },
   "placeholders": {
     "title": "Enter title",

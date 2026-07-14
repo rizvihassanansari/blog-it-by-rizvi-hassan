@@ -1,35 +1,42 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { Redirect } from "@bigbinary/neeto-icons";
 import { Button } from "@bigbinary/neetoui";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import routes from "routes";
+import {
+  useHistory,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
 
 import SubmitButton from "./commons/SubmitButton";
-import CreatePostForm from "./Form";
+import EditPostForm from "./Form";
 import { modifySubmitPayload } from "./utils";
 
 import { useFetchCategories } from "../../hooks/reactQueries/useCategoriesApi";
-import { useCreatePost } from "../../hooks/reactQueries/usePostsApi";
+import {
+  useShowPost,
+  useUpdatePost,
+} from "../../hooks/reactQueries/usePostsApi";
+import routes from "../../routes";
 import { setPreviewPost } from "../../utils/storage";
 import Title from "../commons/Title";
 
-const Create = () => {
+const Edit = () => {
+  const [initialFormValues, setInitialFormValues] = useState(null);
+
   const formRef = useRef(null);
 
+  const { slug } = useParams();
   const history = useHistory();
   const { t } = useTranslation();
 
-  const handleSuccess = () => {
-    history.push(routes.root);
-  };
+  const { data: { post } = {} } = useShowPost(slug);
 
-  const { mutate, isPending: isLoading } = useCreatePost(handleSuccess);
+  const { mutate, isPending: isLoading } = useUpdatePost();
 
   const handleSubmit = formValues => {
     const payload = modifySubmitPayload(formValues);
-    mutate(payload);
+    mutate({ slug, payload });
   };
 
   const { data: { categories = [] } = {} } = useFetchCategories();
@@ -49,15 +56,32 @@ const Create = () => {
       id: item.value,
       name: item.label,
     }));
-    previewData["user"] = { name: "Your name" };
+    previewData["user"] = post.user;
     setPreviewPost(previewData);
     history.push(routes.posts.preview);
   };
 
+  useEffect(() => {
+    if (post) {
+      const postValues = {
+        title: post.title,
+        description: post.description,
+        isBloggable: post.isBloggable,
+      };
+
+      const categoryOptions = post.categories.map(category => ({
+        label: category.name,
+        value: category.id,
+      }));
+
+      setInitialFormValues({ ...postValues, categories: categoryOptions });
+    }
+  }, [post]);
+
   return (
     <>
       <div className="flex justify-between">
-        <Title titleText={t("titles.newBlogPost")} />
+        <Title titleText={t("titles.editBlogPost")} />
         <div className="flex items-center justify-center gap-2">
           <Button
             icon={Redirect}
@@ -75,16 +99,18 @@ const Create = () => {
           <SubmitButton {...{ handleUpdate }} />
         </div>
       </div>
-      <CreatePostForm
+      <EditPostForm
         ref={formRef}
         {...{
           isLoading,
           handleSubmit,
           categories,
+          initialFormValues,
         }}
+        disableTitle
       />
     </>
   );
 };
 
-export default Create;
+export default Edit;

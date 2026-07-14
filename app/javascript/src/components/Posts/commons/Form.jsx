@@ -12,7 +12,7 @@ import {
   POST_FORM_INITIAL_VALUES,
   POST_FORM_VALIDATION_SCHEMA,
   MAX_DESCRIPTION_LENGTH,
-} from "./constants";
+} from "../constants";
 
 // eslint-disable-next-line no-unused-vars
 const Form = forwardRef(

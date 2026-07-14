@@ -1,28 +1,32 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import { isNotEmpty } from "@bigbinary/neeto-cist";
 import { Redirect } from "@bigbinary/neeto-icons";
-import { Button } from "@bigbinary/neetoui";
-import { useTranslation } from "react-i18next";
+import { Button, Typography } from "@bigbinary/neetoui";
+import { Trans, useTranslation } from "react-i18next";
 import {
   useHistory,
   useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
 
+import EditPostForm from "./commons/Form";
 import SubmitButton from "./commons/SubmitButton";
-import EditPostForm from "./Form";
 import { modifySubmitPayload } from "./utils";
 
 import { useFetchCategories } from "../../hooks/reactQueries/useCategoriesApi";
 import {
+  useDeletePost,
   useShowPost,
   useUpdatePost,
 } from "../../hooks/reactQueries/usePostsApi";
 import routes from "../../routes";
 import { setPreviewPost } from "../../utils/storage";
 import Title from "../commons/Title";
+import { formatDateTime } from "../utils";
 
 const Edit = () => {
   const [initialFormValues, setInitialFormValues] = useState(null);
+  const [savedTime, setSavedTime] = useState("");
 
   const formRef = useRef(null);
 
@@ -32,22 +36,31 @@ const Edit = () => {
 
   const { data: { post } = {} } = useShowPost(slug);
 
-  const { mutate, isPending: isLoading } = useUpdatePost();
+  const handleSuccess = data => {
+    setSavedTime(formatDateTime(data?.updatedAt));
+  };
+
+  const { mutate, isPending: isLoading } = useUpdatePost(handleSuccess);
+  const { mutate: deletePost } = useDeletePost(slug);
 
   const handleSubmit = formValues => {
     const payload = modifySubmitPayload(formValues);
-    mutate({ slug, payload });
+    mutate({ slug, payload, quiet: !formValues.isBloggable });
   };
 
   const { data: { categories = [] } = {} } = useFetchCategories();
 
   const handleUpdate = (publish = false) => {
-    formRef.current.values.isBloggable = publish ? "true" : "false";
+    formRef.current.values.isBloggable = !!publish;
     formRef.current.validateForm();
 
     if (formRef.current.isValid) {
       formRef.current.submitForm();
     }
+  };
+
+  const handleDelete = () => {
+    deletePost();
   };
 
   const handlePreview = () => {
@@ -83,6 +96,15 @@ const Edit = () => {
       <div className="flex justify-between">
         <Title titleText={t("titles.editBlogPost")} />
         <div className="flex items-center justify-center gap-2">
+          <Typography style="nano">
+            {isNotEmpty(savedTime) && (
+              <Trans
+                components={{ bold: <b /> }}
+                i18nKey="messages.draftSaved"
+                values={{ time: savedTime }}
+              />
+            )}
+          </Typography>
           <Button
             icon={Redirect}
             style="text"
@@ -96,7 +118,7 @@ const Edit = () => {
             style="secondary"
             onClick={() => history.replace(routes.root)}
           />
-          <SubmitButton {...{ handleUpdate }} />
+          <SubmitButton {...{ handleUpdate, handleDelete }} />
         </div>
       </div>
       <EditPostForm

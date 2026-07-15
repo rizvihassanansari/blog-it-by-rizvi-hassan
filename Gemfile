@@ -74,6 +74,11 @@ group :development, :test do
   # For code formatting and linting
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
+
+  gem "factory_bot_rails"
+
+  # For auto-generating demo data
+  gem "faker"
 end
 
 gem "bcrypt", "~> 3.1.13"

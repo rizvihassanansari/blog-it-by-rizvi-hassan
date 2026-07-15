@@ -59,7 +59,7 @@ const Signup = ({ handleSubmit, handleLoginRedirect, organizations }) => {
       <Input
         required
         className="w-full"
-        label={t("label.password")}
+        label={t("labels.password")}
         name="password"
         placeholder={t("placeholders.password")}
         type="password"

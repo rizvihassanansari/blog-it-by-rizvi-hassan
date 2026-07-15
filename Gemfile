@@ -74,9 +74,16 @@ group :development, :test do
   # For code formatting and linting
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
+
+  gem "factory_bot_rails"
+
+  # For auto-generating demo data
+  gem "faker"
 end
 
 gem "bcrypt", "~> 3.1.13"
+gem "byebug"
 gem "connection_pool", "~> 2.4"
 gem "data_migrate"
 gem "react-rails", "~> 2.7.1"
+gem "simplecov", require: false, group: :test

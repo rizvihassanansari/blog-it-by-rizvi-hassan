@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   MAX_DESCRIPTION_LENGTH = 10000
 
   belongs_to :user
+  belongs_to :organization
   has_and_belongs_to_many :categories, join_table: :categories_posts
 
   validates :title,

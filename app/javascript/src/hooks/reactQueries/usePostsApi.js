@@ -66,3 +66,15 @@ export const useFetchMyPosts = (filters = {}) =>
       return postsApi.myPosts(nonEmptyFilters);
     },
   });
+
+export const useBulkUpdatePosts = () =>
+  useMutation({
+    mutationKey: [QUERY_KEYS.POSTS],
+    mutationFn: payload => postsApi.bulkUpdate(payload),
+  });
+
+export const useBulkDeletePosts = () =>
+  useMutation({
+    mutationKey: [QUERY_KEYS.POSTS],
+    mutationFn: slugs => postsApi.bulkDelete(slugs),
+  });

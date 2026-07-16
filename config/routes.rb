@@ -14,9 +14,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   constraints(lambda { |req| req.format == :json }) do
-    resources :posts, only: %i[index create show update destroy],
-      param: :slug do
-      get "my_posts", on: :collection
+    resources :posts, only: %i[index create show update destroy], param: :slug do
+      collection do
+        get "my_posts"
+        patch "bulk_update"
+        delete "bulk_delete"
+      end
     end
     resources :users, only: %i[index create]
     resources :categories, only: %i[index create]

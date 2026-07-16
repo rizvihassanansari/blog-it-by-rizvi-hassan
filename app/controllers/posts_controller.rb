@@ -72,7 +72,7 @@ class PostsController < ApplicationController
 
   def my_posts
     @posts = current_user.posts.joins(:categories).distinct
-    @posts = PostsFilterService.new(@posts).call
+    @posts = PostsFilterService.new(@posts, filter_params).call
     render
   end
 
@@ -84,6 +84,10 @@ class PostsController < ApplicationController
 
     def update_params
       params.require(:post).permit(:description, :is_bloggable, category_ids: [])
+    end
+
+    def filter_params
+      params.permit(:title, :status, categories: [])
     end
 
     def load_post!

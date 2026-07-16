@@ -20,23 +20,23 @@ class PostsFilterService
 
     def filter_by_title(posts)
       if filters[:title].present?
-        posts.where("title ILIKE ?", "%#{filters[:title]}%")
+        posts.where("title LIKE ?", "%#{filters[:title]}%")
       else
         posts
       end
     end
 
     def filter_by_category(posts)
-      if filters[:category_id].present?
-        posts.where(category_id: filters[:category_id])
+      if filters[:categories].present?
+        posts.where(categories: { id: filters[:categories] })
       else
         posts
       end
     end
 
     def filter_by_status(posts)
-      if filters[:status].present?
-        posts.where(status: filters[:status])
+      unless filters[:status].nil?
+        posts.where(is_bloggable: filters[:status])
       else
         posts
       end

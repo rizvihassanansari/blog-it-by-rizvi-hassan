@@ -2,6 +2,8 @@ import { filterNonNull } from "@bigbinary/neeto-cist";
 import { useMutation, useQuery } from "react-query";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
+import { getIds } from "./utils";
+
 import postsApi from "../../apis/posts";
 import { QUERY_KEYS } from "../../constants/query";
 import routes from "../../routes";
@@ -47,8 +49,20 @@ export const useDeletePost = handleSuccess =>
     onSuccess: handleSuccess,
   });
 
-export const useFetchMyPosts = () =>
+export const useFetchMyPosts = (filters = {}) =>
   useQuery({
     queryKey: [QUERY_KEYS.POSTS],
-    queryFn: () => postsApi.myPosts(),
+    queryFn: () => {
+      const nonEmptyFilters = filterNonNull(filters);
+
+      if (nonEmptyFilters.categories) {
+        nonEmptyFilters.categories = getIds(nonEmptyFilters.categories);
+      }
+
+      if (nonEmptyFilters.status) {
+        nonEmptyFilters.status = nonEmptyFilters.status.value;
+      }
+
+      return postsApi.myPosts(nonEmptyFilters);
+    },
   });

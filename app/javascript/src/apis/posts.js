@@ -22,7 +22,7 @@ const destroy = ({ slug, quiet = false }) => {
   return axios.delete(url);
 };
 
-const myPosts = () => axios.get(`/posts/my_posts`);
+const myPosts = filters => axios.get(`/posts/my_posts`, { params: filters });
 
 const postsApi = { fetch, create, show, update, destroy, myPosts };
 

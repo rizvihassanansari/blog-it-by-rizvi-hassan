@@ -25,9 +25,6 @@ module BlogIt
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    # Autoload and eager load custom service objects
-    config.autoload_paths << Rails.root.join("app/services")
-    config.eager_load_paths << Rails.root.join("app/services")
 
     config.generators do |g|
       g.test_framework :test_unit, fixture: false

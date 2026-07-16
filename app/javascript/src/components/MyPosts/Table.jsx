@@ -7,12 +7,12 @@ import Title from "./Title";
 
 import { formatDateTime } from "../utils";
 
-const Table = ({ posts, refetch }) => {
+const Table = ({ posts, refetch, visibleColumns: isColumnVisible }) => {
   const columnData = [
     {
       title: "TITLE",
       dataIndex: "title",
-      key: "id",
+      key: "title",
       width: 450,
       render: ({ title, slug }) => <Title {...{ title, slug }} />,
     },
@@ -35,6 +35,10 @@ const Table = ({ posts, refetch }) => {
     },
   ];
 
+  const visibleColumnsData = columnData.filter(
+    column => isColumnVisible[column.key]
+  );
+
   const rowData = posts.map(post => ({
     id: post.id,
     slug: post.slug,
@@ -44,7 +48,7 @@ const Table = ({ posts, refetch }) => {
     status: { isBloggable: post.isBloggable, slug: post.slug },
   }));
 
-  return <NeetoTable columnData={columnData} rowData={rowData} />;
+  return <NeetoTable columnData={visibleColumnsData} rowData={rowData} />;
 };
 
 export default Table;

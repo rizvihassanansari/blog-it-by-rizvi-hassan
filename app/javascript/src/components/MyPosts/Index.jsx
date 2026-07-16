@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 
-import { ActionDropdown, Checkbox, Typography } from "@bigbinary/neetoui";
+import { Filter } from "@bigbinary/neeto-icons";
+import { Button, Typography } from "@bigbinary/neetoui";
 
+import FilterColumns from "./Filter/Columns";
+import Pane from "./Filter/Pane";
 import Table from "./Table";
 
 import { useFetchMyPosts } from "../../hooks/reactQueries/usePostsApi";
@@ -14,6 +17,7 @@ const Index = () => {
     updatedAt: true,
     status: true,
   });
+  const [isPaneOpen, setIsPaneOpen] = useState(false);
 
   const { data: { posts = [] } = {}, refetch } = useFetchMyPosts();
 
@@ -30,51 +34,19 @@ const Index = () => {
   return (
     <>
       <Title titleText="My blog posts" />
-      <div className="my-4 flex w-full items-center justify-between">
+      <div className="my-4 flex w-full items-center justify-between gap-1">
         <Typography style="body2" weight="semibold">
           14 Articles
         </Typography>
-        <ActionDropdown buttonStyle="secondary" label="Columns">
-          <ActionDropdown.Menu>
-            <ActionDropdown.MenuItem>
-              <Checkbox
-                checked
-                disabled
-                className="neetix-checkbox px-4 py-2"
-                label="Title"
-              />
-            </ActionDropdown.MenuItem>
-            <ActionDropdown.MenuItem>
-              <Checkbox
-                checked={visibleColumns.category}
-                className="neetix-checkbox px-4 py-2"
-                id="category"
-                label="Categories"
-                onChange={handleToggleVisibleColumns}
-              />
-            </ActionDropdown.MenuItem>
-            <ActionDropdown.MenuItem>
-              <Checkbox
-                checked={visibleColumns.updatedAt}
-                className="neetix-checkbox px-4 py-2"
-                id="updatedAt"
-                label="Last Published at"
-                onChange={handleToggleVisibleColumns}
-              />
-            </ActionDropdown.MenuItem>
-            <ActionDropdown.MenuItem>
-              <Checkbox
-                checked={visibleColumns.status}
-                className="neetix-checkbox px-4 py-2"
-                id="status"
-                label="Status"
-                onChange={handleToggleVisibleColumns}
-              />
-            </ActionDropdown.MenuItem>
-          </ActionDropdown.Menu>
-        </ActionDropdown>
+        <FilterColumns {...{ visibleColumns, handleToggleVisibleColumns }} />
+        <Button
+          icon={Filter}
+          style="text"
+          onClick={() => setIsPaneOpen(true)}
+        />
       </div>
       <Table {...{ posts, refetch, visibleColumns }} />
+      <Pane {...{ isPaneOpen, setIsPaneOpen }} />
     </>
   );
 };

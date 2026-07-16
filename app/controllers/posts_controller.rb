@@ -72,9 +72,7 @@ class PostsController < ApplicationController
 
   def my_posts
     @posts = current_user.posts.joins(:categories).distinct
-    # .as_json(
-    #   only: %i[id title slug is_bloggable updated_at],
-    # include: { categories: { only: %i[id name] } })
+    @posts = PostsFilterService.new(@posts).call
     render
   end
 

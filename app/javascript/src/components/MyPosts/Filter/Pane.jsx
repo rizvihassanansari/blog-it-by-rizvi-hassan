@@ -32,8 +32,10 @@ const Pane = ({
     setIsPaneOpen(false);
   };
 
-  const resetFilters = () => {
-    setFilterOptions(DEFAULT_FILTER_OPTIONS);
+  const resetFilters = async () => {
+    await setFilterOptions(DEFAULT_FILTER_OPTIONS);
+    refetchPosts();
+    setIsPaneOpen(false);
   };
 
   return (

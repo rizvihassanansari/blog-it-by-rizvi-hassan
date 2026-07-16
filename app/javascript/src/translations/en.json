@@ -23,7 +23,11 @@
       "addCategory": "Add new category"
     },
     "draftSaved": "Draft saved at <bold>{{time}}</bold>",
-    "pageNotFound": "The page you are looking for is not available"
+    "pageNotFound": "The page you are looking for is not available",
+    "results": {
+      "resultCount_one": "{{count}} result",
+      "resultCount_other": "{{count}} results"
+    }
   },
   "validations": {
     "titleRequired": "Title is required",
@@ -80,7 +84,8 @@
     "status": "Status",
     "columns": "Columns",
     "done": "Done",
-    "clearFilters": "Clear Filters"
+    "clearFilters": "Clear Filters",
+    "both": "Both"
   },
   "placeholders": {
     "title": "Enter title",

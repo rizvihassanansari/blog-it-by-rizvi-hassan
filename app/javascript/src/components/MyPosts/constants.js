@@ -1,7 +1,9 @@
+import { t } from "i18next";
+
 export const DEFAULT_STATUS_OPTIONS = [
-  { label: "Both", value: null },
-  { label: "Draft", value: false },
-  { label: "Published", value: true },
+  { label: t("labels.both"), value: null },
+  { label: t("labels.draft"), value: false },
+  { label: t("labels.published"), value: true },
 ];
 
 export const DEFAULT_FILTER_OPTIONS = {

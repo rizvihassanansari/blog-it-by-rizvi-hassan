@@ -6,6 +6,6 @@ FactoryBot.define do
     description { Faker::Lorem.paragraph }
     is_bloggable { [true, false].sample }
     association :user
-    organization_id { user.organization }
+    organization { user.organization }
   end
 end

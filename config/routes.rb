@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   constraints(lambda { |req| req.format == :json }) do
-    resources :posts, only: %i[index create show update destroy], param: :slug do
+    resources :posts, only: %i[index create show update destroy],
+      param: :slug,
+      defaults: { format: "json" } do
       get "my_posts", on: :collection
     end
     resources :users, only: %i[index create]

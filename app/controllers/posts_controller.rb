@@ -11,34 +11,22 @@ class PostsController < ApplicationController
 
     current_user_organization_id = current_user.organization_id
 
-    posts = []
-    total_results = 0
-    if category_ids.present?
-      filtered_posts = Post
-        .joins(:categories)
-        .where(is_bloggable: true, categories: { id: category_ids }, organization_id: current_user_organization_id)
-        .distinct
+    @posts = category_ids.present? ? Post
+      .joins(:categories)
+      .includes(:user, :categories)
+      .where(is_bloggable: true, categories: { id: category_ids }, organization_id: current_user_organization_id)
+      .distinct
+      .order(created_at: :desc)
+
+      : Post
+        .includes(:user, :categories)
+        .where(is_bloggable: true, organization_id: current_user_organization_id)
         .order(created_at: :desc)
 
-      total_results = filtered_posts.count
+    @total_results = @posts.count
+    @posts = @posts.limit(PAGE_SIZE).offset((page - 1) * PAGE_SIZE)
 
-      posts = filtered_posts
-        .limit(PAGE_SIZE)
-        .offset((page - 1) * PAGE_SIZE)
-        .as_json(include: { user: { only: %i[name id organization_id] }, categories: { only: %i[id name] } })
-
-    else
-      total_posts = Post.all.order(created_at: :desc)
-      total_results = total_posts.count
-
-      posts = total_posts
-        .where(is_bloggable: true, organization_id: current_user_organization_id)
-        .limit(PAGE_SIZE)
-        .offset((page - 1) * PAGE_SIZE)
-        .as_json(include: { user: { only: %i[name id organization_id] }, categories: { only: %i[id name] } })
-    end
-
-    render_json({ posts:, total_results: })
+    render
   end
 
   def create
@@ -58,8 +46,7 @@ class PostsController < ApplicationController
     if @post.user_id != current_user.id && @post.is_bloggable == false
       render_error(t("does_not_exist"))
     else
-      post = @post.as_json(include: { user: { only: %i[name id organization_id] }, categories: { only: %i[id name] } })
-      render_json({ post: })
+      render
     end
   end
 
@@ -84,10 +71,11 @@ class PostsController < ApplicationController
   end
 
   def my_posts
-    posts = current_user.posts.joins(:categories).distinct.as_json(
-      only: %i[id title slug is_bloggable updated_at],
-      include: { categories: { only: %i[id name] } })
-    render_json({ posts: })
+    @posts = current_user.posts.joins(:categories).distinct
+    # .as_json(
+    #   only: %i[id title slug is_bloggable updated_at],
+    # include: { categories: { only: %i[id name] } })
+    render
   end
 
   private

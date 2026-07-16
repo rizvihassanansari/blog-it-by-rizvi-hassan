@@ -110,3 +110,9 @@ div:has(> textarea),
   --neeto-ui-pagination-item-active-border-color: rgb(var(--neeto-ui-gray-800));
   --neeto-ui-pagination-item-active-bg-color: rgb(var(--neeto-ui-gray-800));
 }
+
+.neetix-checkbox {
+  --neeto-ui-checkbox-color: rgb(var(--neeto-ui-gray-800));
+  --neeto-ui-checkbox-focus-visible-outline: 3px solid rgba(var(--neeto-ui-gray-800), 50%);
+  --neeto-ui-checkbox-checked-border-color: rgb(var(--neeto-ui-gray-800));
+}

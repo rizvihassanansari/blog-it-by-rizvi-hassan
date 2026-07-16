@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 
-import { Filter } from "@bigbinary/neeto-icons";
-import { Button, Typography } from "@bigbinary/neetoui";
-import { without } from "ramda";
-import { useTranslation } from "react-i18next";
+import { Delete, Filter } from "@bigbinary/neeto-icons";
+import {
+  Dropdown as ActionDropdown,
+  Button,
+  Typography,
+} from "@bigbinary/neetoui";
+import { isNotEmpty, without } from "ramda";
+import { Trans, useTranslation } from "react-i18next";
 
 import { DEFAULT_FILTER_OPTIONS } from "./constants";
 import CategoryTags from "./Filter/CategoryTags";
@@ -12,7 +16,11 @@ import Pane from "./Filter/Pane";
 import StatusTag from "./Filter/StatusTag";
 import Table from "./Table";
 
-import { useFetchMyPosts } from "../../hooks/reactQueries/usePostsApi";
+import {
+  useBulkDeletePosts,
+  useBulkUpdatePosts,
+  useFetchMyPosts,
+} from "../../hooks/reactQueries/usePostsApi";
 import Title from "../commons/Title";
 
 const Index = () => {
@@ -24,9 +32,13 @@ const Index = () => {
   });
   const [isPaneOpen, setIsPaneOpen] = useState(false);
   const [filterOptions, setFilterOptions] = useState(DEFAULT_FILTER_OPTIONS);
+  const [selectedRowsSlug, setSelectedRowsSlug] = useState([]);
 
   const { t } = useTranslation();
   const { data: { posts = [] } = {}, refetch } = useFetchMyPosts(filterOptions);
+
+  const { mutateAsync: bulkUpdate } = useBulkUpdatePosts();
+  const { mutateAsync: bulkDelete } = useBulkDeletePosts();
 
   const handleToggleVisibleColumns = event => {
     event.stopPropagation();
@@ -56,34 +68,84 @@ const Index = () => {
     refetch();
   };
 
+  const handleBulkUpdate = async status => {
+    const filteredSlugs = posts
+      .filter(
+        post =>
+          selectedRowsSlug.includes(post.slug) && post.isBloggable !== status
+      )
+      .map(post => post.slug);
+
+    await bulkUpdate({ slugs: filteredSlugs, status });
+
+    refetch();
+  };
+
+  const handleBulkDelete = async () => {
+    await bulkDelete(selectedRowsSlug);
+
+    refetch();
+  };
+
   return (
     <>
       <Title titleText={t("titles.myBlogPosts")} />
       <div className="my-4 flex w-full items-center justify-between gap-2">
-        <div className="flex">
-          <Typography style="body2" weight="semibold">
-            {`${t("messages.results.resultCount", {
-              count: posts?.length,
-            })}`}
-            {!isPaneOpen && filterOptions.title !== ""
-              ? ` for "${filterOptions.title}"`
-              : ""}
-          </Typography>
-          <CategoryTags
-            {...{
-              items: filterOptions?.categories,
-              handleDeleteTag,
-              isHidden: isPaneOpen,
-            }}
-          />
-          <StatusTag
-            {...{
-              status: filterOptions?.status?.label,
-              isHidden: isPaneOpen,
-              handleDeleteTag: handleRemoveStatus,
-            }}
-          />
-        </div>
+        {isNotEmpty(selectedRowsSlug) ? (
+          <div className="flex items-center gap-2">
+            <Trans
+              components={{ bold: <b /> }}
+              i18nKey="messages.articles.selected"
+              values={{ count: selectedRowsSlug.length, total: posts.length }}
+            />
+            <ActionDropdown
+              buttonStyle="secondary"
+              label={t("labels.changeStatus")}
+            >
+              <ActionDropdown.MenuItem onClick={() => handleBulkUpdate(false)}>
+                <Typography className="px-4 py-2" style="body2">
+                  {t("labels.draft")}
+                </Typography>
+              </ActionDropdown.MenuItem>
+              <ActionDropdown.MenuItem onClick={() => handleBulkUpdate(true)}>
+                <Typography className="px-4 py-2" style="body2">
+                  {t("labels.publish")}
+                </Typography>
+              </ActionDropdown.MenuItem>
+            </ActionDropdown>
+            <Button
+              icon={Delete}
+              label={t("labels.delete")}
+              style="danger"
+              onClick={handleBulkDelete}
+            />
+          </div>
+        ) : (
+          <div className="flex">
+            <Typography style="body2" weight="semibold">
+              {`${t("messages.results.resultCount", {
+                count: posts?.length,
+              })}`}
+              {!isPaneOpen && filterOptions.title !== ""
+                ? ` for "${filterOptions.title}"`
+                : ""}
+            </Typography>
+            <CategoryTags
+              {...{
+                items: filterOptions?.categories,
+                handleDeleteTag,
+                isHidden: isPaneOpen,
+              }}
+            />
+            <StatusTag
+              {...{
+                status: filterOptions?.status?.label,
+                isHidden: isPaneOpen,
+                handleDeleteTag: handleRemoveStatus,
+              }}
+            />
+          </div>
+        )}
         <FilterColumns {...{ visibleColumns, handleToggleVisibleColumns }} />
         <Button
           icon={Filter}
@@ -91,7 +153,7 @@ const Index = () => {
           onClick={() => setIsPaneOpen(true)}
         />
       </div>
-      <Table {...{ posts, refetch, visibleColumns }} />
+      <Table {...{ posts, refetch, visibleColumns, setSelectedRowsSlug }} />
       <Pane
         {...{
           isPaneOpen,

@@ -1,33 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Table as NeetoTable } from "@bigbinary/neetoui";
+import { pluck } from "ramda";
+import { useTranslation } from "react-i18next";
 
 import Status from "./Status";
 import Title from "./Title";
 
 import { formatDateTime } from "../utils";
 
-const Table = ({ posts, refetch, visibleColumns: isColumnVisible }) => {
+const Table = ({
+  posts,
+  refetch,
+  visibleColumns: isColumnVisible,
+  setSelectedRowsSlug,
+}) => {
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
+  const { t } = useTranslation();
+
   const columnData = [
     {
-      title: "TITLE",
+      title: t("titles.table.title"),
       dataIndex: "title",
       key: "title",
       width: 450,
       render: ({ title, slug }) => <Title {...{ title, slug }} />,
     },
     {
-      title: "CATEGORY",
+      title: t("titles.table.category"),
       dataIndex: "category",
       key: "category",
     },
     {
-      title: "LAST PUBLISHED AT",
+      title: t("titles.table.lastPublished"),
       dataIndex: "updatedAt",
       key: "updatedAt",
     },
     {
-      title: "STATUS",
+      title: t("titles.table.status"),
       dataIndex: "status",
       key: "status",
       width: 150,
@@ -48,7 +59,22 @@ const Table = ({ posts, refetch, visibleColumns: isColumnVisible }) => {
     status: { isBloggable: post.isBloggable, slug: post.slug },
   }));
 
-  return <NeetoTable columnData={visibleColumnsData} rowData={rowData} />;
+  const handleChange = (RowKeys, selectedRows) => {
+    setSelectedRowKeys(RowKeys);
+    setSelectedRowsSlug(pluck("slug", selectedRows));
+  };
+
+  return (
+    <NeetoTable
+      columnData={visibleColumnsData}
+      rowData={rowData}
+      selectedRowKeys={selectedRowKeys}
+      rowSelection={{
+        type: "checkbox",
+      }}
+      onRowSelect={handleChange}
+    />
+  );
 };
 
 export default Table;

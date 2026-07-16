@@ -24,6 +24,20 @@ const destroy = ({ slug, quiet = false }) => {
 
 const myPosts = filters => axios.get(`/posts/my_posts`, { params: filters });
 
-const postsApi = { fetch, create, show, update, destroy, myPosts };
+const bulkUpdate = payload => axios.patch(`/posts/bulk_update`, { ...payload });
+
+const bulkDelete = slugs =>
+  axios.delete(`/posts/bulk_delete`, { data: { slugs } });
+
+const postsApi = {
+  fetch,
+  create,
+  show,
+  update,
+  destroy,
+  myPosts,
+  bulkUpdate,
+  bulkDelete,
+};
 
 export default postsApi;

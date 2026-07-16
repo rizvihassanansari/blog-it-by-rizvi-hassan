@@ -76,6 +76,19 @@ class PostsController < ApplicationController
     render
   end
 
+  def bulk_update
+    @posts = Post.where(slug: params[:slugs])
+    @posts.update_all(is_bloggable: params[:status])
+    render_notice(t("successfully_updated.posts"))
+  end
+
+  def bulk_delete
+    slugs = params[:slugs]
+    puts "DEBUGGING", slugs
+    Post.where(slug: params[:slugs]).destroy_all
+    render_notice(t("successfully_deleted.posts"))
+  end
+
   private
 
     def post_params

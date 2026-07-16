@@ -10,7 +10,13 @@
     "signup": "Signup",
     "login": "Login",
     "notFound": "404! Not found",
-    "filters": "Filters"
+    "filters": "Filters",
+    "table": {
+      "title": "TITLE",
+      "category": "CATEGORIES",
+      "lastPublished": "LAST PUBLISHED AT",
+      "status": "STATUS"
+    }
   },
   "messages": {
     "loading": "Loading...",
@@ -27,6 +33,10 @@
     "results": {
       "resultCount_one": "{{count}} result",
       "resultCount_other": "{{count}} results"
+    },
+    "articles": {
+      "selected_one": "<bold>{{count}} article</bold> selected of {{total}}",
+      "selected_other": "<bold>{{count}} articles</bold> selected of {{total}}"
     }
   },
   "validations": {
@@ -85,7 +95,8 @@
     "columns": "Columns",
     "done": "Done",
     "clearFilters": "Clear Filters",
-    "both": "Both"
+    "both": "Both",
+    "changeStatus": "Change status"
   },
   "placeholders": {
     "title": "Enter title",

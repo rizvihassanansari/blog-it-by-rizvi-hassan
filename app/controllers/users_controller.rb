@@ -4,8 +4,8 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_user_using_x_auth_token, only: :create
 
   def index
-    users = User.all
-    render_json({ users: })
+    @users = User.all
+    render
   end
 
   def create

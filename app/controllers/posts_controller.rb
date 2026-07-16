@@ -72,9 +72,7 @@ class PostsController < ApplicationController
 
   def my_posts
     @posts = current_user.posts.joins(:categories).distinct
-    # .as_json(
-    #   only: %i[id title slug is_bloggable updated_at],
-    # include: { categories: { only: %i[id name] } })
+    @posts = PostsFilterService.new(@posts, filter_params).call
     render
   end
 
@@ -86,6 +84,10 @@ class PostsController < ApplicationController
 
     def update_params
       params.require(:post).permit(:description, :is_bloggable, category_ids: [])
+    end
+
+    def filter_params
+      params.permit(:title, :status, categories: [])
     end
 
     def load_post!

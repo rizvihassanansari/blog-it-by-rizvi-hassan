@@ -15,6 +15,7 @@ const Pane = ({
   setIsPaneOpen,
   filterOptions,
   setFilterOptions,
+  refetch: refetchPosts,
 }) => {
   const { data: { categories = [] } = {} } = useFetchCategories();
 
@@ -24,10 +25,23 @@ const Pane = ({
   }));
 
   const statusOptions = [
-    { label: "Both", value: "both" },
-    { label: "Draft", value: "draft" },
-    { label: "Unpublished", value: "unpublished" },
+    { label: "Both", value: null },
+    { label: "Draft", value: false },
+    { label: "Published", value: true },
   ];
+
+  const handleSubmit = () => {
+    refetchPosts();
+    setIsPaneOpen(false);
+  };
+
+  const resetFilters = () => {
+    setFilterOptions({
+      title: "",
+      categories: [],
+      status: { label: "Both", value: null },
+    });
+  };
 
   return (
     <NeetoPane
@@ -49,7 +63,7 @@ const Pane = ({
             onChange={event =>
               setFilterOptions(previous => ({
                 ...previous,
-                ["title"]: event.target.values,
+                ["title"]: event.target.value,
               }))
             }
           />
@@ -59,16 +73,14 @@ const Pane = ({
             options={categoryOptions}
             placeholder="Filter categories"
             value={filterOptions.categories}
-            onChange={value =>
+            onChange={values =>
               setFilterOptions(previous => ({
                 ...previous,
-                ["categories"]: value,
+                ["categories"]: values,
               }))
             }
           />
           <Select
-            className="neetix-select"
-            defaultOption={{ label: "Both", value: "both" }}
             label="Status"
             options={statusOptions}
             value={filterOptions.status}
@@ -82,11 +94,15 @@ const Pane = ({
         </div>
       </NeetoPane.Body>
       <NeetoPane.Footer className="flex gap-4">
-        <Button className="black-button--primary" label="Done" />
+        <Button
+          className="black-button--primary"
+          label="Done"
+          onClick={handleSubmit}
+        />
         <Button
           className="black-button--secondary"
-          label="Cancel"
-          onClick={() => setIsPaneOpen(false)}
+          label="Clear Filters"
+          onClick={resetFilters}
         />
       </NeetoPane.Footer>
     </NeetoPane>

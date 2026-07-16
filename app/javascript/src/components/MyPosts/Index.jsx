@@ -21,10 +21,10 @@ const Index = () => {
   const [filterOptions, setFilterOptions] = useState({
     title: "",
     categories: [],
-    status: {},
+    status: { label: "Both", value: null },
   });
 
-  const { data: { posts = [] } = {}, refetch } = useFetchMyPosts();
+  const { data: { posts = [] } = {}, refetch } = useFetchMyPosts(filterOptions);
 
   const handleToggleVisibleColumns = event => {
     event.stopPropagation();
@@ -39,7 +39,7 @@ const Index = () => {
   return (
     <>
       <Title titleText="My blog posts" />
-      <div className="my-4 flex w-full items-center justify-between gap-1">
+      <div className="my-4 flex w-full items-center justify-between gap-2">
         <Typography style="body2" weight="semibold">
           14 Articles
         </Typography>
@@ -52,7 +52,13 @@ const Index = () => {
       </div>
       <Table {...{ posts, refetch, visibleColumns }} />
       <Pane
-        {...{ isPaneOpen, setIsPaneOpen, filterOptions, setFilterOptions }}
+        {...{
+          isPaneOpen,
+          setIsPaneOpen,
+          filterOptions,
+          setFilterOptions,
+          refetch,
+        }}
       />
     </>
   );

@@ -8,12 +8,20 @@ import {
   Typography,
 } from "@bigbinary/neetoui";
 
-const Pane = ({ isPaneOpen, setIsPaneOpen }) => {
-  const categoryOptions = [
-    { label: "Tech", value: "tech" },
-    { label: "Ruby", value: "ruby" },
-    { label: "React", value: "react" },
-  ];
+import { useFetchCategories } from "../../../hooks/reactQueries/useCategoriesApi";
+
+const Pane = ({
+  isPaneOpen,
+  setIsPaneOpen,
+  filterOptions,
+  setFilterOptions,
+}) => {
+  const { data: { categories = [] } = {} } = useFetchCategories();
+
+  const categoryOptions = categories.map(({ id, name }) => ({
+    label: name,
+    value: id,
+  }));
 
   const statusOptions = [
     { label: "Both", value: "both" },
@@ -34,17 +42,42 @@ const Pane = ({ isPaneOpen, setIsPaneOpen }) => {
       </NeetoPane.Header>
       <NeetoPane.Body>
         <div className="flex w-full flex-col gap-4">
-          <Input label="Title" type="text" />
+          <Input
+            label="Title"
+            type="text"
+            value={filterOptions.title}
+            onChange={event =>
+              setFilterOptions(previous => ({
+                ...previous,
+                ["title"]: event.target.values,
+              }))
+            }
+          />
           <Select
             isMulti
             label="Categories"
             options={categoryOptions}
             placeholder="Filter categories"
+            value={filterOptions.categories}
+            onChange={value =>
+              setFilterOptions(previous => ({
+                ...previous,
+                ["categories"]: value,
+              }))
+            }
           />
           <Select
+            className="neetix-select"
             defaultOption={{ label: "Both", value: "both" }}
             label="Status"
             options={statusOptions}
+            value={filterOptions.status}
+            onChange={value =>
+              setFilterOptions(previous => ({
+                ...previous,
+                ["status"]: value,
+              }))
+            }
           />
         </div>
       </NeetoPane.Body>

@@ -18,6 +18,11 @@ const Index = () => {
     status: true,
   });
   const [isPaneOpen, setIsPaneOpen] = useState(false);
+  const [filterOptions, setFilterOptions] = useState({
+    title: "",
+    categories: [],
+    status: {},
+  });
 
   const { data: { posts = [] } = {}, refetch } = useFetchMyPosts();
 
@@ -46,7 +51,9 @@ const Index = () => {
         />
       </div>
       <Table {...{ posts, refetch, visibleColumns }} />
-      <Pane {...{ isPaneOpen, setIsPaneOpen }} />
+      <Pane
+        {...{ isPaneOpen, setIsPaneOpen, filterOptions, setFilterOptions }}
+      />
     </>
   );
 };

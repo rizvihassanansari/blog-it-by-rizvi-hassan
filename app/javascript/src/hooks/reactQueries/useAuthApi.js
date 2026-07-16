@@ -14,7 +14,7 @@ export const useSignup = handleSuccess =>
 export const useLogin = () =>
   useMutation({
     mutationFn: payload => authApi.login(payload),
-    onSuccess: user => {
+    onSuccess: ({ user }) => {
       setToLocalStorage({
         authToken: user.authenticationToken,
         email: user.email.toLowerCase(),

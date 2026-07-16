@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       get "my_posts", on: :collection
     end
     resources :users, only: %i[index create]
-    resources :categories, only: %i[index create]
+    resources :categories, only: %i[index create], defaults: { format: "json" }
     resources :organizations, only: :index
     resource :session, only: %i[create destroy]
   end

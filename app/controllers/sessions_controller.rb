@@ -4,12 +4,13 @@ class SessionsController < ApplicationController
   skip_before_action :authenticate_user_using_x_auth_token
 
   def create
-    user = User.find_by!(email: login_params[:email].downcase)
-    unless user.authenticate(login_params[:password])
+    @user = User.find_by!(email: login_params[:email].downcase)
+    unless @user.authenticate(login_params[:password])
       render_error(t("session.incorrect_credentials"), :unauthorized)
     else
-      user_to_send = user.as_json(only: %i[id name email authentication_token])
-      render_json(user_to_send)
+      # user_to_send = user.as_json(only: %i[id name email authentication_token])
+      # render_json(user_to_send)
+      render
     end
   end
 

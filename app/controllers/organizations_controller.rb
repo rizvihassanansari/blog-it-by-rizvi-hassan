@@ -3,7 +3,7 @@
 class OrganizationsController < ApplicationController
   skip_before_action :authenticate_user_using_x_auth_token, only: :index
   def index
-    organizations = Organization.all
-    render_json({ organizations: })
+    @organizations = Organization.all
+    render
   end
 end

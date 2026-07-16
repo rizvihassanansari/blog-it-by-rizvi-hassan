@@ -7,8 +7,10 @@ import {
   Select,
   Typography,
 } from "@bigbinary/neetoui";
+import { useTranslation } from "react-i18next";
 
 import { useFetchCategories } from "../../../hooks/reactQueries/useCategoriesApi";
+import { DEFAULT_FILTER_OPTIONS, DEFAULT_STATUS_OPTIONS } from "../constants";
 
 const Pane = ({
   isPaneOpen,
@@ -17,6 +19,7 @@ const Pane = ({
   setFilterOptions,
   refetch: refetchPosts,
 }) => {
+  const { t } = useTranslation();
   const { data: { categories = [] } = {} } = useFetchCategories();
 
   const categoryOptions = categories.map(({ id, name }) => ({
@@ -24,23 +27,13 @@ const Pane = ({
     value: id,
   }));
 
-  const statusOptions = [
-    { label: "Both", value: null },
-    { label: "Draft", value: false },
-    { label: "Published", value: true },
-  ];
-
   const handleSubmit = () => {
     refetchPosts();
     setIsPaneOpen(false);
   };
 
   const resetFilters = () => {
-    setFilterOptions({
-      title: "",
-      categories: [],
-      status: { label: "Both", value: null },
-    });
+    setFilterOptions(DEFAULT_FILTER_OPTIONS);
   };
 
   return (
@@ -51,13 +44,13 @@ const Pane = ({
     >
       <NeetoPane.Header>
         <Typography style="h2" weight="bold">
-          Filters
+          {t("titles.filters")}
         </Typography>
       </NeetoPane.Header>
       <NeetoPane.Body>
         <div className="flex w-full flex-col gap-4">
           <Input
-            label="Title"
+            label={t("labels.title")}
             type="text"
             value={filterOptions.title}
             onChange={event =>
@@ -69,9 +62,9 @@ const Pane = ({
           />
           <Select
             isMulti
-            label="Categories"
+            label={t("labels.categories")}
             options={categoryOptions}
-            placeholder="Filter categories"
+            placeholder={t("placeholders.categories")}
             value={filterOptions.categories}
             onChange={values =>
               setFilterOptions(previous => ({
@@ -81,8 +74,8 @@ const Pane = ({
             }
           />
           <Select
-            label="Status"
-            options={statusOptions}
+            label={t("labels.status")}
+            options={DEFAULT_STATUS_OPTIONS}
             value={filterOptions.status}
             onChange={value =>
               setFilterOptions(previous => ({
@@ -96,12 +89,12 @@ const Pane = ({
       <NeetoPane.Footer className="flex gap-4">
         <Button
           className="black-button--primary"
-          label="Done"
+          label={t("labels.done")}
           onClick={handleSubmit}
         />
         <Button
           className="black-button--secondary"
-          label="Clear Filters"
+          label={t("labels.clearFilters")}
           onClick={resetFilters}
         />
       </NeetoPane.Footer>

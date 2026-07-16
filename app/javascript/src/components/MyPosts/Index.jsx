@@ -2,7 +2,9 @@ import React, { useState } from "react";
 
 import { Filter } from "@bigbinary/neeto-icons";
 import { Button, Typography } from "@bigbinary/neetoui";
+import { useTranslation } from "react-i18next";
 
+import { DEFAULT_FILTER_OPTIONS } from "./constants";
 import FilterColumns from "./Filter/Columns";
 import Pane from "./Filter/Pane";
 import Table from "./Table";
@@ -18,12 +20,9 @@ const Index = () => {
     status: true,
   });
   const [isPaneOpen, setIsPaneOpen] = useState(false);
-  const [filterOptions, setFilterOptions] = useState({
-    title: "",
-    categories: [],
-    status: { label: "Both", value: null },
-  });
+  const [filterOptions, setFilterOptions] = useState(DEFAULT_FILTER_OPTIONS);
 
+  const { t } = useTranslation();
   const { data: { posts = [] } = {}, refetch } = useFetchMyPosts(filterOptions);
 
   const handleToggleVisibleColumns = event => {
@@ -38,7 +37,7 @@ const Index = () => {
 
   return (
     <>
-      <Title titleText="My blog posts" />
+      <Title titleText={t("titles.myBlogPosts")} />
       <div className="my-4 flex w-full items-center justify-between gap-2">
         <Typography style="body2" weight="semibold">
           14 Articles

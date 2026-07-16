@@ -1,16 +1,21 @@
 import React from "react";
 
 import { ActionDropdown, Checkbox } from "@bigbinary/neetoui";
+import { withTranslation } from "react-i18next";
 
-const Columns = ({ visibleColumns, handleToggleVisibleColumns }) => (
-  <ActionDropdown buttonStyle="secondary" className="ml-auto" label="Columns">
+const Columns = ({ visibleColumns, handleToggleVisibleColumns, t }) => (
+  <ActionDropdown
+    buttonStyle="secondary"
+    className="ml-auto"
+    label={t("labels.columns")}
+  >
     <ActionDropdown.Menu>
       <ActionDropdown.MenuItem>
         <Checkbox
           checked
           disabled
           className="neetix-checkbox px-4 py-2"
-          label="Title"
+          label={t("labels.title")}
         />
       </ActionDropdown.MenuItem>
       <ActionDropdown.MenuItem>
@@ -18,7 +23,7 @@ const Columns = ({ visibleColumns, handleToggleVisibleColumns }) => (
           checked={visibleColumns.category}
           className="neetix-checkbox px-4 py-2"
           id="category"
-          label="Categories"
+          label={t("labels.categories")}
           onChange={handleToggleVisibleColumns}
         />
       </ActionDropdown.MenuItem>
@@ -27,7 +32,7 @@ const Columns = ({ visibleColumns, handleToggleVisibleColumns }) => (
           checked={visibleColumns.updatedAt}
           className="neetix-checkbox px-4 py-2"
           id="updatedAt"
-          label="Last Published at"
+          label={t("labels.lastPublished")}
           onChange={handleToggleVisibleColumns}
         />
       </ActionDropdown.MenuItem>
@@ -36,7 +41,7 @@ const Columns = ({ visibleColumns, handleToggleVisibleColumns }) => (
           checked={visibleColumns.status}
           className="neetix-checkbox px-4 py-2"
           id="status"
-          label="Status"
+          label={t("labels.status")}
           onChange={handleToggleVisibleColumns}
         />
       </ActionDropdown.MenuItem>
@@ -44,4 +49,4 @@ const Columns = ({ visibleColumns, handleToggleVisibleColumns }) => (
   </ActionDropdown>
 );
 
-export default Columns;
+export default withTranslation()(Columns);

@@ -4,11 +4,13 @@
     "blogPosts": "Blog posts",
     "newBlogPost": "New blog post",
     "editBlogPost": "Edit blog post",
+    "myBlogPosts": "My blog posts",
     "categories": "CATEGORIES",
     "newCategory": "New category",
     "signup": "Signup",
     "login": "Login",
-    "notFound": "404! Not found"
+    "notFound": "404! Not found",
+    "filters": "Filters"
   },
   "messages": {
     "loading": "Loading...",
@@ -73,7 +75,12 @@
     "draft": "Draft",
     "unpublish": "Unpublish",
     "unpublished": "Unpublished",
-    "home": "Go back to home"
+    "home": "Go back to home",
+    "lastPublished": "Last Published at",
+    "status": "Status",
+    "columns": "Columns",
+    "done": "Done",
+    "clearFilters": "Clear Filters"
   },
   "placeholders": {
     "title": "Enter title",

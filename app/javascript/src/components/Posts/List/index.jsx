@@ -51,7 +51,7 @@ const Index = () => {
       />
       <ul className="mt-4">
         {posts?.map(post => (
-          <PostItem key={post.id} {...post} />
+          <PostItem key={post.id} {...{ ...post }} />
         ))}
       </ul>
       <div className="absolute bottom-0 left-0 flex w-full justify-end bg-white py-2 pr-2 ">

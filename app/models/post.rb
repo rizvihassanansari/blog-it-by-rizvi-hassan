@@ -3,10 +3,13 @@
 class Post < ApplicationRecord
   MAX_TITLE_LENGTH = 125
   MAX_DESCRIPTION_LENGTH = 10000
+  BLOGGABLE_THRESHOLD = 2
 
   belongs_to :user
   belongs_to :organization
   has_and_belongs_to_many :categories, join_table: :categories_posts
+  has_many :votes, dependent: :destroy
+  has_many :voters, through: :votes, source: :user
 
   validates :title,
     presence: true,
@@ -16,6 +19,7 @@ class Post < ApplicationRecord
     length: { maximum: MAX_DESCRIPTION_LENGTH }
   validates :slug, uniqueness: true
   validates_inclusion_of :is_bloggable, in: [true, false]
+  validates_inclusion_of :is_published, in: [true, false]
   validate :slug_not_changed
 
   before_create :set_slug

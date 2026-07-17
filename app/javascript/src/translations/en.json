@@ -96,7 +96,8 @@
     "done": "Done",
     "clearFilters": "Clear Filters",
     "both": "Both",
-    "changeStatus": "Change status"
+    "changeStatus": "Change status",
+    "blogIt": "Blog It"
   },
   "placeholders": {
     "title": "Enter title",

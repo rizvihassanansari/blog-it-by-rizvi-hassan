@@ -72,7 +72,7 @@ const Index = () => {
     const filteredSlugs = posts
       .filter(
         post =>
-          selectedRowsSlug.includes(post.slug) && post.isBloggable !== status
+          selectedRowsSlug.includes(post.slug) && post.isPublished !== status
       )
       .map(post => post.slug);
 

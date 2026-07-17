@@ -11,21 +11,17 @@ class PostsController < ApplicationController
 
     current_user_organization_id = current_user.organization_id
 
-    @posts = category_ids.present? ? Post
-      .joins(:categories)
-      .includes(:user, :categories)
-      .where(is_published: true, categories: { id: category_ids }, organization_id: current_user_organization_id)
-      .distinct
-      .order(created_at: :desc)
+    @posts = category_ids.present? ?
+      Post.joins(:categories).where(categories: { id: category_ids }).distinct :
+      Post.all
 
-      : Post
-        .includes(:user, :categories)
-        .where(is_published: true, organization_id: current_user_organization_id)
-        .order(created_at: :desc)
+    @posts = @posts
+      .includes(:user, :categories)
+      .where(is_published: true, organization_id: current_user_organization_id).order(id: :desc)
 
     @total_results = @posts.count
     @posts = @posts.limit(PAGE_SIZE).offset((page - 1) * PAGE_SIZE)
-
+    @votes = Vote.where(user_id: current_user.id, post_id: @posts.ids).index_by(&:post_id)
     render
   end
 

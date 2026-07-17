@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :categories, only: %i[index create]
     resources :organizations, only: :index
     resource :session, only: %i[create destroy]
+    resources :votes, only: %i[create destroy]
   end
 
   root "home#index"

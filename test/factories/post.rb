@@ -5,6 +5,7 @@ FactoryBot.define do
     title { Faker::Book.title }
     description { Faker::Lorem.paragraph }
     is_bloggable { [true, false].sample }
+    is_published { [true, false].sample }
     association :user
     organization { user.organization }
   end

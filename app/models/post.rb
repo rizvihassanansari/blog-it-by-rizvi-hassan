@@ -16,6 +16,7 @@ class Post < ApplicationRecord
     length: { maximum: MAX_DESCRIPTION_LENGTH }
   validates :slug, uniqueness: true
   validates_inclusion_of :is_bloggable, in: [true, false]
+  validates_inclusion_of :is_published, in: [true, false]
   validate :slug_not_changed
 
   before_create :set_slug

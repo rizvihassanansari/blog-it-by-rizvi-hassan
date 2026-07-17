@@ -9,14 +9,14 @@ import {
   useUpdatePost,
 } from "../../hooks/reactQueries/usePostsApi";
 
-const Status = ({ isBloggable, slug, refetch: handleSuccess }) => {
+const Status = ({ isPublished, slug, refetch: handleSuccess }) => {
   const { t } = useTranslation();
 
   const { mutate: updatePost } = useUpdatePost(handleSuccess);
   const { mutate: deletePost } = useDeletePost(handleSuccess);
 
   const handleUpdateStatus = () => {
-    updatePost({ slug, payload: { isBloggable: !isBloggable }, quiet: true });
+    updatePost({ slug, payload: { isPublished: !isPublished }, quiet: true });
   };
 
   const handleDeletePost = () => {
@@ -26,7 +26,7 @@ const Status = ({ isBloggable, slug, refetch: handleSuccess }) => {
   return (
     <div className="flex items-center justify-between overflow-visible">
       <Typography style="body2">
-        {t(isBloggable ? "labels.published" : "labels.draft")}
+        {t(isPublished ? "labels.published" : "labels.draft")}
       </Typography>
       <div>
         <Dropdown
@@ -36,7 +36,7 @@ const Status = ({ isBloggable, slug, refetch: handleSuccess }) => {
           <Dropdown.Menu>
             <Dropdown.MenuItem onClick={handleUpdateStatus}>
               <Typography className="px-2 py-1" style="body2">
-                {t(isBloggable ? "labels.unpublish" : "labels.publish")}
+                {t(isPublished ? "labels.unpublish" : "labels.publish")}
               </Typography>
             </Dropdown.MenuItem>
             <Dropdown.Divider />

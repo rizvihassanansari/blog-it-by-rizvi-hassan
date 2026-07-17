@@ -8,7 +8,7 @@ export const POST_FORM_INITIAL_VALUES = {
   title: "",
   description: "",
   categories: [],
-  isBloggable: "false",
+  isPublished: "false",
 };
 
 export const POST_FORM_VALIDATION_SCHEMA = yup.object().shape({

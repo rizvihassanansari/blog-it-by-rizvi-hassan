@@ -8,7 +8,8 @@ json.posts do
       :title,
       :is_bloggable,
       :slug,
-      :updated_at
+      :updated_at,
+      :is_published
 
     json.categories do
       json.array! post.categories do |category|

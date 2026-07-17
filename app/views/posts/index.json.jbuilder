@@ -9,7 +9,8 @@ json.posts do
       :description,
       :is_bloggable,
       :created_at,
-      :updated_at
+      :updated_at,
+      :is_published
 
     json.user do
       json.extract! post.user,

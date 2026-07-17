@@ -14,7 +14,6 @@ import {
   MAX_DESCRIPTION_LENGTH,
 } from "../constants";
 
-// eslint-disable-next-line no-unused-vars
 const Form = forwardRef(
   (
     {

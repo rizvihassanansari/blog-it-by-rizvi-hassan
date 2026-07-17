@@ -56,7 +56,7 @@ const Table = ({
     title: { title: post.title, slug: post.slug },
     category: post.categories.map(category => category.name).join(", "),
     updatedAt: formatDateTime(post.updatedAt),
-    status: { isBloggable: post.isBloggable, slug: post.slug },
+    status: { isPublished: post.isPublished, slug: post.slug },
   }));
 
   const handleChange = (RowKeys, selectedRows) => {

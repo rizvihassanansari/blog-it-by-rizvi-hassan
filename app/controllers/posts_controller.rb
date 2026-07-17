@@ -14,13 +14,13 @@ class PostsController < ApplicationController
     @posts = category_ids.present? ? Post
       .joins(:categories)
       .includes(:user, :categories)
-      .where(is_bloggable: true, categories: { id: category_ids }, organization_id: current_user_organization_id)
+      .where(is_published: true, categories: { id: category_ids }, organization_id: current_user_organization_id)
       .distinct
       .order(created_at: :desc)
 
       : Post
         .includes(:user, :categories)
-        .where(is_bloggable: true, organization_id: current_user_organization_id)
+        .where(is_published: true, organization_id: current_user_organization_id)
         .order(created_at: :desc)
 
     @total_results = @posts.count
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    if @post.user_id != current_user.id && @post.is_bloggable == false
+    if @post.user_id != current_user.id && @post.is_published == false
       render_error(t("does_not_exist"))
     else
       render
@@ -78,7 +78,7 @@ class PostsController < ApplicationController
 
   def bulk_update
     @posts = Post.where(slug: params[:slugs])
-    @posts.update_all(is_bloggable: params[:status])
+    @posts.update_all(is_published: params[:status])
     render_notice(t("successfully_updated.posts"))
   end
 
@@ -92,11 +92,11 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:title, :description, :is_bloggable, category_ids: [])
+      params.require(:post).permit(:title, :description, :is_published, category_ids: [])
     end
 
     def update_params
-      params.require(:post).permit(:description, :is_bloggable, category_ids: [])
+      params.require(:post).permit(:description, :is_published, category_ids: [])
     end
 
     def filter_params

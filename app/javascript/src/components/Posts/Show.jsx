@@ -34,11 +34,11 @@ const Show = () => {
       <div className="flex items-center justify-between pr-4">
         <div className="flex w-full items-center gap-3">
           <Title className="w-ful" titleText={post?.title} />
-          {!post.isBloggable && (
+          {!post.isPublished && (
             <Tag label={t("labels.draft")} size="small" style="danger" />
           )}
         </div>
-        {post?.userId === currentUserId && (
+        {post?.user?.id === currentUserId && (
           <Button
             className="aspect-square cursor-pointer"
             icon={Edit}

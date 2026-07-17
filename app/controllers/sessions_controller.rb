@@ -8,8 +8,6 @@ class SessionsController < ApplicationController
     unless @user.authenticate(login_params[:password])
       render_error(t("session.incorrect_credentials"), :unauthorized)
     else
-      # user_to_send = user.as_json(only: %i[id name email authentication_token])
-      # render_json(user_to_send)
       render
     end
   end

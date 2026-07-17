@@ -26,7 +26,7 @@ const Create = () => {
   const { t } = useTranslation();
 
   const handleSuccess = data => {
-    if (formRef.current.values.isBloggable) {
+    if (formRef.current.values.isPublished) {
       history.push(routes.root);
     } else {
       setSavedTime(formatDateTime(data?.updatedAt));
@@ -36,13 +36,13 @@ const Create = () => {
 
   const handleSubmit = formValues => {
     const payload = modifySubmitPayload(formValues);
-    mutate({ payload, quiet: !formValues.isBloggable });
+    mutate({ payload, quiet: !formValues.isPublished });
   };
 
   const { data: { categories = [] } = {} } = useFetchCategories();
 
   const handleUpdate = (publish = false) => {
-    formRef.current.values.isBloggable = !!publish;
+    formRef.current.values.isPublished = !!publish;
     formRef.current.validateForm();
 
     if (formRef.current.isValid) {

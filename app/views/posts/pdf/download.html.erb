@@ -1,0 +1,32 @@
+<div class="pdf-post">
+  <div class="mb-4 text-sm text-gray-500">
+    <% if @post.categories.any? %>
+      <%= @post.categories.map(&:name).join(", ") %>
+    <% end %>
+  </div>
+
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-bold"><%= @post.title %></h1>
+
+      <% unless @post.is_published %>
+        <div class="mt-2 inline-block rounded bg-red-100 px-2 py-1 text-sm text-red-700">
+          Draft
+        </div>
+      <% else %>
+        <div class="mt-2 inline-block rounded bg-red-100 px-2 py-1 text-sm text-green-700">
+          Published
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mt-4 text-sm text-gray-600">
+    <div><strong>Author:</strong> <%= @post.user&.name %></div>
+    <div><strong>Updated:</strong> <%= @post.updated_at.strftime("%B %d, %Y") %></div>
+  </div>
+
+  <div class="mt-8 whitespace-pre-wrap break-words">
+    <%= simple_format(@post.description) %>
+  </div>
+</div>

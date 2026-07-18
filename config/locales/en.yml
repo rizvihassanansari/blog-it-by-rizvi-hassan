@@ -49,3 +49,4 @@ en:
   does_not_exist: "Post does not exist"
   vote_added: "Your vote has been added!"
   vote_removed: "Your vote has been removed!"
+  not_found: "Pdf not found"

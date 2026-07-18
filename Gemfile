@@ -86,4 +86,10 @@ gem "byebug"
 gem "connection_pool", "~> 2.4"
 gem "data_migrate"
 gem "react-rails", "~> 2.7.1"
+gem "sidekiq", "~> 7.0"
 gem "simplecov", require: false, group: :test
+
+# PDF generation gem
+gem "wicked_pdf"
+# wicked_pdf uses the following binary
+gem "wkhtmltopdf-binary"

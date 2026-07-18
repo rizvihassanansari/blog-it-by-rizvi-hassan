@@ -17,7 +17,7 @@ class PostsController < ApplicationController
 
     @posts = @posts
       .includes(:user, :categories)
-      .where(is_published: true, organization_id: current_user_organization_id).order(id: :desc)
+      .where(organization_id: current_user_organization_id).order(id: :desc)
 
     @total_results = @posts.count
     @posts = @posts.limit(PAGE_SIZE).offset((page - 1) * PAGE_SIZE)

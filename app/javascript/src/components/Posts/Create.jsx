@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 
 import { isNotEmpty } from "@bigbinary/neeto-cist";
-import { Redirect } from "@bigbinary/neeto-icons";
 import { Button, Typography } from "@bigbinary/neetoui";
 import Title from "components/commons/Title";
 import CreatePostForm from "components/Posts/commons/Form";
@@ -13,7 +12,6 @@ import { useCreatePost } from "hooks/reactQueries/usePostsApi";
 import { Trans, useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import routes from "routes";
-import { setPreviewPost } from "utils/storage";
 
 const Create = () => {
   const [savedTime, setSavedTime] = useState("");
@@ -48,17 +46,6 @@ const Create = () => {
     }
   };
 
-  const handlePreview = () => {
-    const previewData = formRef.current.values;
-    previewData["categories"] = formRef.current.values.categories.map(item => ({
-      id: item.value,
-      name: item.label,
-    }));
-    previewData["user"] = { name: "Your name" };
-    setPreviewPost(previewData);
-    history.push(routes.posts.preview);
-  };
-
   return (
     <>
       <div className="flex justify-between">
@@ -73,14 +60,6 @@ const Create = () => {
               />
             )}
           </Typography>
-          <Button
-            icon={Redirect}
-            style="text"
-            tooltipProps={{
-              content: t("labels.preview"),
-            }}
-            onClick={handlePreview}
-          />
           <Button
             label={t("labels.cancel")}
             style="secondary"

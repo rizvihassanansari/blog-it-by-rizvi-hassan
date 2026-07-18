@@ -51,9 +51,8 @@
     "@babel/core": "^7.19.1",
     "@babel/plugin-transform-react-constant-elements": "^7.25.9",
     "@babel/plugin-transform-runtime": "7.19.1",
-    "@babel/preset-env": "7.17.10",
-    "@babel/preset-react": "^7.16.7",
     "@babel/runtime": "7.19.0",
+    "@bigbinary/babel-preset-neeto": "1.0.6",
     "@bigbinary/neeto-cist": "1.0.3",
     "@bigbinary/neeto-commons-frontend": "^3.0.10",
     "@bigbinary/neeto-datepicker": "^1.0.4",
@@ -116,5 +115,10 @@
   "resolutions": {
     "strip-ansi": "^6.0.1",
     "string-width": "^4.2.2"
+  },
+  "babel": {
+    "presets": [
+      "@bigbinary/neeto"
+    ]
   }
 }

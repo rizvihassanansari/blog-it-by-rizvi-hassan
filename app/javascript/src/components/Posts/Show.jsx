@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
+import DownloadAsPdf from "./commons/DownloadAsPdf";
 import Tags from "./commons/Tags";
 
 import { useShowPost } from "../../hooks/reactQueries/usePostsApi";
@@ -38,6 +39,7 @@ const Show = () => {
             <Tag label={t("labels.draft")} size="small" style="danger" />
           )}
         </div>
+        <DownloadAsPdf {...{ slug }} />
         {post?.user?.id === currentUserId && (
           <Button
             className="aspect-square cursor-pointer"
@@ -59,7 +61,7 @@ const Show = () => {
         size="large"
         user={post?.user}
       />
-      <Typography className="my-8 whitespace-pre-wrap break-words">
+      <Typography className="whitespace-pre-wrap break-words py-8">
         {post?.description}
       </Typography>
     </>

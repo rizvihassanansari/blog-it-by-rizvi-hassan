@@ -1,7 +1,6 @@
 import { keysToCamelCase, keysToSnakeCase } from "@bigbinary/neeto-cist";
 import { Toastr } from "@bigbinary/neetoui";
 import axios from "axios";
-import { t } from "i18next";
 import { includes } from "ramda";
 
 import { getFromLocalStorage } from "../utils/storage";
@@ -36,7 +35,8 @@ const handleSuccessResponse = response => {
       Toastr.success(response.data.notice, { autoClose: 3000 });
     }
 
-    if (response.data) {
+    const contentType = response.headers["content-type"];
+    if (contentType.includes("application/json") && response.data) {
       response = keysToCamelCase(response.data);
     }
   }
@@ -45,10 +45,10 @@ const handleSuccessResponse = response => {
 };
 
 const handleErrorResponse = axiosErrorObject => {
-  Toastr.error(
-    axiosErrorObject.response?.data?.error ||
-      t("messages.errors.default", { autoClose: 3000 })
-  );
+  if (axiosErrorObject.response?.data?.error) {
+    Toastr.error(axiosErrorObject.response?.data?.error);
+  }
+
   if (axiosErrorObject.response?.status === 423) {
     window.location.href = "/";
   }

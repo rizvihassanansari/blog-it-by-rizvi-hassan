@@ -20,6 +20,9 @@ Rails.application.routes.draw do
         patch "bulk_update"
         delete "bulk_delete"
       end
+      resource :pdf, only: %i[create], module: :post do
+        get :download
+      end
     end
     resources :users, only: %i[index create]
     resources :categories, only: %i[index create]

@@ -29,6 +29,10 @@ const bulkUpdate = payload => axios.patch(`/posts/bulk_update`, { ...payload });
 const bulkDelete = slugs =>
   axios.delete(`/posts/bulk_delete`, { data: { slugs } });
 
+const generatePdf = slug => axios.post(`/posts/${slug}/pdf`, {});
+const downloadPdf = slug =>
+  axios.get(`/posts/${slug}/pdf/download`, { responseType: "blob" });
+
 const postsApi = {
   fetch,
   create,
@@ -38,6 +42,8 @@ const postsApi = {
   myPosts,
   bulkUpdate,
   bulkDelete,
+  generatePdf,
+  downloadPdf,
 };
 
 export default postsApi;

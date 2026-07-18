@@ -3,6 +3,7 @@ import * as yup from "yup";
 
 const MAX_TITLE_LENGTH = 125;
 export const MAX_DESCRIPTION_LENGTH = 10000;
+export const POLL_INTERVAL = 2000;
 
 export const POST_FORM_INITIAL_VALUES = {
   title: "",

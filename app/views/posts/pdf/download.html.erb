@@ -1,0 +1,40 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+  .pdf-post {
+    font-family: 'Inter', sans-serif;
+  }
+</style>
+
+<div class="pdf-post">
+  <div style="margin-bottom: 1rem; font-size: 0.875rem; line-height: 1.25rem; color: #6b7280;">
+    <% if @post.categories.any? %>
+      <%= @post.categories.map(&:name).join(", ") %>
+    <% end %>
+  </div>
+
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div>
+      <h1 style="font-size: 1.5rem; line-height: 2rem; font-weight: 700;"><%= @post.title %></h1>
+
+      <% unless @post.is_published %>
+        <div style="margin-top: 0.5rem; display: inline-block; border-radius: 0.25rem; background-color: #fee2e2; padding-left: 0.5rem; padding-right: 0.5rem; padding-top: 0.25rem; padding-bottom: 0.25rem; font-size: 0.875rem; line-height: 1.25rem; color: #b91c1c;">
+          Draft
+        </div>
+      <% else %>
+        <div style="margin-top: 0.5rem; display: inline-block; border-radius: 0.25rem; background-color: #dcfce7; padding-left: 0.5rem; padding-right: 0.5rem; padding-top: 0.25rem; padding-bottom: 0.25rem; font-size: 0.875rem; line-height: 1.25rem; color: #15803d;">
+          Published
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div style="margin-top: 1rem; font-size: 0.875rem; line-height: 1.25rem; color: #4b5563; font-weight: bold;">
+    <div><b>Author:</b> <%= @post.user&.name %></div>
+    <div><b>Updated:</b> <%= @post.updated_at.strftime("%B %d, %Y") %></div>
+  </div>
+
+  <div style="white-space: pre-wrap; overflow-wrap: break-word; word-break: break-word;">
+    <%= simple_format(@post.description) %>
+  </div>
+</div>

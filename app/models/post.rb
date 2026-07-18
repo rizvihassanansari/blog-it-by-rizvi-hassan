@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
+  scope :accessible_to, ->(user_id) { where("user_id = ?", user_id) }
   MAX_TITLE_LENGTH = 125
   MAX_DESCRIPTION_LENGTH = 10000
   BLOGGABLE_THRESHOLD = 2

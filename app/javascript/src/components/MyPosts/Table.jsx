@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 
 import { Table as NeetoTable } from "@bigbinary/neetoui";
+import Status from "components/MyPosts/Status";
+import Title from "components/MyPosts/Title";
+import { formatDateTime } from "components/utils/dateTime";
 import { pluck } from "ramda";
 import { useTranslation } from "react-i18next";
-
-import Status from "./Status";
-import Title from "./Title";
-
-import { formatDateTime } from "../utils";
 
 const Table = ({
   posts,

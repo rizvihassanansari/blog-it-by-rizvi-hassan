@@ -2,8 +2,7 @@ import React from "react";
 
 import { Avatar as UserIcon, Typography } from "@bigbinary/neetoui";
 import classNames from "classnames";
-
-import { formatDate } from "../utils";
+import { formatDate } from "components/utils/dateTime";
 
 const Avatar = ({
   user,

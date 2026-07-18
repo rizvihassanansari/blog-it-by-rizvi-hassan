@@ -3,7 +3,7 @@ import { Toastr } from "@bigbinary/neetoui";
 import axios from "axios";
 import { includes } from "ramda";
 
-import { getFromLocalStorage } from "../utils/storage";
+import { getFromLocalStorage } from "../components/utils/storage";
 
 axios.defaults.baseURL = "/";
 
@@ -36,7 +36,7 @@ const handleSuccessResponse = response => {
     }
 
     const contentType = response.headers["content-type"];
-    if (contentType.includes("application/json") && response.data) {
+    if (contentType?.includes("application/json") && response.data) {
       response = keysToCamelCase(response.data);
     }
   }

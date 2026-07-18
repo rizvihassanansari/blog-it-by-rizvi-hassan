@@ -1,5 +1,5 @@
 import { mergeDeepRight } from "ramda";
-import { alias } from "./config/build/config";
+import { alias } from "./config/build/config.js";
 import { define, entryPoints, extensions } from "./config/build/constants";
 import svgr from "vite-plugin-svgr";
 const postCssConfig = require("./postcss.config");

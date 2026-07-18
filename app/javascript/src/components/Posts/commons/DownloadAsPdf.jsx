@@ -2,10 +2,9 @@ import React, { useState } from "react";
 
 import { Download } from "@bigbinary/neeto-icons";
 import { Button } from "@bigbinary/neetoui";
+import postsApi from "apis/posts";
+import { POLL_INTERVAL } from "components/Posts/constants";
 import { useTranslation } from "react-i18next";
-
-import postsApi from "../../../apis/posts";
-import { POLL_INTERVAL } from "../constants";
 
 const DownloadAsPdf = ({ slug }) => {
   const [isLoading, setIsLoading] = useState(false);

@@ -2,8 +2,8 @@ import React from "react";
 
 import { LeftArrow } from "@bigbinary/neeto-icons";
 import { Button } from "@bigbinary/neetoui";
+import { useLogout } from "hooks/reactQueries/useAuthApi";
 
-import { useLogout } from "../../../hooks/reactQueries/useAuthApi";
 import UserAvatar from "../Avatar";
 
 const Logout = ({ name, email }) => {

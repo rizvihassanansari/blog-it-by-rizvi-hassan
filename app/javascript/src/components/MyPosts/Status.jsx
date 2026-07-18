@@ -2,12 +2,8 @@ import React from "react";
 
 import { MenuHorizontal } from "@bigbinary/neeto-icons";
 import { Button, Dropdown, Typography } from "@bigbinary/neetoui";
+import { useDeletePost, useUpdatePost } from "hooks/reactQueries/usePostsApi";
 import { useTranslation } from "react-i18next";
-
-import {
-  useDeletePost,
-  useUpdatePost,
-} from "../../hooks/reactQueries/usePostsApi";
 
 const Status = ({ isPublished, slug, refetch: handleSuccess }) => {
   const { t } = useTranslation();

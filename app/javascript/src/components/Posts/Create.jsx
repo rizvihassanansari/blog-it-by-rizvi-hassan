@@ -3,19 +3,17 @@ import React, { useRef, useState } from "react";
 import { isNotEmpty } from "@bigbinary/neeto-cist";
 import { Redirect } from "@bigbinary/neeto-icons";
 import { Button, Typography } from "@bigbinary/neetoui";
+import Title from "components/commons/Title";
+import CreatePostForm from "components/Posts/commons/Form";
+import SubmitButton from "components/Posts/commons/SubmitButton";
+import { modifySubmitPayload } from "components/Posts/utils";
+import { formatDateTime } from "components/utils/dateTime";
+import { useFetchCategories } from "hooks/reactQueries/useCategoriesApi";
+import { useCreatePost } from "hooks/reactQueries/usePostsApi";
 import { Trans, useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import routes from "routes";
-
-import CreatePostForm from "./commons/Form";
-import SubmitButton from "./commons/SubmitButton";
-import { modifySubmitPayload } from "./utils";
-
-import { useFetchCategories } from "../../hooks/reactQueries/useCategoriesApi";
-import { useCreatePost } from "../../hooks/reactQueries/usePostsApi";
-import { setPreviewPost } from "../../utils/storage";
-import Title from "../commons/Title";
-import { formatDateTime } from "../utils";
+import { setPreviewPost } from "utils/storage";
 
 const Create = () => {
   const [savedTime, setSavedTime] = useState("");

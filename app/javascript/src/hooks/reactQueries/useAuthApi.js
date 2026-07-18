@@ -1,9 +1,8 @@
+import authApi from "apis/auth";
+import { resetAuthTokens, setAuthHeaders } from "apis/axios";
 import { useMutation } from "react-query";
-
-import authApi from "../../apis/auth";
-import { resetAuthTokens, setAuthHeaders } from "../../apis/axios";
-import routes from "../../routes";
-import { setToLocalStorage } from "../../utils/storage";
+import routes from "routes";
+import { setToLocalStorage } from "utils/storage";
 
 export const useSignup = handleSuccess =>
   useMutation({

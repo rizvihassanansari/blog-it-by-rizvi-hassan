@@ -1,15 +1,13 @@
 import React from "react";
 
+import SignupForm from "components/Authentication/Form/Signup";
+import Title from "components/commons/Title";
+import { useSignup } from "hooks/reactQueries/useAuthApi";
+import { useFetchOrganizations } from "hooks/reactQueries/useOrganizations";
 import { omit } from "ramda";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
-import SignupForm from "./Form/Signup";
-
-import { useSignup } from "../../hooks/reactQueries/useAuthApi";
-import { useFetchOrganizations } from "../../hooks/reactQueries/useOrganizations";
-import routes from "../../routes";
-import Title from "../commons/Title";
+import routes from "routes";
 
 const Signup = () => {
   const history = useHistory();

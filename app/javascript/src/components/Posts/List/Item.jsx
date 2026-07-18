@@ -3,16 +3,12 @@ import React, { useState } from "react";
 import { DownArrowCircle, UpArrowCircle } from "@bigbinary/neeto-icons";
 import { Tag, Typography } from "@bigbinary/neetoui";
 import classNames from "classnames";
+import CategoryTags from "components/Posts/commons/Tags";
+import { formatDate } from "components/utils/dateTime";
+import { useCreateVote, useDestroyVote } from "hooks/reactQueries/useVotesApi";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import routes from "routes";
-
-import {
-  useCreateVote,
-  useDestroyVote,
-} from "../../../hooks/reactQueries/useVotesApi";
-import { formatDate } from "../../utils";
-import CategoryTags from "../commons/Tags";
 
 const Item = ({
   id,

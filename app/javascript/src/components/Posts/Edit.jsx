@@ -20,10 +20,12 @@ import {
   useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
 import routes from "routes";
-import { setPreviewPost } from "utils/storage";
+import usePreviewPostStore from "stores/usePreviewPostStore";
 
 const Edit = () => {
-  const [initialFormValues, setInitialFormValues] = useState(null);
+  const { previewPostData, setPreviewPostData } = usePreviewPostStore();
+
+  const [initialFormValues, setInitialFormValues] = useState(previewPostData);
   const [savedTime, setSavedTime] = useState("");
 
   const formRef = useRef(null);
@@ -40,6 +42,7 @@ const Edit = () => {
     } else {
       setSavedTime(formatDateTime(data?.updatedAt));
     }
+    setPreviewPostData(null);
   };
 
   const { mutate, isPending: isLoading } = useUpdatePost(handleSuccess);
@@ -67,17 +70,14 @@ const Edit = () => {
 
   const handlePreview = () => {
     const previewData = formRef.current.values;
-    previewData["categories"] = formRef.current.values.categories.map(item => ({
-      id: item.value,
-      name: item.label,
-    }));
     previewData["user"] = post.user;
-    setPreviewPost(previewData);
+    previewData["id"] = post.id;
+    setPreviewPostData(previewData);
     history.push(routes.posts.preview);
   };
 
   useEffect(() => {
-    if (post) {
+    if (post && previewPostData?.id !== post.id) {
       const postValues = {
         title: post.title,
         description: post.description,
@@ -118,7 +118,10 @@ const Edit = () => {
           <Button
             label={t("labels.cancel")}
             style="secondary"
-            onClick={() => history.replace(routes.root)}
+            onClick={() => {
+              history.goBack();
+              setPreviewPostData(null);
+            }}
           />
           <SubmitButton
             {...{

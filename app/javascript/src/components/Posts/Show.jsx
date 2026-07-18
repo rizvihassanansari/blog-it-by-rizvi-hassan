@@ -31,8 +31,8 @@ const Show = () => {
     <>
       <Tags categories={post?.categories} />
       <div className="flex items-center justify-between pr-4">
-        <div className="flex w-full items-center gap-3">
-          <Title className="w-ful" titleText={post?.title} />
+        <div className="mr-12 flex w-full items-center justify-start gap-3">
+          <Title titleText={post?.title} />
           {!post.isPublished && (
             <Tag label={t("labels.draft")} size="small" style="danger" />
           )}

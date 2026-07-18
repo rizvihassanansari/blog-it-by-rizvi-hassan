@@ -2,7 +2,7 @@
 
 class Post::PdfsController < ApplicationController
   def create
-    PdfsJob.perform_async(current_user.id, params[:post_slug], pdf_path)
+    PdfsJob.perform_async(params[:post_slug], pdf_path)
     render_notice(t("in_progress", action: "Report generation"))
   end
 

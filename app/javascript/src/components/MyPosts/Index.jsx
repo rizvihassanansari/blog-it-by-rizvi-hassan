@@ -6,12 +6,11 @@ import { DEFAULT_FILTER_OPTIONS } from "components/MyPosts/constants";
 import DeleteModal from "components/MyPosts/DeleteModal";
 import FilterColumns from "components/MyPosts/Filter/Columns";
 import Pane from "components/MyPosts/Filter/Pane";
+import SelectedRowsAction from "components/MyPosts/SelectedRowsAction";
+import ShowSelectedFilters from "components/MyPosts/ShowSelectedFilters";
 import Table from "components/MyPosts/Table";
 import { isNotEmpty, without } from "ramda";
 import { useTranslation } from "react-i18next";
-
-import SelectedRowsAction from "./SelectedRowsAction";
-import ShowSelectedFilters from "./ShowSelectedFilters";
 
 import {
   useBulkDeletePosts,

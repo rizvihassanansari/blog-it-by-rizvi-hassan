@@ -49,7 +49,7 @@ const Index = () => {
         buttonProps={{ label: t("labels.newBlogPost"), onClick: handleClick }}
         titleText={t("titles.blogPosts")}
       />
-      <ul className="mt-4">
+      <ul className="mt-4 pb-12">
         {posts?.map(post => (
           <PostItem key={post.id} {...{ ...post }} />
         ))}

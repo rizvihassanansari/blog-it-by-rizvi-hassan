@@ -120,7 +120,13 @@ const Edit = () => {
             style="secondary"
             onClick={() => history.replace(routes.root)}
           />
-          <SubmitButton {...{ handleUpdate, handleDelete }} />
+          <SubmitButton
+            {...{
+              handleUpdate,
+              handleDelete,
+              title: post?.title,
+            }}
+          />
         </div>
       </div>
       <EditPostForm

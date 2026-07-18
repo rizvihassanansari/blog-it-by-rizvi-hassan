@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-class ReportsJob
+class PdfsJob
   include Sidekiq::Job
 
   def perform(user_id, post_slug, pdf_path)
-    post = Post.accessible_to(user_id).find_by!(slug: post_slug).includes(:user, :categories)
+    post = Post.accessible_to(user_id).includes(:user, :categories).find_by!(slug: post_slug)
     content = ApplicationController.render(
       assigns: {
         post:
@@ -16,5 +16,6 @@ class ReportsJob
     File.open(pdf_path, "wb") do |f|
       f.write(pdf_blob)
     end
+    puts "DUBBING - GENERATED PDF"
   end
 end

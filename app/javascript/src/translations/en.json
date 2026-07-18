@@ -97,7 +97,8 @@
     "clearFilters": "Clear Filters",
     "both": "Both",
     "changeStatus": "Change status",
-    "blogIt": "Blog It"
+    "blogIt": "Blog It",
+    "downloadAsPdf": "Download as pdf"
   },
   "placeholders": {
     "title": "Enter title",

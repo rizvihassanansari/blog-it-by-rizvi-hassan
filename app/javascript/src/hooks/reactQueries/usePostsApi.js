@@ -78,16 +78,3 @@ export const useBulkDeletePosts = () =>
     mutationKey: [QUERY_KEYS.POSTS],
     mutationFn: slugs => postsApi.bulkDelete(slugs),
   });
-
-export const useGeneratePdf = slug =>
-  useMutation({
-    mutationKey: [QUERY_KEYS.POSTS, slug],
-    mutationFn: () => postsApi.downloadPdf(slug),
-  });
-
-export const useDownloadPdf = slug =>
-  useQuery({
-    queryKey: [QUERY_KEYS.POSTS, slug],
-    queryFn: () => postsApi.downloadPdf(slug),
-    retry: false,
-  });

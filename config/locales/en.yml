@@ -50,3 +50,4 @@ en:
   vote_added: "Your vote has been added!"
   vote_removed: "Your vote has been removed!"
   not_found: "Pdf not found"
+  in_progress: "Pdf generation is in progress"

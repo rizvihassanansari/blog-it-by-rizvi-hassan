@@ -2,7 +2,7 @@
 
 class Post::PdfsController < ApplicationController
   def create
-    ReportsJob.perform_async(current_user.id, params[:post_slug], pdf_path)
+    PdfsJob.perform_async(current_user.id, params[:post_slug], pdf_path)
     render_notice(t("in_progress", action: "Report generation"))
   end
 
@@ -15,7 +15,7 @@ class Post::PdfsController < ApplicationController
         disposition: "attachment"
       )
     else
-      render_error(t("not_found", entity: "report"), :not_found)
+      render_json({ not_found: t("not_found") }, :not_found)
     end
   end
 

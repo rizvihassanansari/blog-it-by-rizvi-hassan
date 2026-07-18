@@ -7,10 +7,12 @@ import {
   Select,
   Typography,
 } from "@bigbinary/neetoui";
+import {
+  DEFAULT_FILTER_OPTIONS,
+  DEFAULT_STATUS_OPTIONS,
+} from "components/MyPosts/constants";
+import { useFetchCategories } from "hooks/reactQueries/useCategoriesApi";
 import { useTranslation } from "react-i18next";
-
-import { useFetchCategories } from "../../../hooks/reactQueries/useCategoriesApi";
-import { DEFAULT_FILTER_OPTIONS, DEFAULT_STATUS_OPTIONS } from "../constants";
 
 const Pane = ({
   isPaneOpen,

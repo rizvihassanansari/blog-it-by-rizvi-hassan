@@ -1,13 +1,11 @@
 import React from "react";
 
+import LoginForm from "components/Authentication/Form/Login";
+import Title from "components/commons/Title";
+import { useLogin } from "hooks/reactQueries/useAuthApi";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
-import LoginForm from "./Form/Login";
-
-import { useLogin } from "../../hooks/reactQueries/useAuthApi";
-import routes from "../../routes";
-import Title from "../commons/Title";
+import { useHistory } from "react-router-dom";
+import routes from "routes";
 
 const Login = () => {
   const history = useHistory();

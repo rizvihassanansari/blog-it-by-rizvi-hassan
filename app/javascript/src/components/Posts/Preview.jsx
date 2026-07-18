@@ -1,14 +1,12 @@
 import React from "react";
 
 import { Typography, Tag } from "@bigbinary/neetoui";
+import UserAvatar from "components/commons/Avatar";
+import Title from "components/commons/Title";
+import Tags from "components/Posts/commons/Tags";
 import { withTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
-import Tags from "./commons/Tags";
-
-import { getPreviewPost } from "../../utils/storage";
-import UserAvatar from "../commons/Avatar";
-import Title from "../commons/Title";
+import { getPreviewPost } from "utils/storage";
 
 const Preview = ({ t }) => {
   const previewPost = getPreviewPost();

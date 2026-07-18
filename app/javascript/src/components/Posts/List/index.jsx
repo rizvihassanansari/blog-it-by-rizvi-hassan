@@ -1,18 +1,18 @@
 import React from "react";
 
 import { Pagination } from "@bigbinary/neetoui";
+import { PageLoader, Title } from "components/commons";
+import {
+  DEFAULT_PAGE_INDEX,
+  DEFAULT_PAGE_SIZE,
+} from "components/Posts/List/constants";
+import PostItem from "components/Posts/List/Item";
+import { useFetchPosts } from "hooks/reactQueries/usePostsApi";
+import useQueryParams from "hooks/useQueryParams";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import routes from "routes";
-
-import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "./constants";
-import PostItem from "./Item";
-
-import { useFetchPosts } from "../../../hooks/reactQueries/usePostsApi";
-import useQueryParams from "../../../hooks/useQueryParams";
-import { buildUrl } from "../../../utils/urls";
-import { PageLoader } from "../../commons";
-import Title from "../../commons/Title";
+import { buildUrl } from "utils/urls";
 
 const Index = () => {
   const { page = DEFAULT_PAGE_INDEX, categories = [] } = useQueryParams();

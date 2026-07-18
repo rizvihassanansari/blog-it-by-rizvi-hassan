@@ -3,9 +3,8 @@ import React, { useState } from "react";
 import { Plus, Search } from "@bigbinary/neeto-icons";
 import { Button, Typography, Input } from "@bigbinary/neetoui";
 import classnames from "classnames";
+import NewCategory from "components/commons/CategoryBar/New";
 import { useTranslation } from "react-i18next";
-
-import NewCategory from "./New";
 
 const Head = ({ keyword, setKeyword, ...restParams }) => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);

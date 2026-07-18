@@ -2,19 +2,17 @@ import React from "react";
 
 import { Edit } from "@bigbinary/neeto-icons";
 import { Button, Tag, Typography } from "@bigbinary/neetoui";
+import { PageLoader } from "components/commons";
+import UserAvatar from "components/commons/Avatar";
+import Title from "components/commons/Title";
+import DownloadAsPdf from "components/Posts/commons/DownloadAsPdf";
+import Tags from "components/Posts/commons/Tags";
+import { useShowPost } from "hooks/reactQueries/usePostsApi";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
-import DownloadAsPdf from "./commons/DownloadAsPdf";
-import Tags from "./commons/Tags";
-
-import { useShowPost } from "../../hooks/reactQueries/usePostsApi";
-import routes from "../../routes";
-import { getFromLocalStorage } from "../../utils/storage";
-import { PageLoader } from "../commons";
-import UserAvatar from "../commons/Avatar";
-import Title from "../commons/Title";
+import routes from "routes";
+import { getFromLocalStorage } from "utils/storage";
 
 const Show = () => {
   const { slug } = useParams();

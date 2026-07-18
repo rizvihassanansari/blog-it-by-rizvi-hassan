@@ -2,14 +2,12 @@ import React from "react";
 
 import { Modal, Typography, Button as NeetoUiButton } from "@bigbinary/neetoui";
 import { Form as FormikForm, Input, Button } from "@bigbinary/neetoui/formik";
-import { useTranslation } from "react-i18next";
-
 import {
   CATEGORY_FORM_VALIDATION_SCHEMA,
   INITIAL_FORM_PROPS,
-} from "./constants";
-
-import { useCreateCategory } from "../../../hooks/reactQueries/useCategoriesApi";
+} from "components/commons/CategoryBar/constants";
+import { useCreateCategory } from "hooks/reactQueries/useCategoriesApi";
+import { useTranslation } from "react-i18next";
 
 const New = ({ isOpen, setIsOpen, refetchCategories }) => {
   const { t } = useTranslation();

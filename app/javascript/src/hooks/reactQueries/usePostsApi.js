@@ -1,12 +1,11 @@
+import { QUERY_KEYS } from "constants/query";
+
 import { filterNonNull } from "@bigbinary/neeto-cist";
+import postsApi from "apis/posts";
+import { getIds } from "hooks/reactQueries/utils";
 import { useMutation, useQuery } from "react-query";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
-import { getIds } from "./utils";
-
-import postsApi from "../../apis/posts";
-import { QUERY_KEYS } from "../../constants/query";
-import routes from "../../routes";
+import routes from "routes";
 
 export const useFetchPosts = params => {
   const filteredParams = filterNonNull(params);

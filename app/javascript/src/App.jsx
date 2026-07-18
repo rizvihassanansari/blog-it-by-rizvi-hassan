@@ -16,9 +16,9 @@ import {
   ShowPost,
   PreviewPost,
 } from "./components/Posts";
+import queryClient from "./components/utils/queryClient";
+import { getFromLocalStorage } from "./components/utils/storage";
 import routes from "./routes";
-import queryClient from "./utils/queryClient";
-import { getFromLocalStorage } from "./utils/storage";
 
 const App = () => {
   const authToken = getFromLocalStorage("authToken");

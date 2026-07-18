@@ -3,13 +3,11 @@ import React, { useState } from "react";
 import { isNotEmpty } from "@bigbinary/neeto-cist";
 import { Spinner, Typography } from "@bigbinary/neetoui";
 import classNames from "classnames";
+import Bar from "components/commons/CategoryBar/Bar";
+import CategoryHead from "components/commons/CategoryBar/Head";
+import { useFetchCategories } from "hooks/reactQueries/useCategoriesApi";
+import useDebounce from "hooks/useDebounce";
 import { useTranslation } from "react-i18next";
-
-import Bar from "./Bar";
-import CategoryHead from "./Head";
-
-import { useFetchCategories } from "../../../hooks/reactQueries/useCategoriesApi";
-import useDebounce from "../../../hooks/useDebounce";
 
 const Index = ({ isVisible }) => {
   const [keyword, setKeyword] = useState("");

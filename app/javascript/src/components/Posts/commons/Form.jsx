@@ -6,13 +6,12 @@ import {
   Textarea,
   Select,
 } from "@bigbinary/neetoui/formik";
-import { useTranslation } from "react-i18next";
-
 import {
   POST_FORM_INITIAL_VALUES,
   POST_FORM_VALIDATION_SCHEMA,
   MAX_DESCRIPTION_LENGTH,
-} from "../constants";
+} from "components/Posts/constants";
+import { useTranslation } from "react-i18next";
 
 const Form = forwardRef(
   (

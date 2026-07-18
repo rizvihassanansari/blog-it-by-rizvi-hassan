@@ -2,13 +2,12 @@ import React, { useState } from "react";
 
 import { Typography } from "@bigbinary/neetoui";
 import classNames from "classnames";
+import { DEFAULT_PAGE_INDEX } from "components/Posts/List/constants";
+import useQueryParams from "hooks/useQueryParams";
 import { symmetricDifference } from "ramda";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
 import routes from "routes";
-
-import useQueryParams from "../../../hooks/useQueryParams";
-import { buildUrl } from "../../../utils/urls";
-import { DEFAULT_PAGE_INDEX } from "../../Posts/List/constants";
+import { buildUrl } from "utils/urls";
 
 const Bar = ({ id, name }) => {
   const { categories = [] } = useQueryParams();

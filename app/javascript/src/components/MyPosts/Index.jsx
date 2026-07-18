@@ -6,15 +6,14 @@ import {
   Button,
   Typography,
 } from "@bigbinary/neetoui";
+import { DEFAULT_FILTER_OPTIONS } from "components/MyPosts/constants";
+import CategoryTags from "components/MyPosts/Filter/CategoryTags";
+import FilterColumns from "components/MyPosts/Filter/Columns";
+import Pane from "components/MyPosts/Filter/Pane";
+import StatusTag from "components/MyPosts/Filter/StatusTag";
+import Table from "components/MyPosts/Table";
 import { isNotEmpty, without } from "ramda";
 import { Trans, useTranslation } from "react-i18next";
-
-import { DEFAULT_FILTER_OPTIONS } from "./constants";
-import CategoryTags from "./Filter/CategoryTags";
-import FilterColumns from "./Filter/Columns";
-import Pane from "./Filter/Pane";
-import StatusTag from "./Filter/StatusTag";
-import Table from "./Table";
 
 import {
   useBulkDeletePosts,

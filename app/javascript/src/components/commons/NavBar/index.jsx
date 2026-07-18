@@ -1,15 +1,15 @@
 /* eslint-disable import/order */
 import React, { useRef, useState } from "react";
 
-import { LINKS } from "./constants";
-import NavLink from "./Link";
-import UserAvatar from "../Avatar";
+import { LINKS } from "components/commons/NavBar/constants";
+import NavLink from "components/commons/NavBar/Link";
+import UserAvatar from "components/commons/Avatar";
 import classNames from "classnames";
 import { Book, ListDetails } from "@bigbinary/neeto-icons";
 import { Button, Popover } from "@bigbinary/neetoui";
-import CategoryBar from "../CategoryBar";
-import { getFromLocalStorage } from "../../../utils/storage";
-import Logout from "./Logout";
+import CategoryBar from "components/commons/CategoryBar";
+import { getFromLocalStorage } from "utils/storage";
+import Logout from "components/commons/NavBar/Logout";
 
 const NavBar = () => {
   const [isCategoryVisible, setIsCategoryVisible] = useState(false);

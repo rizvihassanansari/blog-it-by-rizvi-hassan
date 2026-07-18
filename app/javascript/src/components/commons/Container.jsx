@@ -1,9 +1,8 @@
 import React from "react";
 
 import classnames from "classnames";
+import NavBar from "components/commons/NavBar";
 import PropTypes from "prop-types";
-
-import NavBar from "./NavBar";
 
 const Container = ({ children, className = "" }) => (
   <main className=" flex h-screen w-full overflow-hidden">

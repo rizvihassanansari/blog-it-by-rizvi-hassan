@@ -16,7 +16,8 @@
       "category": "CATEGORIES",
       "lastPublished": "LAST PUBLISHED AT",
       "status": "STATUS"
-    }
+    },
+    "deleteMultiplePosts": "Delete multiple posts?"
   },
   "messages": {
     "loading": "Loading...",
@@ -37,7 +38,9 @@
     "articles": {
       "selected_one": "<bold>{{count}} article</bold> selected of {{total}}",
       "selected_other": "<bold>{{count}} articles</bold> selected of {{total}}"
-    }
+    },
+    "deleteMultiplePosts_one": "Are you sure you want to delete <bold>{{count}}</bold> post? This action cannot be reversed.",
+    "deleteMultiplePosts_other": "Are you sure you want to delete <bold>{{count}}</bold> posts? This action cannot be reversed."
   },
   "validations": {
     "titleRequired": "Title is required",

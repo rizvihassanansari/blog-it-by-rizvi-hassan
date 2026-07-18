@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 
-import { Delete, Filter } from "@bigbinary/neeto-icons";
-import {
-  Dropdown as ActionDropdown,
-  Button,
-  Typography,
-} from "@bigbinary/neetoui";
+import { Filter } from "@bigbinary/neeto-icons";
+import { Button } from "@bigbinary/neetoui";
 import { DEFAULT_FILTER_OPTIONS } from "components/MyPosts/constants";
-import CategoryTags from "components/MyPosts/Filter/CategoryTags";
+import DeleteModal from "components/MyPosts/DeleteModal";
 import FilterColumns from "components/MyPosts/Filter/Columns";
 import Pane from "components/MyPosts/Filter/Pane";
-import StatusTag from "components/MyPosts/Filter/StatusTag";
 import Table from "components/MyPosts/Table";
 import { isNotEmpty, without } from "ramda";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+
+import SelectedRowsAction from "./SelectedRowsAction";
+import ShowSelectedFilters from "./ShowSelectedFilters";
 
 import {
   useBulkDeletePosts,
@@ -32,6 +30,7 @@ const Index = () => {
   const [isPaneOpen, setIsPaneOpen] = useState(false);
   const [filterOptions, setFilterOptions] = useState(DEFAULT_FILTER_OPTIONS);
   const [selectedRowsSlug, setSelectedRowsSlug] = useState([]);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const { t } = useTranslation();
   const { data: { posts = [] } = {}, refetch } = useFetchMyPosts(filterOptions);
@@ -91,59 +90,24 @@ const Index = () => {
       <Title titleText={t("titles.myBlogPosts")} />
       <div className="my-4 flex w-full items-center justify-between gap-2">
         {isNotEmpty(selectedRowsSlug) ? (
-          <div className="flex items-center gap-2">
-            <Trans
-              components={{ bold: <b /> }}
-              i18nKey="messages.articles.selected"
-              values={{ count: selectedRowsSlug.length, total: posts.length }}
-            />
-            <ActionDropdown
-              buttonStyle="secondary"
-              label={t("labels.changeStatus")}
-            >
-              <ActionDropdown.MenuItem onClick={() => handleBulkUpdate(false)}>
-                <Typography className="px-4 py-2" style="body2">
-                  {t("labels.draft")}
-                </Typography>
-              </ActionDropdown.MenuItem>
-              <ActionDropdown.MenuItem onClick={() => handleBulkUpdate(true)}>
-                <Typography className="px-4 py-2" style="body2">
-                  {t("labels.publish")}
-                </Typography>
-              </ActionDropdown.MenuItem>
-            </ActionDropdown>
-            <Button
-              icon={Delete}
-              label={t("labels.delete")}
-              style="danger"
-              onClick={handleBulkDelete}
-            />
-          </div>
+          <SelectedRowsAction
+            {...{
+              selectedPostsCount: selectedRowsSlug.length,
+              totalPostsCount: posts.length,
+              handleBulkUpdate,
+              setIsDeleteModalOpen,
+            }}
+          />
         ) : (
-          <div className="flex">
-            <Typography style="body2" weight="semibold">
-              {`${t("messages.results.resultCount", {
-                count: posts?.length,
-              })}`}
-              {!isPaneOpen && filterOptions.title !== ""
-                ? ` for "${filterOptions.title}"`
-                : ""}
-            </Typography>
-            <CategoryTags
-              {...{
-                items: filterOptions?.categories,
-                handleDeleteTag,
-                isHidden: isPaneOpen,
-              }}
-            />
-            <StatusTag
-              {...{
-                status: filterOptions?.status?.label,
-                isHidden: isPaneOpen,
-                handleDeleteTag: handleRemoveStatus,
-              }}
-            />
-          </div>
+          <ShowSelectedFilters
+            {...{
+              count: posts?.length,
+              isPaneOpen,
+              filterOptions,
+              handleDeleteTag,
+              handleRemoveStatus,
+            }}
+          />
         )}
         <FilterColumns {...{ visibleColumns, handleToggleVisibleColumns }} />
         <Button
@@ -160,6 +124,14 @@ const Index = () => {
           filterOptions,
           setFilterOptions,
           refetch,
+        }}
+      />
+      <DeleteModal
+        {...{
+          isDeleteModalOpen,
+          setIsDeleteModalOpen,
+          handleBulkDelete,
+          postsCount: selectedRowsSlug.length,
         }}
       />
     </>

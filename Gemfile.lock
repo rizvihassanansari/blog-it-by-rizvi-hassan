@@ -346,7 +346,7 @@ GEM
       logger
       rack (>= 2.2.4, < 3.3)
       redis-client (>= 0.23.0, < 1)
-    simplecov (1.0.0)
+    simplecov (1.0.2)
     smart_properties (1.17.0)
     solid_cable (4.0.0)
       actioncable (>= 7.2)
@@ -588,7 +588,7 @@ CHECKSUMS
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
   selenium-webdriver (4.45.0) sha256=ecac65a4df86ac6f7d707e6dcbacaa9c08b6cf2b966babecfb9653c5aa13e2d1
   sidekiq (7.3.10) sha256=781eb4f65ef36042534ad73d72f211283afb7fee82eec786ada4ed1972ef8e3c
-  simplecov (1.0.0) sha256=bdc50b41fa4a8b3c860da4bf5d61ba4704479c51d08a8f53cbd56ae50778dca8
+  simplecov (1.0.2) sha256=c6459434efe4b948b46477cc2df2faa73ab365f83a33c7c17f81262f4f7f1244
   smart_properties (1.17.0) sha256=f9323f8122e932341756ddec8e0ac9ec6e238408a7661508be99439ca6d6384b
   solid_cable (4.0.0) sha256=8379680ef6bf36e195eb876a6306ea290f87d5fa10bc4a757bc2a918f83229b5
   solid_cache (1.0.10) sha256=bc05a2fb3ac78a6f43cbb5946679cf9db67dd30d22939ededc385cb93e120d41
